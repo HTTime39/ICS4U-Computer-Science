@@ -1,0 +1,87 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body
+{
+    background-image: url("bg.jpg");
+    background-size: cover;
+    background-repeat:no-repeat;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#title
+{
+    background-color: black;
+    height: 10vh;
+    width: 130vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10vh;
+    border-radius: 3px;
+}
+#titleInner
+{
+    background-color: rgb(225, 255, 255);
+    height: 8vh;
+    width: 128vh;
+    margin-left: 1vh;
+    margin-top: 1vh;
+    position: absolute;
+    border-radius: 3px;
+}
+#title h1
+{
+    font-size: 6vh;
+    text-align: center;
+}
+#main
+{
+    background: black;
+    height: 60vh;
+    width: 130vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3vh;
+    border-radius: 3px;
+}
+#mainInner
+{
+    background-color: rgb(225, 255, 255);
+    height: 58vh;
+    width: 128vh;
+    margin-left: 1vh;
+    margin-top: 1vh;
+    position: absolute;
+    border-radius: 3px;
+}
+#quoteContent
+{
+    height: 40vh;
+}
+#quoteBox
+{
+    font-size: 4vh;
+    margin-top: 5vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
+    text-align: center;
+}
+#authorBox
+{
+    font-size: 7vh;
+    margin-top: 5vh;
+    text-align: center;
+}
+#newQ
+{
+    font-size: 4vh;
+    position: absolute;
+    width: 26vh;
+    height: 6vh;
+    margin-top: 4vh;
+    margin-left: 40%;
+    background-color: #a8c6ff;
+    border-radius: 3px;
+}

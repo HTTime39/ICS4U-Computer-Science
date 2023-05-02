@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review: HTML</title>
+
+    <link rel = "stylesheet" href = "review.css"> <!--Linking CSS stylesheet to the HTML page-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100&display=swap" rel="stylesheet">
+
+</head>
+<body style: padding-bottom = 1000px>
+
+    <!--HTML REVIEW 1-->
+
+    <h1>Review: HTML</h1>
+
+    <hr>
+
+    <nav>
+        <ul>
+            <li><a href = "#responsibilities">Responsibilities</a></li>
+            <li><a href = "#links">Links</a></li>
+            <li><a href = "#Tables">Tables</a></li>
+        </ul>
+    </nav>
+
+    <section id = "responsibilities">
+        <hr> <!--Creates horizontal divider across page-->
+
+        <h2>My Responsibilities</h2>
+
+        <p>Below is a list of my responsibilities ranked by importance</p>
+
+        <ol>
+            <div class = "school">
+                <li><a href = "https://sahe.ycdsb.ca/" target = "_blank">School</a></li> <!--target = "_blank" will open the link in a new tab-->
+                <ul>
+                    <li>Survive.</li>
+                    <li>Learn.</li>
+                    <li>Homework.</li>
+                </ul>
+            </div>
+            <div class = "home">
+                <li>Home</li>
+                <ul>
+                    <li>Survive.</li>
+                    <li>Video Games</li>
+                </ul>
+            </div>
+            <div class = "social">
+                <li>Social Life</li>
+                <ul>
+                    <li>Nothing (I don't go outside)</li>
+                </ul>
+            </div>      
+        </ol>
+
+        <br><br>
+
+        <hr>
+    </section>
+
+    <section id = "links">
+        <h2>Type of Links</h2>
+
+        <h3>Absolute Reference</h3>
+        <p>Links a pre-existing page on a website</p>
+        <a href = "https://youtube.ca" target = "_blank">YouTube</a>
+
+        <h3>Relative Reference</h3>
+        <p>Links to other pages on the server</p>
+        <!--See head tag and below closing body tag-->
+        <ul>
+            <li>CSS File</li>
+            <li>JS File</li>
+        </ul>
+
+        <h3>Internal Reference</h3>
+        <!--An actual anchor, to text on the same page as the link. Scrolls down to it.-->
+
+
+        <h3>Phone Number</h3>
+        <!--Will call the number linked. More useful on a cell phone-->
+        <p>A link to a cell phone number</p>
+        <a href="tel: 2897635393">Phone Number</a>"
+
+        <h2>Images</h2>
+        <img src = "Images/bocchi.gif" alt = "Bocchi the Glock" title = "Bocchi the Glock" width = "150px" loading="lazy"> <!--title adds text when hovered over. loading changes the render behaviour (Only when on screen or always)-->
+
+        <hr>
+    </section>
+
+    <section id = "tables">
+
+        <h2>Tables</h2>
+
+        <h3>My Daily Schedule</h3>
+
+        <table bgcolor = "black" width = "400">
+            <tr bgcolor = "grey" align = "center">
+                <th>Time</th>
+                <th>Activity</th>
+            </tr>
+            <tr bgcolor = "lightgrey" align = "center">
+                <td><time datetime = "08:20">8:20 AM</time>-<time datetime = "14:20">2:20 PM</time></td>
+                <td>Kill myself</td>
+            </tr>
+            <tr bgcolor = "grey" align = "center">
+            <td><time datetime = "14:20">2:20 PM</time>-<time datetime = "00:00">12:00 AM</time></td>
+                <td>Hate myself</td>
+            </tr>
+            <tr bgcolor = "lightgrey" align = "center">
+            <td><time datetime = "00:00">12:00 AM</time>-<time datetime = "08:20">8:20 AM</time></td>
+                <td>Cry about myself</td>
+            </tr>
+        </table>
+    </section>
+
+    <br><br><br>
+    <hr>
+    <br><br><br>
+
+    <!--CSS REVIEW 2-->
+    <button id = "subButton">SUBSCRIBE</button>
+
+    <br><br><br>
+
+    <div class = "container">
+        <div class = "item-1">Item 1</div>
+        <div class = "item-2">Item 2</div>
+        <div class = "item-3">Item 3</div>
+    </div>
+    
+    <br>
+    <br>
+    <br>
+
+    <div class = "grid-container">
+        <div style = "background-color: lightblue;">div 1</div>
+        <div style = "background-color: lightpink;">div 2</div>
+        <div style = "background-color: lightblue;">div 3</div>
+        <div style = "background-color: lightpink;">div 4</div>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <a href = "#">Back to Top</a>
+
+    <h1 id = "header">Hello</h1>
+
+</body>
+
+<script src = "review.js"></script>
+
+</html>

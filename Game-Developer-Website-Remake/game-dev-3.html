@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer</title>
+    <link rel = "stylesheet" href = "css/main.css">
+
+    <!--Oswald-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&display=swap" rel="stylesheet">
+
+    <!--Lato-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id = "refMain">
+        <!--Header-->
+        <div id = "headerSwap">
+            <div id = "header">
+                <div id = "header1">
+                    <a href = "game-dev-0.html" id = "header-title">Video Game Developer</a>
+                </div>
+                <div id = "header2">
+                    <ul>
+                        <li><a href = "game-dev-0.html">Home</a></li>
+                        <li><a href = "game-dev-1.html">Job Requirements</a></li>
+                        <li><a href = "game-dev-2.html">Career Path</a></li>
+                        <li id = "navSelectedTop"><a href = "game-dev-3.html">References</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id = "title-card">
+            <h1>References</h1>
+        </div>
+
+        <div id = "content">
+
+            <div class = "ref-body">
+                <p><a href = "https://en.wikipedia.org/wiki/Video_game_development#:~:text=Commercial%20game%20development%20began%20in,a%20full%20and%20complete%20game.">https://en.wikipedia.org/wiki/Video_game_development#:~:text=Commercial%20game%20development%20began%20in,a%20full%20and%20complete%20game.</a></p>
+                <br>
+                <p><a href = "https://targetjobs.co.uk/careers-advice/job-descriptions/video-game-developer-job-description">https://targetjobs.co.uk/careers-advice/job-descriptions/video-game-developer-job-description</a></p>
+                <br>
+                <p><a href = "https://www.ziprecruiter.com/Salaries/Entry-Level-Game-Developer-Salary#:~:text=How%20much%20does%20an%20Entry,be%20approximately%20%2429.36%20an%20hour">https://www.ziprecruiter.com/Salaries/Entry-Level-Game-Developer-Salary#:~:text=How%20much%20does%20an%20Entry,be%20approximately%20%2429.36%20an%20hour</a></p>
+                <br>
+                <br>
+                <p><a href = "https://www.ziprecruiter.com/Salaries/GAME-Developer-Salary">https://www.ziprecruiter.com/Salaries/GAME-Developer-Salary</a></p>
+                <br>
+                <p><a href = "https://www.computerscience.org/careers/video-game-designer/career-outlook-and-salary/">https://www.computerscience.org/careers/video-game-designer/career-outlook-and-salary/</a></p>
+            </div>
+    
+        </div>
+        
+        <!--Footer-->
+            <div id = "refFooter">
+                <div id = "refFooterGreater">
+                    <div id = "foot0">
+                        <p>References</p>
+                    </div>
+                    <div id = "foot1">
+                        <p>Made in March 2023 by N.Dizon</p>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+</body>
+
+<script>
+    window.addEventListener("scroll" , function() //A function that will be called any time the user scrolls
+    {
+        if (this.window.scrollY == 0) //Checks to see if the number of pixels scrolled from the top is zero (Is the page at the top?)
+        {
+            document.getElementById("headerSwap").innerHTML = "<div id = 'header' style = 'background-color: #3c3c53;'><div id = 'header1'><a href = 'game-dev-0.html' id = 'header-title'>Video Game Developer</a></div><div id = 'header2'><ul><li><a href = 'game-dev-0.html'>Home</a></li><li><a href = 'game-dev-1.html'>Job Requirements</a></li><li><a href = 'game-dev-2.html' >Career Path</a></li><li id = 'navSelectedTop'><a href = 'game-dev-3.html'>References</a></li></ul></div></div>";
+        }
+        else //Will be equal to this whenever the user is not at the top of the page
+        {
+            document.getElementById("headerSwap").innerHTML = "<div id = 'header' style = 'background-color: #212121;'><div id = 'header1'><a href = 'game-dev-0.html' id = 'header-title'>Video Game Developer</a></div><div id = 'header2'><ul><li><a href = 'game-dev-0.html'>Home</a></li><li><a href = 'game-dev-1.html'>Job Requirements</a></li><li><a href = 'game-dev-2.html'>Career Path</a></li><li id = 'navSelected'><a href = 'game-dev-3.html'>References</a></li></ul></div></div>";
+        }
+    });
+</script>
+
+</html>

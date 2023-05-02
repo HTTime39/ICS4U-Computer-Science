@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Game Developer</title>
+
+    <link rel = "stylesheet" href = "css/main.css">
+
+    <!--Oswald-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&display=swap" rel="stylesheet">
+
+    <!--Lato-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--Header-->
+    <div id = "headerSwap">
+        <div id = "header">
+            <div id = "header1">
+                <a href = "game-dev-0.html" id = "header-title">Video Game Developer</a>
+            </div>
+            <div id = "header2">
+                <ul>
+                    <li id = "navSelectedTop"><a href = "game-dev-0.html">Home</a></li>
+                    <li><a href = "game-dev-1.html">Job Requirements</a></li>
+                    <li><a href = "game-dev-2.html">Career Path</a></li>
+                    <li><a href = "game-dev-3.html">References</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id = "title-card">
+        <h1>Video Game Developer</h1>
+    </div>
+
+    <div id = "content">
+        <div class = "content-1">
+
+            <div class = "content-1-1">
+                <img src = "images/video-game-developer-image-1.jpg" width = "100%">
+            </div>
+
+            <div class = "content-1-2">
+                <h2>What Does a Game Developer Do?</h2>
+                <p>A video game developer is the person at a game company that will write the code for the video game they are making. They will write games for the PC, video game consoles, and mobile devices. They will write the code needed for games to work. For example, they will program the different systems and mechanics that will work to complete the tasks required by the game company's design team. They will also help to program the way that the different models and art created by the game company's art team will interact with each other and the environment they exist in so that the game works and can be played. In summary, a video game developer is essentially the person that makes everything in a game come to life.</p>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class = "content-1">
+
+            <div class = "content-1-2">
+                <h2>Game Developer History</h2>
+                <p>Game development began in the 1960s, but the games that were developed were not publicly distributed because the general public didn't really have computers to run the games yet. When game consoles and personal computers became more widespread in households, more game developers were needed because more games needed to be made for people to play on their computers and consoles. As computer hardware has increased in performance, games are able to be more and more complex, making the demand for game developers increase as well, because companies need more developers to help design these complex systems in reasonable amounts of time. </p>
+            </div>
+
+            <div class = "content-1-1">
+                <img src = "images/video-game-developer-image-2.jpg" width = "100%">
+            </div>
+
+        </div>
+    </div>
+
+    <!--Footer-->
+    <div id = "footerGreater">
+        <div id = "footer">
+            <div id = "foot0">
+                <p><a href = "game-dev-3.html">References</a></p>
+            </div>
+            <div id = "foot1">
+                <p>Made in March 2023 by N.Dizon</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    window.addEventListener("scroll" , function() //A function that will be called any time the user scrolls
+    {
+        if (this.window.scrollY == 0) //Checks to see if the number of pixels scrolled from the top is zero (Is the page at the top?)
+        {
+            document.getElementById("headerSwap").innerHTML = "<div id = 'header' style = 'background-color: #3c3c53;'><div id = 'header1'><a href = 'game-dev-0.html' id = 'header-title'>Video Game Developer</a></div><div id = 'header2'><ul><li id = 'navSelectedTop'><a href = 'game-dev-0.html'>Home</a></li><li><a href = 'game-dev-1.html'>Job Requirements</a></li><li><a href = 'game-dev-2.html'>Career Path</a></li><li><a href = 'game-dev-3.html'>References</a></li></ul></div></div>";
+        }
+        else //Will be equal to this whenever the user is not at the top of the page
+        {
+            document.getElementById("headerSwap").innerHTML = "<div id = 'header' style = 'background-color: #212121;'><div id = 'header1'><a href = 'game-dev-0.html' id = 'header-title'>Video Game Developer</a></div><div id = 'header2'><ul><li id = 'navSelected'><a href = 'game-dev-0.html'>Home</a></li><li><a href = 'game-dev-1.html'>Job Requirements</a></li><li><a href = 'game-dev-2.html'>Career Path</a></li><li><a href = 'game-dev-3.html'>References</a></li></ul></div></div>";
+        }
+    });
+</script>
+
+</html>

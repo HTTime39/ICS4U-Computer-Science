@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer</title>
+    <link rel = "stylesheet" href = "css/main.css">
+
+    <!--Oswald-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&display=swap" rel="stylesheet">
+
+    <!--Lato-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--Header-->
+    <div id = "headerSwap">
+        <div id = "header">
+            <div id = "header1">
+                <a href = "game-dev-0.html">Video Game Developer</a>
+            </div>
+            <div id = "header2">
+                <ul>
+                    <li><a href = "game-dev-0.html">Home</a></li>
+                    <li id = "navSelectedTop"><a href = "game-dev-1.html">Job Requirements</a></li>
+                    <li><a href = "game-dev-2.html">Career Path</a></li>
+                    <li><a href = "game-dev-3.html">References</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id = "title-card">
+        <h1>Job Requirements</h1>
+    </div>
+
+    <div id = "content">
+
+        <div class = "content-1">
+
+            <div class = "content-1-1">
+                <img src = "images/video-game-developer-image-3.jpg" width = 100%>
+            </div>
+
+            <div class = "content-1-2">
+                <h2>Skills Needed</h2>
+                <p>A video game developer needs to be able to take the specifications presented to them by the game designers and write the code that will make those ideas work within the game. They need to be able to use APIs such as a game engine like Source or Unity to help bring the worlds created by the game designers and artists to life in a playable format. In general, problem solving skills and knowledge of a programming language are required to be a game developer. Creativity, passion, and teamwork are also good skills to have as a video game developer.</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class = "content-1">
+
+            <div class = "content-1-2">
+                <h2>Required Education</h2>
+                <p>Companies that hire game developers expect job applicants to have a computer science degree, software engineering degree, or similar degree. You might also be able to be hired as a game developer if you have proficient knowledge of programming and the gaming industry. It is very competitive to be hired as a game developer, so having a portfolio of your previous projects can be important to increase your chances of being hired by a game publisher.</p>
+            </div>
+            
+            <div class = "content-1-1">
+                <img src = "images/video-game-developer-image-4.jpg" width = 100%>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--Footer-->
+    <div id = "footerGreater">
+        <div id = "footer">
+            <div id = "foot0">
+                <p><a href = "game-dev-3.html">References</a></p>
+            </div>
+            <div id = "foot1">
+                <p>Made in March 2023 by N.Dizon</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    window.addEventListener("scroll" , function() //A function that will be called any time the user scrolls
+    {
+        if (this.window.scrollY == 0) //Checks to see if the number of pixels scrolled from the top is zero (Is the page at the top?)
+        {
+            document.getElementById("headerSwap").innerHTML = "<div id = 'header' style = 'background-color: #3c3c53;'><div id = 'header1'><a href = 'game-dev-0.html' id = 'header-title'>Video Game Developer</a></div><div id = 'header2'><ul><li><a href = 'game-dev-0.html'>Home</a></li><li id = 'navSelectedTop'><a href = 'game-dev-1.html'>Job Requirements</a></li><li><a href = 'game-dev-2.html'>Career Path</a></li><li><a href = 'game-dev-3.html'>References</a></li></ul></div></div>";
+        }
+        else //Will be equal to this whenever the user is not at the top of the page
+        {
+            document.getElementById("headerSwap").innerHTML = "<div id = 'header' style = 'background-color: #212121;'><div id = 'header1'><a href = 'game-dev-0.html' id = 'header-title'>Video Game Developer</a></div><div id = 'header2'><ul><li><a href = 'game-dev-0.html'>Home</a></li><li id = 'navSelected'><a href = 'game-dev-1.html'>Job Requirements</a></li><li><a href = 'game-dev-2.html'>Career Path</a></li><li><a href = 'game-dev-3.html'>References</a></li></ul></div></div>";
+        }
+    });
+</script>
+
+</html>

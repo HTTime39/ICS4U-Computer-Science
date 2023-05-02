@@ -1,0 +1,23 @@
+body, div 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grandparent
+{
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}
+.parent{
+    width: 130px;
+    height: 130px;
+    background-color: blue;
+}
+.child
+{
+    width: 60px;
+    height: 60px;
+    background-color: green;
+}

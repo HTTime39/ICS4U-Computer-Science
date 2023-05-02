@@ -1,0 +1,83 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body
+{
+    background-color: #000000;
+}
+
+/*========== Game Viewport ==========*/
+#gameViewPort
+{
+    background-color: #ffffff;
+    height: 98vh;
+    width: 112vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+/*========== Snake ==========*/
+#snake
+{
+    height: 10vh;
+    position:absolute;
+    margin-left: 0vh;
+    margin-top: 0vh;
+}
+#snakeSprite
+{
+    width: 5vh;
+    height: 10vh;
+}
+
+/*========== Guards ==========*/
+#guard
+{
+    height: 10vh;
+    margin-top: 20vh;
+    margin-left: 40vh;
+    position: absolute;
+}
+.guardSprite
+{
+    height: 10vh;
+}
+
+/*========== Walls ==========*/
+.wallVertical
+{
+    position: absolute;
+    width: 5vh;
+}
+.wallVerticalSprite
+{
+    width: 5vh;
+    /*Graphical Fix for the behaviour of the collision detection leaving a gap on the top and bottom of the wall when Snake touches it.*/
+    height: 27vh;
+    margin-top: -1vh;
+}
+.wallHorizontal
+{
+    position: absolute;
+    height: 5vh;
+}
+.wallHorizontalSprite
+{
+    height: 5vh;
+}
+
+#wallTest
+{
+    margin-left: 20vh;
+    margin-top: 20vh;
+}
+#wallTest1
+{
+    margin-left: 60vh;
+    margin-top: 60vh;
+}

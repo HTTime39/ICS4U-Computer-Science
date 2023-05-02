@@ -1,0 +1,56 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    background-color: skyblue;
+}
+.container
+{
+    width: 500px;
+    margin: 32px auto;
+}
+.container .title
+{
+    text-align: center;
+}
+.container .form
+{
+    background-color: white;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+.form .input
+{
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background-color: transparent;
+}
+.form .btn
+{
+    padding: 12px;
+    background-color: darkblue;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+.lists .todo
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    margin-top: 8px;
+    padding: 8px;
+    gap: 8px;
+}
+.lists span
+{
+    cursor: pointer;
+}
