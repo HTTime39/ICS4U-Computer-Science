@@ -212,6 +212,7 @@ function gameCollision()
     {
         topStop = false;
     }
+    console.log("Repeating");
 }
 
 /*========== Sub Recursive Function for Low Priority Functions ==========*/
@@ -219,4 +220,55 @@ setInterval(gameSecondary, 1000);
 function gameSecondary()
 {
     //For secondary recursive tasks :(
+}
+
+//========== Framework for loading rooms ==========
+let roomID = 0;
+
+//Room Data (HTML) for each room in the game
+let room0 = `
+<!--Player Character's Div Containing Sprite-->
+<div id = "snake">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+<!--Wall's Div Containing Sprite-->
+<div class = "wallVertical" id = "wallTest">
+    <img src = "Assets/wall-vertical.jpg" class = "wallVerticalSprite">
+</div>
+<div class = "wallHorizontal" id = "wallTest1">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<!--Guard's Div Containing Sprite-->
+<div id = "guard">
+    <img src = "Assets/guard-forward.png" class = "guardSprite">
+</div>`;
+
+let room1 = `
+<!--Player Character's Div Containing Sprite-->
+<div id = "snake">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>`;
+
+function roomLoad()
+{
+    switch (roomID)
+    {
+        case 0:
+            document.getElementById("gameViewPort").innerHTML = room0;
+            snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
+            //These need to be set to where snake it actually, otherwise when his position is first updated, it will teleport him to where he was in the previous room
+            snakeX = 0;
+            snakeY = 0;
+            console.log("Load Room 0");
+            break;
+        case 1:
+            //The HTML is switched to so the viewport contains the objects that are in the room being loaded
+            document.getElementById("gameViewPort").innerHTML = room1;
+            snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
+            //These need to be set to where snake it actually, otherwise when his position is first updated, it will teleport him to where he was in the previous room
+            snakeX = 0;
+            snakeY = 0;
+            console.log("Load Room 1");
+            break;
+    }
 }
