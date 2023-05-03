@@ -1,5 +1,6 @@
 package assessments;
 import java.util.Scanner;
+import java.io.*;
 
 public class checkpoint1 {
 
@@ -108,17 +109,94 @@ public class checkpoint1 {
 			System.out.println("The package meets all of the requirements");
 		}
 		
-		//Hello Github
+		//Program 4: Loops
+		int count = 1;
+		while (count <= 100)
+		{
+			System.out.println(count);
+			count++;
+		}
+		
+		for (int i = 100; i >= 1; i--)
+		{
+			System.out.println(i);
+		}
+		
+		int count1 = 1;
+		while (count1 <= 50)
+		{
+			System.out.println(count1);
+			count1 += 2;
+		}
+		
+		for (int i = 1; i <= 50; i++)
+		{
+			if (i % 2 == 0)
+			{
+				System.out.println(i);
+			}
+		}
+		
+		int count2 = 1;
+		while (count2 <= 20)
+		{
+			if (count2 % 6 == 0)
+			{
+				System.out.println(count2);
+			}
+			count2++;
+		}
+		
+		//Program 5: Security
+		in.nextLine();
+		System.out.println("What is your username?");
+		String userName = in.nextLine();
+		System.out.println("What is your password?");
+		String passWord = in.nextLine();
+		
+		int intruderCount = 0;
+		String userNameAttempt = "";
+		String passWordAttempt = "";
+		
+		do
+		{
+			System.out.println("Input username:");
+			userNameAttempt = in.nextLine();
+			System.out.println("Input password:");
+			passWordAttempt = in.nextLine();
+			
+			intruderCount++;
+		}
+		while (intruderCount != 3 && !userNameAttempt.equals(userName) && !passWordAttempt.equals(passWord));
 
+		if (userNameAttempt.equals(userName) && passWordAttempt.equals(passWord))
+		{
+			System.out.println("Welcome!");
+		}
+		else 
+		{
+			System.out.println("Intruder Alert");
+		}
+		
+		//Program 6: Files
+		try
+		{
+			FileWriter file = new FileWriter("file01.txt");
+			PrintWriter fileW = new PrintWriter(file);
+			fileW.println("A sentence");
+			fileW.close();
+			
+			FileReader rFile = new FileReader("file01.txt");
+			Scanner fsc = new Scanner(rFile);
+			
+			String text = fsc.nextLine();
+			System.out.println(text);
+		}
+		catch (Exception e)
+		{
+			System.out.println("File Not Found");
+		}
+				
 	}
 
 }
-
-
-
-
-
-
-
-
-
