@@ -1,17 +1,20 @@
-/*========== Initialize Position Counters For Snake ==========*/ 
-//The origin is the top left corner
-let snakeX = 0; //Tracks the x position of snake as an integer
-let snakeXString = "0vh"; //Tracks the x position of snake as a string with units appended so it can be read by css
-let snakeY = 0; //Tracks the y position of snake as an integer
-let snakeYString = "0vh"; //Tracks the y position of snake as a string with units appended so it can be read by
-
-let snake = document.querySelector("#snake"); //Player character
-document.addEventListener("keydown", keysDown); //Records keys when pressed
-document.addEventListener("keyup", keysUp); //Unrecords keys when unpressed
-
 /*========== Setting Up Collision Detection On Snake ==========*/
+let snake = document.querySelector("#snake"); //Player character
 let snakeWidth = 5; //The width of Snake's sprite in viewport units. To be used in collision detection calculations.
 let snakeHeight = 10; //The height of Snake's sprite in viewport units. It is actuall slightly less than a 1:2 ratio so this might need to be changed later.
+
+/*========== Initialize Position Counters For Snake ==========*/ 
+//The origin is the top left corner
+let snakeX = 53; //Tracks the x position of snake as an integer
+let snakeXString = "53vh"; //Tracks the x position of snake as a string with units appended so it can be read by css
+snake.style.marginLeft = snakeXString;
+let snakeY = 4; //Tracks the y position of snake as an integer
+let snakeYString = "4vh"; //Tracks the y position of snake as a string with units appended so it can be read by
+snake.style.marginTop = snakeYString;
+
+//Key Event Listeners
+document.addEventListener("keydown", keysDown); //Records keys when pressed
+document.addEventListener("keyup", keysUp); //Unrecords keys when unpressed
 
 /*========== Collision Detection Variables ==========*/
 //Will be changed in the recursive collision detection function when Snake is against a wall
@@ -21,7 +24,6 @@ let topStop = false;
 let bottomStop = false;
 
 /*========== Setting Up Collision Detection on Walls ==========*/
-let wallSpriteV = document.querySelector(".wallVerticalSprite"); //Can probably be deleted later
 
 //The dimensions to be used in collision detection for horizontal wall segments (vh)
 let wallWidthV = 5;
@@ -30,14 +32,18 @@ let wallHeightV = 25;
 let wallWidthH = 25;
 let wallHeightH = 5;
 
-let wallTest = document.querySelector("#wallTest");
 
-/*========== Test Wall Positions TEMP ==========*/
+/*========== Room 0 Wall Positions ==========*/
 let wall1X = 20;
 let wall1Y = 20;
 
 let wall2X = 60;
 let wall2Y = 60;
+
+//Wall Doesn't Exist
+let DNE = -100;
+let dbExists = true;
+let dtExists = false;
 
 /*========== Recording and Unrecording Inputs ==========*/
 //Array to hold all currently held buttons
@@ -90,7 +96,7 @@ function gameMain()
             snakeYString = snakeY + "vh";
             snake.style.marginTop = snakeYString;
         }
-        //foor door function
+        doorCheckU();
     }
     //moves snake down
     if ((pressedKeys[83] || pressedKeys[40]))
@@ -102,7 +108,7 @@ function gameMain()
             snake.style.marginTop = snakeYString;
         }
 
-        doorCheck();
+        doorCheckD();
     }
 }
 
@@ -240,6 +246,7 @@ function gameSecondary()
 
 //========== Framework for loading rooms ==========
 let roomID = 0;
+let roomIDLast;
 
 //Room Data (HTML) for each room in the game
 let room0 = `
@@ -266,39 +273,76 @@ let room0 = `
 
 let room1 = `
 <!--Player Character's Div Containing Sprite-->
+<div class = "doorVertical" id = "doorTop">
+<img src = "Assets/door-vertical.png" class = "doorVerticalSprite">
+</div>
 <div id = "snake">
     <img src = "Assets/snake-forward.png" id = "snakeSprite">
 </div>`;
 
+/*========== Loading a Room ==========*/
 function roomLoad()
 {
+    console.log("Loading Room " + roomID);
+    //Each room's specifics are loaded here
     switch (roomID)
     {
         case 0:
             document.getElementById("gameViewPort").innerHTML = room0;
             snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
-            //These need to be set to where snake it actually, otherwise when his position is first updated, it will teleport him to where he was in the previous room
-            snakeX = 0;
-            snakeY = 0;
-            console.log("Load Room 0");
+
+            dbExists = true;
+            dtExists = false;
             break;
         case 1:
             //The HTML is switched to so the viewport contains the objects that are in the room being loaded
             document.getElementById("gameViewPort").innerHTML = room1;
             snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
-            //These need to be set to where snake it actually, otherwise when his position is first updated, it will teleport him to where he was in the previous room
-            snakeX = 0;
-            snakeY = 0;
-            console.log("Load Room 1");
+
+            dbExists = false;
+            dtExists = true;
             break;
     }
+
+    //When Snake advances to a room (Setting Position)
+    if (roomIDLast < roomID)
+    {
+        snakeX = 53; //Tracks the x position of snake as an integer
+        snakeXString = "53vh"; //Tracks the x position of snake as a string with units appended so it can be read by css
+        snake.style.marginLeft = snakeXString;
+        snakeY = 1; //Tracks the y position of snake as an integer
+        snakeYString = "1vh"; //Tracks the y position of snake as a string with units appended so it can be read by
+        snake.style.marginTop = snakeYString;
+    }
+    //When Snake returns to a room (Setting Position)
+    else if (roomID < roomIDLast)
+    {
+        snakeX = 53;
+        snakeXString = "53vh";
+        snake.style.marginLeft = snakeXString;
+        snakeY = 88;
+        snakeYString = "87vh";
+        snake.style.marginTop = snakeYString;
+    }
+    console.log("Loaded Room " + roomID);
 }
 
-function doorCheck()
+/*========== Triggering Room Load at Doors ==========*/
+function doorCheckD()
 {
-    if (52 <= snakeX && snakeX <= 55 && snakeY == 88)
+    if (52 <= snakeX && snakeX <= 55 && snakeY == 88 && dbExists == true)
     {
+        roomIDLast = roomID;
         roomID++;
+        roomLoad();
+    }
+}
+function doorCheckU()
+{
+    if (52 <= snakeX && snakeX <= 55 && snakeY == 0 && dtExists == true)
+    {
+        roomIDLast = roomID;
+        roomID--;
         roomLoad();
     }
 }
