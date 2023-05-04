@@ -32,7 +32,7 @@ let wallHeightH = 5;
 
 let wallTest = document.querySelector("#wallTest");
 
-/*========== Test Wall Positions TEMP==========*/
+/*========== Test Wall Positions TEMP ==========*/
 let wall1X = 20;
 let wall1Y = 20;
 
@@ -60,32 +60,49 @@ setInterval(gameMain, 30);
 function gameMain()
 {
     //Moves snake to the right
-    if ((pressedKeys[68] || pressedKeys[39]) && snakeX < 107 && rightStop == false)
+    if ((pressedKeys[68] || pressedKeys[39]))
     {
-        snakeX++;
-        snakeXString = snakeX + "vh";
-        snake.style.marginLeft = snakeXString;
+        if (snakeX < 107 && rightStop == false)
+        {
+            snakeX++;
+            snakeXString = snakeX + "vh";
+            snake.style.marginLeft = snakeXString;
+        }
+        //for door function
     }
     //moves snake to the left
-    if ((pressedKeys[65] || pressedKeys[37]) && snakeX > 0 && leftStop == false)
+    if ((pressedKeys[65] || pressedKeys[37]))
     {
-        snakeX--;
-        snakeXString = snakeX + "vh";
-        snake.style.marginLeft = snakeXString;
+        if (snakeX > 0 && leftStop == false)
+        {
+            snakeX--;
+            snakeXString = snakeX + "vh";
+            snake.style.marginLeft = snakeXString;
+        }
+        //for door function
     }
     //moves snake up
-    if ((pressedKeys[87] || pressedKeys[38]) && snakeY > 0 && topStop == false)
+    if ((pressedKeys[87] || pressedKeys[38]))
     {
-        snakeY--;
-        snakeYString = snakeY + "vh";
-        snake.style.marginTop = snakeYString;
+        if (snakeY > 0 && topStop == false)
+        {
+            snakeY--;
+            snakeYString = snakeY + "vh";
+            snake.style.marginTop = snakeYString;
+        }
+        //foor door function
     }
     //moves snake down
-    if ((pressedKeys[83] || pressedKeys[40]) && snakeY < 88 && bottomStop == false)
+    if ((pressedKeys[83] || pressedKeys[40]))
     {
-        snakeY++;
-        snakeYString = snakeY + "vh";
-        snake.style.marginTop = snakeYString;
+        if (snakeY < 88 && bottomStop == false)
+        {
+            snakeY++;
+            snakeYString = snakeY + "vh";
+            snake.style.marginTop = snakeYString;
+        }
+
+        doorCheck();
     }
 }
 
@@ -97,7 +114,7 @@ function gameCollision()
     //VERTICAL
     if (snakeX + snakeWidth >= wall1X && snakeX <= wall1X)
     {
-        if (snakeY + snakeHeight >= wall1Y && snakeY <= wall1Y + wallHeightV)
+        if (snakeY + snakeHeight > wall1Y && snakeY < wall1Y + wallHeightV)
         {
             rightStop = true;
         }
@@ -109,7 +126,7 @@ function gameCollision()
     //HORIZONTAL
     else if (snakeX + snakeWidth >= wall2X && snakeX <= wall2X)
     {
-        if (snakeY + snakeHeight >= wall2Y && snakeY <= wall2Y + wallHeightH)
+        if (snakeY + snakeHeight > wall2Y && snakeY < wall2Y + wallHeightH)
         {
             rightStop = true;
         }
@@ -127,7 +144,7 @@ function gameCollision()
     //VERTICAL
     if (snakeX <= wall1X + wallWidthV && snakeX >= wall1X)
     {
-        if (snakeY + snakeHeight >= wall1Y && snakeY <= wall1Y + wallHeightV)
+        if (snakeY + snakeHeight > wall1Y && snakeY < wall1Y + wallHeightV)
         {
             leftStop = true;
         }
@@ -139,7 +156,7 @@ function gameCollision()
     //HORIZONTAL
     else if (snakeX <= wall2X + wallWidthH && snakeX >= wall2X)
     {
-        if (snakeY + snakeHeight >= wall2Y && snakeY <= wall2Y + wallHeightH)
+        if (snakeY + snakeHeight > wall2Y && snakeY < wall2Y + wallHeightH)
         {
             leftStop = true;
         }
@@ -155,7 +172,7 @@ function gameCollision()
 
     //Snake hits the top of a wall
     //VERTICAL
-    if (snakeY + snakeHeight == wall1Y - 1 && snakeY + snakeHeight <= wall1Y + wallHeightV)
+    if (snakeY + snakeHeight == wall1Y && snakeY + snakeHeight <= wall1Y + wallHeightV)
     {
         if (snakeX + snakeWidth > wall1X && snakeX < wall1X + wallWidthV)
         {
@@ -167,7 +184,7 @@ function gameCollision()
         }
     }
     //HORIZONTAL
-    else if (snakeY + snakeHeight == wall2Y - 1 && snakeY + snakeHeight <= wall2Y + wallHeightH)
+    else if (snakeY + snakeHeight == wall2Y && snakeY + snakeHeight <= wall2Y + wallHeightH)
     {
         if (snakeX + snakeWidth > wall2X && snakeX < wall2X + wallWidthH)
         {
@@ -185,7 +202,7 @@ function gameCollision()
 
     //Snake hits the bottom of a wall
     //VERTICAL
-    if (snakeY == wall1Y + 1 + wallHeightV && snakeY >= wall1Y - 1)
+    if (snakeY == wall1Y + wallHeightV && snakeY >= wall1Y)
     {
         if (snakeX + snakeWidth > wall1X && snakeX < wall1X + wallWidthV)
         {
@@ -197,7 +214,7 @@ function gameCollision()
         }
     }
     //HORIZONTAL
-    else if (snakeY == wall2Y + 1 + wallHeightH && snakeY >= wall2Y - 1)
+    else if (snakeY == wall2Y + wallHeightH && snakeY >= wall2Y)
     {
         if (snakeX + snakeWidth > wall2X && snakeX < wall2X + wallWidthH)
         {
@@ -212,7 +229,6 @@ function gameCollision()
     {
         topStop = false;
     }
-    console.log("Repeating");
 }
 
 /*========== Sub Recursive Function for Low Priority Functions ==========*/
@@ -227,13 +243,9 @@ let roomID = 0;
 
 //Room Data (HTML) for each room in the game
 let room0 = `
-<!--Player Character's Div Containing Sprite-->
-<div id = "snake">
-    <img src = "Assets/snake-forward.png" id = "snakeSprite">
-</div>
 <!--Wall's Div Containing Sprite-->
 <div class = "wallVertical" id = "wallTest">
-    <img src = "Assets/wall-vertical.jpg" class = "wallVerticalSprite">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
 </div>
 <div class = "wallHorizontal" id = "wallTest1">
     <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
@@ -241,6 +253,15 @@ let room0 = `
 <!--Guard's Div Containing Sprite-->
 <div id = "guard">
     <img src = "Assets/guard-forward.png" class = "guardSprite">
+</div>
+<!--Door Mat-->
+<div class = "doorVertical" id = "doorBottom">
+    <img src = "Assets/door-vertical.png" class = "doorVerticalSprite">
+</div>
+
+<!--Player Character's Div Containing Sprite-->
+<div id = "snake">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
 </div>`;
 
 let room1 = `
@@ -270,5 +291,14 @@ function roomLoad()
             snakeY = 0;
             console.log("Load Room 1");
             break;
+    }
+}
+
+function doorCheck()
+{
+    if (52 <= snakeX && snakeX <= 55 && snakeY == 88)
+    {
+        roomID++;
+        roomLoad();
     }
 }

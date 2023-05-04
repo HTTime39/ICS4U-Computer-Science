@@ -58,8 +58,8 @@ body
 {
     width: 5vh;
     /*Graphical Fix for the behaviour of the collision detection leaving a gap on the top and bottom of the wall when Snake touches it.*/
-    height: 27vh;
-    margin-top: -1vh;
+    /* height: 27vh; */
+    /* margin-top: -1vh; */
 }
 .wallHorizontal
 {
@@ -71,6 +71,27 @@ body
     height: 5vh;
 }
 
+/* ========== Doors ==========*/
+.doorVertical
+{
+    position: absolute;
+}
+.doorVerticalSprite
+{
+    height: 3vh;
+    width: 8vh;
+}
+
+.doorHorizontal
+{
+    position: absolute;
+}
+.doorHorizontalSprite
+{
+    height: 8vh;
+    width: 3vh;
+}
+
 #wallTest
 {
     margin-left: 20vh;
@@ -80,4 +101,10 @@ body
 {
     margin-left: 60vh;
     margin-top: 60vh;
+}
+
+#doorBottom
+{
+    margin-top: 95vh;
+    margin-left: 52vh;
 }
