@@ -250,6 +250,8 @@ let roomIDLast;
 
 //Room Data (HTML) for each room in the game
 let room0 = `
+<!--Floor-->
+<img src = "Assets/floor.png" id = "floor">
 <!--Wall's Div Containing Sprite-->
 <div class = "wallVertical" id = "wallTest">
     <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
@@ -263,7 +265,7 @@ let room0 = `
 </div>
 <!--Door Mat-->
 <div class = "doorVertical" id = "doorBottom">
-    <img src = "Assets/door-vertical.png" class = "doorVerticalSprite">
+    <img src = "Assets/door-bottom.png" class = "doorVerticalSprite">
 </div>
 
 <!--Player Character's Div Containing Sprite-->
@@ -272,9 +274,11 @@ let room0 = `
 </div>`;
 
 let room1 = `
+<!--Floor-->
+<img src = "Assets/floor.png" id = "floor">
 <!--Player Character's Div Containing Sprite-->
 <div class = "doorVertical" id = "doorTop">
-<img src = "Assets/door-vertical.png" class = "doorVerticalSprite">
+<img src = "Assets/door-top.png" class = "doorVerticalSprite">
 </div>
 <div id = "snake">
     <img src = "Assets/snake-forward.png" id = "snakeSprite">

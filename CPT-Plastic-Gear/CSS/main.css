@@ -12,13 +12,20 @@ body
 /*========== Game Viewport ==========*/
 #gameViewPort
 {
-    background-color: #ffffff;
+    background-color: white;
     height: 98vh;
     width: 112vh;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1vh;
     margin-bottom: 1vh;
+}
+
+#floor
+{
+    position: absolute;
+    height: 98vh;
+    width: 112vh;
 }
 
 /*========== Snake ==========*/
