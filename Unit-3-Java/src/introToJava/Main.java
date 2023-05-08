@@ -198,78 +198,117 @@ public class Main {
 //			System.out.println(i);
 //		}
 		
-		//Lesson 4: Error Catching and Reading + Writing Files
+		// //Lesson 4: Error Catching and Reading + Writing Files
 		
-		try
-		{
-			System.out.println("Enter your favourite number");
-			//int favNum = sc.nextInt();			
-		}
-		catch(Exception e)
-		//Indicates to catch an exception. e is the event
-		{
-			System.out.println("Invalid Input");
-			System.out.println(e);
-		}
+		// try
+		// {
+		// 	System.out.println("Enter your favourite number");
+		// 	//int favNum = sc.nextInt();			
+		// }
+		// catch(Exception e)
+		// //Indicates to catch an exception. e is the event
+		// {
+		// 	System.out.println("Invalid Input");
+		// 	System.out.println(e);
+		// }
 		
-		//Reading Files
-		File file = new File("ComputerScience.txt");
-		//An object representing a file. The argument of the function is the name of the file
+		// //Reading Files
+		// File file = new File("ComputerScience.txt");
+		// //An object representing a file. The argument of the function is the name of the file
 		
-		if (file.exists())
-		//Determines whether or not the file exists
-		{
-			System.out.println("File Located");
-		}
-		else
-		{
-			System.out.println("File not found");
-		}
+		// if (file.exists())
+		// //Determines whether or not the file exists
+		// {
+		// 	System.out.println("File Located");
+		// }
+		// else
+		// {
+		// 	System.out.println("File not found");
+		// }
 		
-		try
-		{
-			FileWriter fw = new FileWriter("ComputerScience.txt");
-			//An object representing the file, but it is ready to write with now.
-			PrintWriter pw = new PrintWriter(fw);
-			//An object that can be addressed to write to the file specified by parentheses.
-			pw.println("Hi");
-			//This will overwrite the whole file, and does not append it.
-			pw.println("What's up?");
-			pw.println("Trevor get off your phone");
-			pw.close();
-		}
-		catch (Exception e)
-		{
-			System.out.println("File Not Found");
-		}
+		// try
+		// {
+		// 	FileWriter fw = new FileWriter("ComputerScience.txt");
+		// 	//An object representing the file, but it is ready to write with now.
+		// 	PrintWriter pw = new PrintWriter(fw);
+		// 	//An object that can be addressed to write to the file specified by parentheses.
+		// 	pw.println("Hi");
+		// 	//This will overwrite the whole file, and does not append it.
+		// 	pw.println("What's up?");
+		// 	pw.println("Trevor get off your phone");
+		// 	pw.close();
+		// }
+		// catch (Exception e)
+		// {
+		// 	System.out.println("File Not Found");
+		// }
 		
-		//Reading from the TestFile.txt
-		try
-		{
-		FileReader fr = new FileReader("TestFile.txt");
-		Scanner sc1 = new Scanner(fr);
-		//A scanner is created and pointed towards the file
-		while (sc1.hasNext()) 
-		//while there are more lines to take in from the file
-		{
-		String words = sc1.nextLine();
-		System.out.println(words);
-		}
+		// //Reading from the TestFile.txt
+		// try
+		// {
+		// FileReader fr = new FileReader("TestFile.txt");
+		// Scanner sc1 = new Scanner(fr);
+		// //A scanner is created and pointed towards the file
+		// while (sc1.hasNext()) 
+		// //while there are more lines to take in from the file
+		// {
+		// String words = sc1.nextLine();
+		// System.out.println(words);
+		// }
 			
-		}
-		catch (Exception e)
+		// }
+		// catch (Exception e)
+		// {
+		// 	System.out.println("File Not Found");
+		// }
+
+		//===== Arrays =====
+		//Instantiating an empty array
+		String [] students = new String [5];
+		int [] numbers = new int [5];
+		//A data type is selected for the array. The number in the second set of square brackets is indicative of the number of indexes in the array
+
+		students[0] = "Justin";
+		students[1] = "Christina";
+		// System.out.println(students[0]);
+
+		//Instantiating an array with its values defined
+		String [] students1 = {"Adrian", "Mary", "Martin", "Lucas"};
+
+		// System.out.println(students1[0]);
+
+		//Displaying an entire array
+		for (int i = 0; i < students1.length; i++)
+		//arrayName.length will return the length of an array
 		{
-			System.out.println("File Not Found");
+			System.out.println(students1[i]);
 		}
 		
+		System.out.println("How many students are in the class?");
+		int student = sc.nextInt();
+
+		//Create 3 blank arrays to store the information
+		String [] classList = new String [student];
+		int [] ages = new int [student];
+		boolean [] g2 = new boolean [student];
+
+		for (int i = 0; i < student; i++)
+		{
+			sc.nextLine();
+			System.out.println("Student Name " + (i + 1) + ": ");
+			classList[i] = sc.nextLine();
+			System.out.println(classList[i] + "'s age: ");
+			ages[i] = sc.nextInt();
+			System.out.println("Does " + classList[i] + " have their G2: ");
+			g2[i] = sc.nextBoolean();
+		}
+
+		System.out.println("Name | Age | G2");
+
+		for (int i = 0; i < student; i++)
+		{
+			System.out.println(classList[i] + " | " + ages[i] + " | " + g2[i]);
+		}
+
 }
 }
-
-
-
-
-
-
-
-
-
