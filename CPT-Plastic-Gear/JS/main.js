@@ -369,7 +369,7 @@ let room0 = `
     <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
 </div>
 <div class = "doorVertical" id = "doorTop">
-    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
+    <img src = "Assets/door-room-0.png" class = "doorVerticalSpriteTop">
 </div>
 
 <!--Player Character's Div Containing Sprite-->
