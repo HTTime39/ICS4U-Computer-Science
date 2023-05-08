@@ -49,7 +49,7 @@ let wall0AY = 15;
 let wall0BX = 25;
 let wall0BY = 15;
 
-let wall0CX = 50;
+let wall0CX = 60;
 let wall0CY = 15;
 
 let wall0DX = 70;
@@ -57,6 +57,8 @@ let wall0DY = 15;
 
 let wall0EX = 90;
 let wall0EY = 15;
+
+//Later rooms are put right into the collision function
 
 
 //==================== FRAMEWORK FOR LOADING ROOMS ========================//
@@ -272,12 +274,43 @@ function collisionRightH(wallX, wallY) //Snake hits the right of a horizontal wa
     }
 }
 
+//Collision for Custom Objects
+function customCollision(wallX, wallY, wallWidth, wallHeight)
+{
+    if (snakeY + snakeHeight == wallY && snakeY + snakeHeight <= wallY + wallHeight)
+    {
+        if (snakeX + snakeWidth > wallX && snakeX < wallX + wallWidth)
+        {
+            bottomStop = true;
+        }
+    }
+    if (snakeY == wallY + wallHeight && snakeY >= wallY)
+    {
+        if (snakeX + snakeWidth > wallX && snakeX < wallX + wallWidth)
+        {
+            topStop = true;
+        }
+    }
+    if (snakeX + snakeWidth >= wallX && snakeX <= wallX)
+    {
+        if (snakeY + snakeHeight > wallY && snakeY < wallY + wallHeight)
+        {
+            rightStop = true;
+        }
+    }
+    if (snakeX <= wallX + wallWidth && snakeX >= wallX)
+    {
+        if (snakeY + snakeHeight > wallY && snakeY < wallY + wallHeight)
+        {
+            leftStop = true;
+        }
+    }
+}
 
 //==================== ROOM DATA STRINGS ==================================//
 
 
 let room0 = `
-<div id = "gameViewPort">
 <!--Floor-->
 <img src = "Assets/floor.png" id = "floor">
 
@@ -297,40 +330,75 @@ let room0 = `
 <div class = "wallVertical" id = "wall0E">
     <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
 </div>
+<div class = "wallVertical" id = "wall0F">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall0G">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall0H">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall0I">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall0J">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall0K">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall0L">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+
+<!--Plane-->
+<div class = "plane" id = "plane0A">
+    <img src = "Assets/plane.png" class = "planeSprite">
+</div>
+<!--Tanks-->
+<div class = "tank" id = "tank0A">
+    <img src = "Assets/tank.png" class = "tankSprite">
+</div>
+<div class = "tank" id = "tank0B">
+    <img src = "Assets/tank.png" class = "tankSprite">
+</div>
 
 <!--Door Mat-->
 <div class = "doorVertical" id = "doorBottom">
-    <img src = "Assets/door-bottom.png" class = "doorVerticalSprite">
+    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
+</div>
+<div class = "doorVertical" id = "doorTop">
+    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
 </div>
 
 <!--Player Character's Div Containing Sprite-->
 <div id = "snake">
     <img src = "Assets/snake-forward.png" id = "snakeSprite">
-</div>
-
 </div>`;
 
 let room1 = `
 <!--Floor-->
 <img src = "Assets/floor.png" id = "floor">
-<!--Player Character's Div Containing Sprite-->
-<div class = "doorVertical" id = "doorTop">
-<img src = "Assets/door-top.png" class = "doorVerticalSprite">
-</div>
 <!--Door Mat-->
 <div class = "doorVertical" id = "doorBottom">
-<img src = "Assets/door-bottom.png" class = "doorVerticalSprite">
+    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
 </div>
+<div class = "doorVertical" id = "doorTop">
+    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
+</div>
+<!--Player Character's Div Containing Sprite-->
 <div id = "snake">
 <img src = "Assets/snake-forward.png" id = "snakeSprite">
 </div>`;
 
 let room2 = `
 <img src = "Assets/floor.png" id = "floor">
-<!--Player Character's Div Containing Sprite-->
+<!--Door Mat-->
 <div class = "doorVertical" id = "doorTop">
-<img src = "Assets/door-top.png" class = "doorVerticalSprite">
+    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
 </div>
+<!--Player Character's Div Containing Sprite-->
 <div id = "snake">
 <img src = "Assets/snake-forward.png" id = "snakeSprite">
 </div>`;
@@ -347,6 +415,21 @@ let room2 = `
         collisionH(wall0CX, wall0CY);
         collisionH(wall0DX, wall0DY);
         collisionV(wall0EX, wall0EY);
+        collisionV(90, 40);
+        collisionV(90, 60);
+        collisionH(70, 80);
+        collisionH(55, 80);
+        collisionH(30, 80);
+        collisionH(5, 80);
+        collisionH(0, 80);
+        //Plane
+        customCollision(0, 41, 26, 18); //Main Body
+        customCollision(0, 44, 35, 12); //Nose
+        customCollision(0, 35, 10, 28); //Inner Wing
+        customCollision(0, 25, 6, 66); //Outer Wing
+        //Tanks
+        customCollision(65, 25, 17, 17);
+        customCollision(45, 55, 17, 17);
     }
     
     function collisionRoom1()

@@ -80,7 +80,12 @@ body
 {
     position: absolute;
 }
-.doorVerticalSprite
+.doorVerticalSpriteTop
+{
+    height: 3.5vh;
+    width: 8vh;
+}
+.doorVerticalSpriteBottom
 {
     height: 3vh;
     width: 8vh;
@@ -96,6 +101,26 @@ body
     width: 3vh;
 }
 
+/* ========== Plane ==========*/
+.plane
+{
+    position: absolute;
+}
+.planeSprite
+{
+    width: 35vh;
+}
+
+/*========== Tank ==========*/
+.tank
+{
+    position: absolute;
+}
+.tankSprite
+{
+    height: 17vh;
+    width: 17vh;
+}
 
 #doorBottom
 {
@@ -120,7 +145,7 @@ body
 }
 #wall0C
 {
-    margin-left: 50vh;
+    margin-left: 60vh;
     margin-top: 15vh;
 }
 #wall0D
@@ -132,4 +157,53 @@ body
 {
     margin-left: 90vh;
     margin-top: 15vh;
+}
+#wall0F
+{
+    margin-left: 90vh;
+    margin-top: 40vh;
+}
+#wall0G
+{
+    margin-left: 90vh;
+    margin-top: 60vh;
+}
+#wall0H
+{
+    margin-left: 70vh;
+    margin-top: 80vh;
+}
+#wall0I
+{
+    margin-left: 55vh;
+    margin-top: 80vh;
+}
+#wall0J
+{
+    margin-left: 30vh;
+    margin-top: 80vh;
+}
+#wall0K
+{
+    margin-left: 5vh;
+    margin-top: 80vh;
+}
+#wall0L
+{
+    margin-left: 0vh;
+    margin-top: 80vh;
+}
+#plane0A
+{
+    margin-top: 25vh;
+}
+#tank0A
+{
+    margin-left: 65vh;
+    margin-top: 25vh;
+}
+#tank0B
+{
+    margin-left: 45vh;
+    margin-top: 55vh;
 }
