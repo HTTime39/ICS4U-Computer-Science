@@ -1,0 +1,1 @@
+This was also the version prior to the major simplification revision to the collision system

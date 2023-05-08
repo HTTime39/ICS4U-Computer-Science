@@ -1,3 +1,6 @@
+//==================== SPRITE DIMENSION VARIABLE SETUP ====================//
+
+
 /*========== Setting Up Collision Detection On Snake ==========*/
 let snake = document.querySelector("#snake"); //Player character
 let snakeWidth = 5; //The width of Snake's sprite in viewport units. To be used in collision detection calculations.
@@ -12,6 +15,18 @@ let snakeY = 4; //Tracks the y position of snake as an integer
 let snakeYString = "4vh"; //Tracks the y position of snake as a string with units appended so it can be read by
 snake.style.marginTop = snakeYString;
 
+/*========== Setting Up Collision Detection on Walls ==========*/
+//The dimensions to be used in collision detection for horizontal wall segments (vh)
+let wallWidthV = 5;
+let wallHeightV = 25;
+//The dimensions to be used in collision detection for horizontal wall segments (vh)
+let wallWidthH = 25;
+let wallHeightH = 5;
+
+
+//==================== INPUT VARIABLE SETUP ===============================//
+
+
 //Key Event Listeners
 document.addEventListener("keydown", keysDown); //Records keys when pressed
 document.addEventListener("keyup", keysUp); //Unrecords keys when unpressed
@@ -23,29 +38,42 @@ let rightStop = false;
 let topStop = false;
 let bottomStop = false;
 
-/*========== Setting Up Collision Detection on Walls ==========*/
 
-//The dimensions to be used in collision detection for horizontal wall segments (vh)
-let wallWidthV = 5;
-let wallHeightV = 25;
-//The dimensions to be used in collision detection for horizontal wall segments (vh)
-let wallWidthH = 25;
-let wallHeightH = 5;
+//==================== WALL VARIABLES BY ROOM =============================//
 
 
 /*========== Room 0 Wall Positions ==========*/
-let wall1X = 20;
-let wall1Y = 20;
+let wall0AX = 0;
+let wall0AY = 15;
 
-let wall2X = 60;
-let wall2Y = 60;
+let wall0BX = 25;
+let wall0BY = 15;
 
-//Wall Doesn't Exist
-let DNE = -100;
+let wall0CX = 50;
+let wall0CY = 15;
+
+let wall0DX = 70;
+let wall0DY = 15;
+
+let wall0EX = 90;
+let wall0EY = 15;
+
+
+//==================== FRAMEWORK FOR LOADING ROOMS ========================//
+
+
+//Variables for what the current room is and what the last room was
+let roomID = 0;
+let roomIDLast;
+
+//Variables for whether or not a door exists in a room
 let dbExists = true;
 let dtExists = false;
 
-/*========== Recording and Unrecording Inputs ==========*/
+
+//==================== RECORDING AND UNRECORDING USER INPUTS ==============//
+
+
 //Array to hold all currently held buttons
 let pressedKeys = [];
 
@@ -61,7 +89,10 @@ function keysUp(e)
     pressedKeys[e.keyCode] = false;
 }
 
-/*========== Recursive Main Character Control Function ==========*/
+
+//==================== PLAYER CONTROL FUNCTION (RECURSIVE) ================//
+
+
 setInterval(gameMain, 30);
 function gameMain()
 {
@@ -107,162 +138,166 @@ function gameMain()
             snakeYString = snakeY + "vh";
             snake.style.marginTop = snakeYString;
         }
-
         doorCheckD();
     }
 }
 
-/*========== Recursive Collision Detection ==========*/
+
+//==================== COLLISION DETECTION FUNCTION (RECURSIVE)============//
+
+
 setInterval(gameCollision, 30);
 function gameCollision()
 {
-    //Snake hits the left side of a wall
-    //VERTICAL
-    if (snakeX + snakeWidth >= wall1X && snakeX <= wall1X)
+    leftStop = false;
+    rightStop = false;
+    topStop = false;
+    bottomStop = false;
+    switch (roomID)
     {
-        if (snakeY + snakeHeight > wall1Y && snakeY < wall1Y + wallHeightV)
-        {
-            rightStop = true;
-        }
-        else
-        {
-            rightStop = false;
-        }
-    }
-    //HORIZONTAL
-    else if (snakeX + snakeWidth >= wall2X && snakeX <= wall2X)
-    {
-        if (snakeY + snakeHeight > wall2Y && snakeY < wall2Y + wallHeightH)
-        {
-            rightStop = true;
-        }
-        else
-        {
-            rightStop = false;
-        }
-    }
-    else
-    {
-        rightStop = false;
-    }
-
-    //Snake hits the right side of a wall
-    //VERTICAL
-    if (snakeX <= wall1X + wallWidthV && snakeX >= wall1X)
-    {
-        if (snakeY + snakeHeight > wall1Y && snakeY < wall1Y + wallHeightV)
-        {
-            leftStop = true;
-        }
-        else
-        {
-            leftStop = false;
-        }
-    }
-    //HORIZONTAL
-    else if (snakeX <= wall2X + wallWidthH && snakeX >= wall2X)
-    {
-        if (snakeY + snakeHeight > wall2Y && snakeY < wall2Y + wallHeightH)
-        {
-            leftStop = true;
-        }
-        else
-        {
-            leftStop = false;
-        }
-    }
-    else
-    {
-        leftStop = false;
-    }
-
-    //Snake hits the top of a wall
-    //VERTICAL
-    if (snakeY + snakeHeight == wall1Y && snakeY + snakeHeight <= wall1Y + wallHeightV)
-    {
-        if (snakeX + snakeWidth > wall1X && snakeX < wall1X + wallWidthV)
-        {
-            bottomStop = true;
-        }
-        else
-        {
-            bottomStop = false;
-        }
-    }
-    //HORIZONTAL
-    else if (snakeY + snakeHeight == wall2Y && snakeY + snakeHeight <= wall2Y + wallHeightH)
-    {
-        if (snakeX + snakeWidth > wall2X && snakeX < wall2X + wallWidthH)
-        {
-            bottomStop = true;
-        }
-        else
-        {
-            bottomStop = false;
-        }
-    }
-    else
-    {
-        bottomStop = false;
-    }
-
-    //Snake hits the bottom of a wall
-    //VERTICAL
-    if (snakeY == wall1Y + wallHeightV && snakeY >= wall1Y)
-    {
-        if (snakeX + snakeWidth > wall1X && snakeX < wall1X + wallWidthV)
-        {
-            topStop = true;
-        }
-        else
-        {
-            topStop = false;
-        }
-    }
-    //HORIZONTAL
-    else if (snakeY == wall2Y + wallHeightH && snakeY >= wall2Y)
-    {
-        if (snakeX + snakeWidth > wall2X && snakeX < wall2X + wallWidthH)
-        {
-            topStop = true;
-        }
-        else
-        {
-            topStop = false;
-        }
-    }
-    else
-    {
-        topStop = false;
+        case 0:
+            collisionRoom0();
+            break;
+        case 1:
+            collisionRoom1();
+            break;
+        case 2:
+            collisionRoom2();
+            break;
     }
 }
 
-/*========== Sub Recursive Function for Low Priority Functions ==========*/
-setInterval(gameSecondary, 1000);
-function gameSecondary()
+
+//==================== DIRECTIONAL COLLISION DETECTION FRAMEWORK ==========//
+
+
+/*========== Overall Collision ==========*/
+function collisionV(wallX, wallY)
 {
-    //For secondary recursive tasks :(
+    collisionTopV(wallX, wallY);
+    collisionBottomV(wallX, wallY);
+    collisionLeftV(wallX, wallY);
+    collisionRightV(wallX, wallY);
+}
+function collisionH(wallX, wallY)
+{
+    collisionTopH(wallX, wallY);
+    collisionBottomH(wallX, wallY);
+    collisionLeftH(wallX, wallY);
+    collisionRightH(wallX, wallY);
 }
 
-//========== Framework for loading rooms ==========
-let roomID = 0;
-let roomIDLast;
+/*========== Collision By Parts ==========*/
+function collisionTopV(wallX, wallY) //Snake hits the top of a vertical wall
+{
+    if (snakeY + snakeHeight == wallY && snakeY + snakeHeight <= wallY + wallHeightV)
+    {
+        if (snakeX + snakeWidth > wallX && snakeX < wallX + wallWidthV)
+        {
+            bottomStop = true;
+        }
+    }
+}
+function collisionTopH(wallX, wallY) //Snake hits the top of a horizontal wall
+{
+    if (snakeY + snakeHeight == wallY && snakeY + snakeHeight <= wallY + wallHeightH)
+    {
+        if (snakeX + snakeWidth > wallX && snakeX < wallX + wallWidthH)
+        {
+            bottomStop = true;
+        }
+    }
+}
 
-//Room Data (HTML) for each room in the game
+function collisionBottomV(wallX, wallY) //Snake hits the bottom of a vertical wall
+{
+    if (snakeY == wallY + wallHeightV && snakeY >= wallY)
+    {
+        if (snakeX + snakeWidth > wallX && snakeX < wallX + wallWidthV)
+        {
+            topStop = true;
+        }
+    }
+}
+function collisionBottomH(wallX, wallY) //Snake hits the bottom of a horizontal wall
+{
+    if (snakeY == wallY + wallHeightH && snakeY >= wallY)
+    {
+        if (snakeX + snakeWidth > wallX && snakeX < wallX + wallWidthH)
+        {
+            topStop = true;
+        }
+    }
+}
+
+function collisionLeftV(wallX, wallY) //Snake hits the left of a vertical wall
+{
+    if (snakeX + snakeWidth >= wallX && snakeX <= wallX)
+    {
+        if (snakeY + snakeHeight > wallY && snakeY < wallY + wallHeightV)
+        {
+            rightStop = true;
+        }
+    }
+}
+function collisionLeftH(wallX, wallY) //Snake hits the left of a horizontal wall
+{
+    if (snakeX + snakeWidth >= wallX && snakeX <= wallX)
+    {
+        if (snakeY + snakeHeight > wallY && snakeY < wallY + wallHeightH)
+        {
+            rightStop = true;
+        }
+    }
+}
+
+function collisionRightV(wallX, wallY) //Snake hits the right of a vertical wall
+{
+    if (snakeX <= wallX + wallWidthV && snakeX >= wallX)
+    {
+        if (snakeY + snakeHeight > wallY && snakeY < wallY + wallHeightV)
+        {
+            leftStop = true;
+        }
+    }
+}
+function collisionRightH(wallX, wallY) //Snake hits the right of a horizontal wall
+{
+    if (snakeX <= wallX + wallWidthH && snakeX >= wallX)
+    {
+        if (snakeY + snakeHeight > wallY && snakeY < wallY + wallHeightH)
+        {
+            leftStop = true;
+        }
+    }
+}
+
+
+//==================== ROOM DATA STRINGS ==================================//
+
+
 let room0 = `
+<div id = "gameViewPort">
 <!--Floor-->
 <img src = "Assets/floor.png" id = "floor">
+
 <!--Wall's Div Containing Sprite-->
-<div class = "wallVertical" id = "wallTest">
-    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
-</div>
-<div class = "wallHorizontal" id = "wallTest1">
+<div class = "wallHorizontal" id = "wall0A">
     <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
 </div>
-<!--Guard's Div Containing Sprite-->
-<div id = "guard">
-    <img src = "Assets/guard-forward.png" class = "guardSprite">
+<div class = "wallHorizontal" id = "wall0B">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
 </div>
+<div class = "wallHorizontal" id = "wall0C">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall0D">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallVertical" id = "wall0E">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+
 <!--Door Mat-->
 <div class = "doorVertical" id = "doorBottom">
     <img src = "Assets/door-bottom.png" class = "doorVerticalSprite">
@@ -271,6 +306,8 @@ let room0 = `
 <!--Player Character's Div Containing Sprite-->
 <div id = "snake">
     <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+
 </div>`;
 
 let room1 = `
@@ -280,56 +317,59 @@ let room1 = `
 <div class = "doorVertical" id = "doorTop">
 <img src = "Assets/door-top.png" class = "doorVerticalSprite">
 </div>
+<!--Door Mat-->
+<div class = "doorVertical" id = "doorBottom">
+<img src = "Assets/door-bottom.png" class = "doorVerticalSprite">
+</div>
 <div id = "snake">
-    <img src = "Assets/snake-forward.png" id = "snakeSprite">
+<img src = "Assets/snake-forward.png" id = "snakeSprite">
 </div>`;
 
-/*========== Loading a Room ==========*/
-function roomLoad()
-{
-    console.log("Loading Room " + roomID);
-    //Each room's specifics are loaded here
-    switch (roomID)
+let room2 = `
+<img src = "Assets/floor.png" id = "floor">
+<!--Player Character's Div Containing Sprite-->
+<div class = "doorVertical" id = "doorTop">
+<img src = "Assets/door-top.png" class = "doorVerticalSprite">
+</div>
+<div id = "snake">
+<img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>`;
+
+
+    //==================== COLLISION DETECTION UNIQUE TO EACH ROOM ========//
+
+
+    function collisionRoom0()
     {
-        case 0:
-            document.getElementById("gameViewPort").innerHTML = room0;
-            snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
-
-            dbExists = true;
-            dtExists = false;
-            break;
-        case 1:
-            //The HTML is switched to so the viewport contains the objects that are in the room being loaded
-            document.getElementById("gameViewPort").innerHTML = room1;
-            snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
-
-            dbExists = false;
-            dtExists = true;
-            break;
+        //Each checks for collision with each wall
+        collisionH(wall0AX, wall0AY);
+        collisionH(wall0BX, wall0BY);
+        collisionH(wall0CX, wall0CY);
+        collisionH(wall0DX, wall0DY);
+        collisionV(wall0EX, wall0EY);
     }
-
-    //When Snake advances to a room (Setting Position)
-    if (roomIDLast < roomID)
+    
+    function collisionRoom1()
     {
-        snakeX = 53; //Tracks the x position of snake as an integer
-        snakeXString = "53vh"; //Tracks the x position of snake as a string with units appended so it can be read by css
-        snake.style.marginLeft = snakeXString;
-        snakeY = 1; //Tracks the y position of snake as an integer
-        snakeYString = "1vh"; //Tracks the y position of snake as a string with units appended so it can be read by
-        snake.style.marginTop = snakeYString;
+    
     }
-    //When Snake returns to a room (Setting Position)
-    else if (roomID < roomIDLast)
+    
+    function collisionRoom2()
+    {
+    
+    }
+    
+    function DevRoomLoad()
     {
         snakeX = 53;
-        snakeXString = "53vh";
-        snake.style.marginLeft = snakeXString;
-        snakeY = 88;
-        snakeYString = "87vh";
-        snake.style.marginTop = snakeYString;
+        snakeY = 4;
+    
+        roomLoad();
     }
-    console.log("Loaded Room " + roomID);
-}
+
+
+//==================== LOADING ROOMS ======================================//
+
 
 /*========== Triggering Room Load at Doors ==========*/
 function doorCheckD()
@@ -348,5 +388,79 @@ function doorCheckU()
         roomIDLast = roomID;
         roomID--;
         roomLoad();
+    }
+}
+
+/*========== Loading Room Data ==========*/
+function roomLoad()
+{
+    console.log("Loading Room " + roomID);
+    //Each room's specifics are loaded here
+    switch (roomID)
+    {
+        case 0:
+            document.getElementById("gameViewPort").innerHTML = room0;
+            snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
+
+            dtExists = false;
+            dbExists = true;
+            break;
+        case 1:
+            //The HTML is switched to so the viewport contains the objects that are in the room being loaded
+            document.getElementById("gameViewPort").innerHTML = room1;
+            snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
+
+            dtExists = true;
+            dbExists = true;
+            break;
+        case 2:
+            document.getElementById("gameViewPort").innerHTML = room2;
+            snake = document.querySelector("#snake");
+
+            dtExists = true;
+            dbExists = false;
+            break;
+    }
+
+    /*========== Room Progression or Return Detection ==========*/
+    if (roomIDLast < roomID) //When Snake advances to a room (Setting Position)
+    {
+        snakeX = 53; //Tracks the x position of snake as an integer
+        snakeXString = "53vh"; //Tracks the x position of snake as a string with units appended so it can be read by css
+        snake.style.marginLeft = snakeXString;
+        snakeY = 1; //Tracks the y position of snake as an integer
+        snakeYString = "1vh"; //Tracks the y position of snake as a string with units appended so it can be read by
+        snake.style.marginTop = snakeYString;
+    }
+    
+    else if (roomID < roomIDLast) //When Snake returns to a room (Setting Position)
+    {
+        snakeX = 53;
+        snakeXString = "53vh";
+        snake.style.marginLeft = snakeXString;
+        snakeY = 88;
+        snakeYString = "87vh";
+        snake.style.marginTop = snakeYString;
+    }
+    console.log("Loaded Room " + roomID);
+}
+
+
+//==================== SUB-RECURSIVE FUNCTION FOR DEV CONTROL =============//
+
+
+setInterval(gameSecondary, 750);
+function gameSecondary()
+{
+    //For secondary recursive tasks :(
+    //Experimental on the fly room reload REMOVE LATER
+    if(pressedKeys[57]) DevRoomLoad();
+    if(pressedKeys[48]) roomID++;
+    if(pressedKeys[56]) roomID--;
+    if(pressedKeys[55]) console.log(roomID);
+    if(pressedKeys[54])
+    {
+        roomID = 0; //Room that is currently being worked on
+        DevRoomLoad();
     }
 }

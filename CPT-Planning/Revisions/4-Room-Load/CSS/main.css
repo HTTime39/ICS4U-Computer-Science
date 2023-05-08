@@ -64,6 +64,9 @@ body
 .wallVerticalSprite
 {
     width: 5vh;
+    /*Graphical Fix for the behaviour of the collision detection leaving a gap on the top and bottom of the wall when Snake touches it.*/
+    /* height: 27vh; */
+    /* margin-top: -1vh; */
 }
 .wallHorizontal
 {

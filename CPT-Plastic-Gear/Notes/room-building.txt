@@ -1,0 +1,35 @@
+Room Building
+
+1) When inserting Snake's div, always place it on the bottom, that way, he always appears on top of all of the other game elements such as the floor, and door mats.
+
+2) Always remember to also insert the image for the floor. Similarly to Snake, the floor div needs to appear above everything else in the HTML to make it appear underneath everything else on the actual screen, so that it is not covering any other game elements. 
+
+3) Always remember to re-establish the JS object that represents snake, so that his position can be changed depending after a new room has been loaded.
+
+4) Walls must be added into the HTML string for them to visually appear
+
+TEMPLATE FOR A VERTICAL WALL DIV:
+
+<div class = "wallVertical" id = "wall#A">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+
+TEMPLATE FOR A HORIZONTAL WALL DIV:
+<div class = "wallHorizontal" id = "wall#A">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+
+5) Walls must be added into the collision detection JS functions for them to physically appear in game. 
+- Make variables for there X and Y coordinates. 
+
+let wall#AX = 0;
+let wall#AY = 15;
+
+- Add collision functions to respective room. Swap H for V for vertical walls
+
+collisionTopH(wall#AX, wall#AY);
+collisionBottomH(wall#AX, wall#AY);
+collisionLeftH(wall#AX, wall#AY);
+collisionRightH(wall#AX, wall#AY);
+
+6) After completing the HTML, remember to reinsert it to match with the HTML strings used for room loads.
