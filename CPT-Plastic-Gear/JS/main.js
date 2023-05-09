@@ -58,7 +58,7 @@ let wall0DY = 15;
 let wall0EX = 90;
 let wall0EY = 15;
 
-//Later rooms are put right into the collision function
+//Later walls and rooms have coordinates directly placed in collision function parameters
 
 
 //==================== FRAMEWORK FOR LOADING ROOMS ========================//
@@ -275,6 +275,7 @@ function collisionRightH(wallX, wallY) //Snake hits the right of a horizontal wa
 }
 
 //Collision for Custom Objects
+//Parameters represent X-Coordinate, Y-Coordinate, Width of Object, Height of Object
 function customCollision(wallX, wallY, wallWidth, wallHeight)
 {
     if (snakeY + snakeHeight == wallY && snakeY + snakeHeight <= wallY + wallHeight)
@@ -380,75 +381,200 @@ let room0 = `
 let room1 = `
 <!--Floor-->
 <img src = "Assets/floor.png" id = "floor">
-<!--Door Mat-->
+
+<!--Walls-->
+<div class = "wallHorizontal" id = "wall1A">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall1B">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall1C">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall1D">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallVertical" id = "wall1E">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall1F">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall1G">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall1H">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall1I">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall1J">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall1K">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+
+<!--Tanks-->
+<div class = "tank" id = "tank1A">
+    <img src = "Assets/tank.png" class = "tankSprite">
+</div>
+<div class = "tank" id = "tank1B">
+    <img src = "Assets/tank.png" class = "tankSprite">
+</div>
+<div class = "tank" id = "tank1C">
+    <img src = "Assets/tank.png" class = "tankSprite">
+</div>
+<div class = "tank" id = "tank1D">
+    <img src = "Assets/tank-1.png" class = "tankSprite">
+</div>
+
+<!--Doormats-->
 <div class = "doorVertical" id = "doorBottom">
     <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
 </div>
 <div class = "doorVertical" id = "doorTop">
     <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
 </div>
+
 <!--Player Character's Div Containing Sprite-->
 <div id = "snake">
-<img src = "Assets/snake-forward.png" id = "snakeSprite">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
 </div>`;
 
 let room2 = `
+<!--Floor-->
 <img src = "Assets/floor.png" id = "floor">
-<!--Door Mat-->
+
+<!--Walls-->
+<div class = "wallHorizontal" id = "wall2A">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2B">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2C">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2D">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2E">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2F">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2G">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2H">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2I">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2J">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2K">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2L">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall2M">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+
+<!--Doormats-->
+<div class = "doorVertical" id = "doorBottom">
+    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
+</div>
 <div class = "doorVertical" id = "doorTop">
     <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
 </div>
+
 <!--Player Character's Div Containing Sprite-->
 <div id = "snake">
-<img src = "Assets/snake-forward.png" id = "snakeSprite">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
 </div>`;
 
 
-    //==================== COLLISION DETECTION UNIQUE TO EACH ROOM ========//
+//==================== COLLISION DETECTION UNIQUE TO EACH ROOM ========//
 
 
-    function collisionRoom0()
-    {
-        //Each checks for collision with each wall
-        collisionH(wall0AX, wall0AY);
-        collisionH(wall0BX, wall0BY);
-        collisionH(wall0CX, wall0CY);
-        collisionH(wall0DX, wall0DY);
-        collisionV(wall0EX, wall0EY);
-        collisionV(90, 40);
-        collisionV(90, 60);
-        collisionH(70, 80);
-        collisionH(55, 80);
-        collisionH(30, 80);
-        collisionH(5, 80);
-        collisionH(0, 80);
-        //Plane
-        customCollision(0, 41, 26, 18); //Main Body
-        customCollision(0, 44, 35, 12); //Nose
-        customCollision(0, 35, 10, 28); //Inner Wing
-        customCollision(0, 25, 6, 66); //Outer Wing
-        //Tanks
-        customCollision(65, 25, 17, 17);
-        customCollision(45, 55, 17, 17);
-    }
-    
-    function collisionRoom1()
-    {
-    
-    }
-    
-    function collisionRoom2()
-    {
-    
-    }
-    
-    function DevRoomLoad()
-    {
-        snakeX = 53;
-        snakeY = 4;
-    
-        roomLoad();
-    }
+function collisionRoom0()
+{
+    //Each checks for collision with each wall
+    collisionH(wall0AX, wall0AY);
+    collisionH(wall0BX, wall0BY);
+    collisionH(wall0CX, wall0CY);
+    collisionH(wall0DX, wall0DY);
+    collisionV(wall0EX, wall0EY);
+    collisionV(90, 40);
+    collisionV(90, 60);
+    collisionH(70, 80);
+    collisionH(55, 80);
+    collisionH(30, 80);
+    collisionH(5, 80);
+    collisionH(0, 80);
+    //Plane
+    customCollision(0, 41, 26, 18); //Main Body
+    customCollision(0, 44, 35, 12); //Nose
+    customCollision(0, 35, 10, 28); //Inner Wing
+    customCollision(0, 25, 6, 66); //Outer Wing
+    //Tanks
+    customCollision(65, 25, 17, 17);
+    customCollision(45, 55, 17, 17);
+}
+
+function collisionRoom1()
+{
+    collisionH(0, 15);
+    collisionH(25, 15);
+    collisionH(50, 15);
+    collisionH(70, 15);
+    collisionV(90, 15);
+    collisionV(90, 20);
+    collisionV(90, 60);
+    collisionH(65, 80);
+    collisionH(40, 80);
+    collisionH(15, 80);
+    collisionH(0, 80);
+    //Tanks
+    customCollision(5, 25, 17, 17);
+    customCollision(25, 50, 17, 17);
+    customCollision(50, 30, 17, 17);
+    customCollision(63, 58, 17, 17);
+}
+
+function collisionRoom2()
+{
+    collisionH(0, 14);
+    collisionH(25, 14);
+    collisionH(50, 14);
+    collisionH(25, 34);
+    collisionH(62, 34);
+    collisionH(87, 34);
+    collisionH(0, 54);
+    collisionH(25, 54);
+    collisionH(62, 54);
+    collisionH(62, 14);
+    collisionH(25, 74);
+    collisionH(62, 74);
+    collisionH(87, 74);
+}
+
+function DevRoomLoad()
+{
+    snakeX = 53;
+    snakeY = 4;
+
+    roomLoad();
+}
 
 
 //==================== LOADING ROOMS ======================================//
@@ -501,7 +627,7 @@ function roomLoad()
             snake = document.querySelector("#snake");
 
             dtExists = true;
-            dbExists = false;
+            dbExists = true;
             break;
     }
 

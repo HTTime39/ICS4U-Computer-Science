@@ -207,3 +207,148 @@ body
     margin-left: 45vh;
     margin-top: 55vh;
 }
+
+/*========== Room 1 ==========*/
+#wall1A
+{
+    margin-left: 0vh;
+    margin-top: 15vh;
+}
+#wall1B
+{
+    margin-left: 25vh;
+    margin-top: 15vh;
+}
+#wall1C
+{
+    margin-left: 50vh;
+    margin-top: 15vh;
+}
+#wall1D
+{
+    margin-left: 70vh;
+    margin-top: 15vh;
+}
+#wall1E
+{
+    margin-left: 90vh;
+    margin-top: 15vh;
+}
+#wall1F
+{
+    margin-left: 90vh;
+    margin-top: 20vh;
+}
+#wall1G
+{
+    margin-left: 90vh;
+    margin-top: 60vh;
+}
+#wall1H
+{
+    margin-left: 65vh;
+    margin-top: 80vh;
+}
+#wall1I
+{
+    margin-left: 40vh;
+    margin-top: 80vh;
+}
+#wall1J
+{
+    margin-left: 15vh;
+    margin-top: 80vh;
+}
+#wall1K
+{
+    margin-left: 0vh;
+    margin-top: 80vh;
+}
+#tank1A
+{
+    margin-left: 5vh;
+    margin-top: 25vh;
+}
+#tank1B
+{
+    margin-left: 25vh;
+    margin-top: 50vh;
+}
+#tank1C
+{
+    margin-left: 50vh;
+    margin-top: 30vh;
+}
+#tank1D
+{
+    margin-left: 63vh;
+    margin-top: 58vh;
+}
+
+/*========== Room 2 ==========*/
+/* Horizontal */
+#wall2A
+{
+    margin-left: 0vh;
+    margin-top: 14vh;
+}
+#wall2B
+{
+    margin-left: 25vh;
+    margin-top: 14vh;
+}
+#wall2C
+{
+    margin-left: 50vh;
+    margin-top: 14vh;
+}
+#wall2D
+{
+    margin-left: 25vh;
+    margin-top: 34vh;
+}
+#wall2E
+{
+    margin-left: 62vh;
+    margin-top: 34vh;
+}
+#wall2F
+{
+    margin-left: 87vh;
+    margin-top: 34vh;
+}
+#wall2G
+{
+    margin-left: 0vh;
+    margin-top: 54vh;
+}
+#wall2H
+{
+    margin-left: 25vh;
+    margin-top: 54vh;
+}
+#wall2I
+{
+    margin-left: 62vh;
+    margin-top: 54vh;
+}
+#wall2J
+{
+    margin-left: 62vh;
+    margin-top: 14vh;
+}
+#wall2K
+{
+    margin-left: 25vh;
+    margin-top: 74vh;
+}
+#wall2L
+{
+    margin-left: 62vh;
+    margin-top: 74vh;
+}
+#wall2M
+{
+    margin-left: 87vh;
+    margin-top: 74vh;
+}
