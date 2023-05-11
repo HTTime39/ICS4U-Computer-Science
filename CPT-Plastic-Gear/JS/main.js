@@ -608,7 +608,61 @@ let room3 = `
 </div>`;
 
 let room4 = `
-`;
+<!--Floor-->
+        <img src = "Assets/floor.png" id = "floor">
+
+        <!--Walls-->
+        <div class = "wallHorizontal" id = "wall4A">
+            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+        </div>
+        <div class = "wallHorizontal" id = "wall4B">
+            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+        </div>
+        <div class = "wallHorizontal" id = "wall4C">
+            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+        </div>
+        <div class = "wallHorizontal" id = "wall4D">
+            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+        </div>
+        <div class = "wallVertical" id = "wall4E">
+            <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+        </div>
+        <div class = "wallVertical" id = "wall4F">
+            <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+        </div>
+        <div class = "wallVertical" id = "wall4G">
+            <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+        </div>
+        <div class = "wallHorizontal" id = "wall4H">
+            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+        </div>
+        <div class = "wallHorizontal" id = "wall4I">
+            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+        </div>
+
+        <!--Tanks-->
+        <div class = "tank" id = "tank4A">
+            <img src = "Assets/tank.png" class = "tankSprite">
+        </div>
+        <div class = "tank" id = "tank4B">
+            <img src = "Assets/tank.png" class = "tankSprite">
+        </div>
+        <div class = "tank" id = "tank4C">
+            <img src = "Assets/tank-1.png" class = "tankSprite">
+        </div>
+
+        <!--Doormats-->
+        <div class = "doorVertical" id = "doorBottom">
+            <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
+        </div>
+        <div class = "doorVertical" id = "doorTop">
+            <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
+        </div>
+
+        <!--Player Character's Div Containing Sprite-->
+        <div id = "snake">
+            <img src = "Assets/snake-forward.png" id = "snakeSprite">
+        </div>`;
 
 
 //==================== COLLISION DETECTION UNIQUE TO EACH ROOM ========//
@@ -683,7 +737,19 @@ function collisionRoom3()
 }
 function collisionRoom4()
 {
-
+    collisionH(0, 25);
+    collisionH(25, 25);
+    collisionH(50, 25);
+    collisionH(60, 25);
+    collisionV(80, 25);
+    collisionV(80, 35);
+    collisionV(80, 73);
+    collisionH(55, 73);
+    collisionH(30, 73);
+    //Tanks
+    customCollision(5, 35, 17, 17);
+    customCollision(30, 35, 17, 17);
+    customCollision(90, 77, 17, 17);
 }
 
 function DevRoomLoad()
