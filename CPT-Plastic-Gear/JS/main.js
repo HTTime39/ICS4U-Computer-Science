@@ -166,6 +166,11 @@ function gameCollision()
         case 2:
             collisionRoom2();
             break;
+        case 3:
+            collisionRoom3();
+            break;
+        case 4:
+            collisionRoom4();
     }
 }
 
@@ -502,6 +507,109 @@ let room2 = `
     <img src = "Assets/snake-forward.png" id = "snakeSprite">
 </div>`;
 
+let room3 = `
+<!--Floor-->
+<img src = "Assets/floor.png" id = "floor">
+
+<!--Walls-->
+<div class = "wallHorizontal" id = "wall3A">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3B">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3C">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3E">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3F">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3G">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3I">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3J">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3K">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3M">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3N">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3O">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3P">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3Q">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3R">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3S">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3T">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3U">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3V">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3W">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3X">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3Y">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3Z">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3AA">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3AB">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3AC">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall3AD">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+
+<!--Doormats-->
+<div class = "doorVertical" id = "doorBottom">
+    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
+</div>
+<div class = "doorVertical" id = "doorTop">
+    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
+</div>
+
+<!--Player Character's Div Containing Sprite-->
+<div id = "snake">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>`;
+
+let room4 = `
+`;
+
 
 //==================== COLLISION DETECTION UNIQUE TO EACH ROOM ========//
 
@@ -567,6 +675,16 @@ function collisionRoom2()
     collisionH(62, 74);
     collisionH(87, 74);
 }
+function collisionRoom3()
+{
+    customCollision(25, 15, 75, 15);
+    customCollision(25, 43, 75, 15);
+    customCollision(25, 71, 75, 15);
+}
+function collisionRoom4()
+{
+
+}
 
 function DevRoomLoad()
 {
@@ -628,6 +746,20 @@ function roomLoad()
 
             dtExists = true;
             dbExists = true;
+            break;
+        case 3:
+            document.getElementById("gameViewPort").innerHTML = room3;
+            snake = document.querySelector("#snake");
+
+            dtExists = true;
+            dbExists = true;
+            break;
+        case 4:
+            document.getElementById("gameViewPort").innerHTML = room4;
+            snake = document.querySelector("#snake");
+
+            dtExists = true;
+            dbExists = false;
             break;
     }
 

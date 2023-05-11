@@ -352,3 +352,202 @@ body
     margin-left: 87vh;
     margin-top: 74vh;
 }
+/*========== Room 3 ==========*/
+#wall3A
+{
+    margin-left: 25vh;
+    margin-top: 15vh;
+}
+#wall3B
+{
+    margin-left: 50vh;
+    margin-top: 15vh;
+}
+#wall3C
+{
+    margin-left: 75vh;
+    margin-top: 15vh;
+}
+#wall3E
+{
+    margin-left: 25vh;
+    margin-top: 20vh;
+}
+#wall3F
+{
+    margin-left: 50vh;
+    margin-top: 20vh;
+}
+#wall3G
+{
+    margin-left: 75vh;
+    margin-top: 20vh;
+}
+#wall3I
+{
+    margin-left: 25vh;
+    margin-top: 25vh;
+}
+#wall3J
+{
+    margin-left: 50vh;
+    margin-top: 25vh;
+}
+#wall3K
+{
+    margin-left: 75vh;
+    margin-top: 25vh;
+}
+#wall3M
+{
+    margin-left: 25vh;
+    margin-top: 43vh;
+}
+#wall3N
+{
+    margin-left: 50vh;
+    margin-top: 43vh;
+}
+#wall3O
+{
+    margin-left: 75vh;
+    margin-top: 43vh;
+}
+#wall3P
+{
+    margin-left: 25vh;
+    margin-top: 48vh;
+}
+#wall3Q
+{
+    margin-left: 50vh;
+    margin-top: 48vh;
+}
+#wall3R
+{
+    margin-left: 75vh;
+    margin-top: 48vh;
+}
+#wall3S
+{
+    margin-left: 25vh;
+    margin-top: 53vh;
+}
+#wall3T
+{
+    margin-left: 50vh;
+    margin-top: 53vh;
+}
+#wall3U
+{
+    margin-left: 75vh;
+    margin-top: 53vh;
+}
+#wall3V
+{
+    margin-left: 25vh;
+    margin-top: 71vh;
+}
+#wall3W
+{
+    margin-left: 50vh;
+    margin-top: 71vh;
+}
+#wall3X
+{
+    margin-left: 75vh;
+    margin-top: 71vh;
+}
+#wall3Y
+{
+    margin-left: 25vh;
+    margin-top: 76vh;
+}
+#wall3Z
+{
+    margin-left: 50vh;
+    margin-top: 76vh;
+}
+#wall3AA
+{
+    margin-left: 75vh;
+    margin-top: 76vh;
+}
+#wall3AB
+{
+    margin-left: 25vh;
+    margin-top: 81vh;
+}
+#wall3AC
+{
+    margin-left: 50vh;
+    margin-top: 81vh;
+}
+#wall3AD
+{
+    margin-left: 75vh;
+    margin-top: 81vh;
+}
+/*========== Room 4 ==========*/
+/* Horizontal */
+#wall4A
+{
+    margin-left: 0vh;
+    margin-top: 25vh;
+}
+#wall4B
+{
+    margin-left: 25vh;
+    margin-top: 25vh;
+}
+#wall4C
+{
+    margin-left: 50vh;
+    margin-top: 25vh;
+}
+#wall4D
+{
+    margin-left: 60vh;
+    margin-top: 25vh;
+}
+/* Vertical */
+#wall4E
+{
+    margin-left: 80vh;
+    margin-top: 25vh;
+}
+#wall4F
+{
+    margin-left: 80vh;
+    margin-top: 35vh;
+}
+#wall4G
+{
+    margin-left: 80vh;
+    margin-top: 73vh;
+}
+#wall4H
+{
+    margin-left: 55vh;
+    margin-top: 73vh;
+}
+#wall4I
+{
+    margin-left: 30vh;
+    margin-top: 73vh;
+}
+#tank4A
+{
+    margin-left: 5vh;
+    margin-top: 35vh;
+}
+#tank4B
+{
+    margin-left: 30vh;
+    margin-top: 35vh;
+}
+#tank4C
+{
+    margin-left: 90vh;
+    margin-top: 77vh;
+}
