@@ -38,6 +38,9 @@ let rightStop = false;
 let topStop = false;
 let bottomStop = false;
 
+//Whether or not Snake has been detected by a guard or camera
+let detected = false;
+
 
 //==================== WALL VARIABLES BY ROOM =============================//
 
@@ -65,7 +68,7 @@ let wall0EY = 15;
 
 
 //Variables for what the current room is and what the last room was
-let roomID = 0;
+let roomID = 1;
 let roomIDLast;
 
 //Variables for whether or not a door exists in a room
@@ -148,9 +151,11 @@ function gameMain()
 //==================== COLLISION DETECTION FUNCTION (RECURSIVE)============//
 
 
+let timer = 0;
 setInterval(gameCollision, 30);
 function gameCollision()
 {
+    timer++; //The animation timer is increased once per interation
     leftStop = false;
     rightStop = false;
     topStop = false;
@@ -162,6 +167,13 @@ function gameCollision()
             break;
         case 1:
             collisionRoom1();
+
+            //Guard Program
+            if (timer < 75)
+            {
+                
+            }
+
             break;
         case 2:
             collisionRoom2();
@@ -386,6 +398,10 @@ let room0 = `
 let room1 = `
 <!--Floor-->
 <img src = "Assets/floor.png" id = "floor">
+
+<div class = "guard" id = "guard1A">
+    <img src = "Assets/guard-right.png" class = "guardSprite">
+</div>
 
 <!--Walls-->
 <div class = "wallHorizontal" id = "wall1A">
@@ -803,6 +819,8 @@ function roomLoad()
             document.getElementById("gameViewPort").innerHTML = room1;
             snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
 
+            let guard1A = document.querySelector("#guard1A"); //Grabbing the guard from HTML for JS
+
             dtExists = true;
             dbExists = true;
             break;
@@ -856,7 +874,7 @@ function roomLoad()
 //==================== SUB-RECURSIVE FUNCTION FOR DEV CONTROL =============//
 
 
-setInterval(gameSecondary, 750);
+setInterval(gameSecondary, 500);
 function gameSecondary()
 {
     //For secondary recursive tasks :(

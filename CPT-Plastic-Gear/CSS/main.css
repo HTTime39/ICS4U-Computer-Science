@@ -32,7 +32,7 @@ body
 #snake
 {
     height: 10vh;
-    position:absolute;
+    position: absolute;
     margin-left: 0vh;
     margin-top: 0vh;
 }
@@ -43,11 +43,8 @@ body
 }
 
 /*========== Guards ==========*/
-#guard
+.guard
 {
-    height: 10vh;
-    margin-top: 20vh;
-    margin-left: 40vh;
     position: absolute;
 }
 .guardSprite
@@ -283,6 +280,13 @@ body
 {
     margin-left: 63vh;
     margin-top: 58vh;
+}
+
+/* Guard */
+#guard1A
+{
+    margin-left: 84vh;
+    margin-top: 47vh;
 }
 
 /*========== Room 2 ==========*/
