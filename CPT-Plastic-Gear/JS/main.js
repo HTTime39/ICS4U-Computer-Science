@@ -889,3 +889,5 @@ function gameSecondary()
         DevRoomLoad();
     }
 }
+
+roomLoad();
