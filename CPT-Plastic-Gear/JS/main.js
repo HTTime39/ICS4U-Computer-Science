@@ -68,7 +68,7 @@ let wall0EY = 15;
 
 
 //Variables for what the current room is and what the last room was
-let roomID = 1;
+let roomID = 0;
 let roomIDLast;
 
 //Variables for whether or not a door exists in a room
@@ -151,11 +151,9 @@ function gameMain()
 //==================== COLLISION DETECTION FUNCTION (RECURSIVE)============//
 
 
-let timer = 0;
 setInterval(gameCollision, 30);
 function gameCollision()
 {
-    timer++; //The animation timer is increased once per interation
     leftStop = false;
     rightStop = false;
     topStop = false;
@@ -167,13 +165,6 @@ function gameCollision()
             break;
         case 1:
             collisionRoom1();
-
-            //Guard Program
-            if (timer < 75)
-            {
-                
-            }
-
             break;
         case 2:
             collisionRoom2();
@@ -768,12 +759,67 @@ function collisionRoom4()
     customCollision(90, 77, 17, 17);
 }
 
+
+//==================== Snake Animation Function ============================//
+let snakeAnimTimer = 0;
+setInterval(snakeAnimation, 30);
+function snakeAnimation()
+{
+    snakeAnimTimer++;
+    if (snakeAnimTimer < 15)
+    {
+        snake.innerHTML = `<img src = "Assets/snake-forward.png" id = "snakeSprite">`;
+    }
+    else if (snakeAnimTimer < 30)
+    {
+        snake.innerHTML = `<img src = "Assets/snake-forward-alt.png" id = "snakeSprite">`;
+    }
+    else
+    {
+        snakeAnimTimer = 0;
+    }
+}
+
+
+//==================== Enemy Animation Function ============================//
+
+
+let enemyTimer = 0;
+setInterval(enemyAnimation, 30);
+function enemyAnimation()
+{
+    enemyTimer++;
+    switch (roomID)
+    {
+        case 0:
+            //No guards exist in room 0
+            break;
+        case 1:
+            if (enemyTimer < 120) //Guard looks right for 4 seconds
+            {
+                guard1A.innerHTML = `<img src = "Assets/guard-right.png" class = "guardSprite">`;
+            }
+            else if (enemyTimer < 165) //Guard looks left for 1.5 seconds
+            {
+                guard1A.innerHTML = `<img src = "Assets/guard-left.png" class = "guardSprite">`;
+            }
+            else
+            {
+                enemyTimer = 0;
+            }
+            break;
+    }
+}
+
 function DevRoomLoad()
 {
     snakeX = 53;
     snakeY = 4;
 
     roomLoad();
+
+    snake.style.marginLeft = "53vh";
+    snake.style.marginTop = "4vh";
 }
 
 
@@ -819,6 +865,7 @@ function roomLoad()
             document.getElementById("gameViewPort").innerHTML = room1;
             snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
 
+            //Creating an object representing the guard
             let guard1A = document.querySelector("#guard1A"); //Grabbing the guard from HTML for JS
 
             dtExists = true;
@@ -885,9 +932,7 @@ function gameSecondary()
     if(pressedKeys[55]) console.log(roomID);
     if(pressedKeys[54])
     {
-        roomID = 0; //Room that is currently being worked on
+        roomID = 1; //Room that is currently being worked on
         DevRoomLoad();
     }
 }
-
-roomLoad();
