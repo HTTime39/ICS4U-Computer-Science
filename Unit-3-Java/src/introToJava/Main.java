@@ -262,52 +262,100 @@ public class Main {
 		// 	System.out.println("File Not Found");
 		// }
 
-		//===== Arrays =====
-		//Instantiating an empty array
-		String [] students = new String [5];
-		int [] numbers = new int [5];
-		//A data type is selected for the array. The number in the second set of square brackets is indicative of the number of indexes in the array
+		// //===== Arrays =====
+		// //Instantiating an empty array
+		// String [] students = new String [5];
+		// int [] numbers = new int [5];
+		// //A data type is selected for the array. The number in the second set of square brackets is indicative of the number of indexes in the array
 
-		students[0] = "Justin";
-		students[1] = "Christina";
-		// System.out.println(students[0]);
+		// students[0] = "Justin";
+		// students[1] = "Christina";
+		// // System.out.println(students[0]);
 
-		//Instantiating an array with its values defined
-		String [] students1 = {"Adrian", "Mary", "Martin", "Lucas"};
+		// //Instantiating an array with its values defined
+		// String [] students1 = {"Adrian", "Mary", "Martin", "Lucas"};
 
-		// System.out.println(students1[0]);
+		// // System.out.println(students1[0]);
 
-		//Displaying an entire array
-		for (int i = 0; i < students1.length; i++)
-		//arrayName.length will return the length of an array
-		{
-			System.out.println(students1[i]);
-		}
+		// //Displaying an entire array
+		// for (int i = 0; i < students1.length; i++)
+		// //arrayName.length will return the length of an array
+		// {
+		// 	System.out.println(students1[i]);
+		// }
 		
-		System.out.println("How many students are in the class?");
-		int student = sc.nextInt();
+		// System.out.println("How many students are in the class?");
+		// int student = sc.nextInt();
 
-		//Create 3 blank arrays to store the information
-		String [] classList = new String [student];
-		int [] ages = new int [student];
-		boolean [] g2 = new boolean [student];
+		// //Create 3 blank arrays to store the information
+		// String [] classList = new String [student];
+		// int [] ages = new int [student];
+		// boolean [] g2 = new boolean [student];
 
-		for (int i = 0; i < student; i++)
+		// for (int i = 0; i < student; i++)
+		// {
+		// 	sc.nextLine();
+		// 	System.out.println("Student Name " + (i + 1) + ": ");
+		// 	classList[i] = sc.nextLine();
+		// 	System.out.println(classList[i] + "'s age: ");
+		// 	ages[i] = sc.nextInt();
+		// 	System.out.println("Does " + classList[i] + " have their G2: ");
+		// 	g2[i] = sc.nextBoolean();
+		// }
+
+		// System.out.println("Name | Age | G2");
+
+		// for (int i = 0; i < student; i++)
+		// {
+		// 	System.out.println(classList[i] + " | " + ages[i] + " | " + g2[i]);
+		// }
+
+		//========== Lesson 7: 2D Arrays ==========//
+		int [][] grid = new int [3][3];
+		//A three by three array is instantiated
+
+		System.out.println(grid[1][1]);
+
+		String [][] board = {{"1", "2", "3"}, {"4", "5", "6"}, {"7", "8", "9"}};
+
+		System.out.println(board[1][2]);
+		//Printing row 2 column 3: 6
+
+		board[0][1] = "20";
+		//Setting a value of the array to a new value
+
+		for (int i = 0; i < board.length; i++)
 		{
-			sc.nextLine();
-			System.out.println("Student Name " + (i + 1) + ": ");
-			classList[i] = sc.nextLine();
-			System.out.println(classList[i] + "'s age: ");
-			ages[i] = sc.nextInt();
-			System.out.println("Does " + classList[i] + " have their G2: ");
-			g2[i] = sc.nextBoolean();
+			for (int j = 0; j < board[0].length; j++)
+			{
+				System.out.println(board[i][j]);
+			}
 		}
 
-		System.out.println("Name | Age | G2");
+		//Tik Tak Toe
+		String [][] game = {{"-", "-", "-"},
+							 {"-", "-", "-"},
+							 {"-", "-", "-"}};
 
-		for (int i = 0; i < student; i++)
+		while (true)
 		{
-			System.out.println(classList[i] + " | " + ages[i] + " | " + g2[i]);
+			System.out.println("Are you X or O:");
+			String symbol = sc.next();
+			System.out.println("Please enter the row where you want to put your symbol");
+			int rowChoice = sc.nextInt();
+			System.out.println("Please enter the column where you want the put your symbol");
+			int colChoice = sc.nextInt();
+
+			game[rowChoice - 1][colChoice -1] = symbol;
+
+			for(int i = 0; i < board.length; i++)
+			{
+				for (int j = 0; j < board[0].length; j++)
+				{
+					System.out.print(game[i][j]);
+				}
+				System.out.println("");
+			}
 		}
 
 }
