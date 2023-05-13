@@ -15,6 +15,12 @@ let snakeY = 4; //Tracks the y position of snake as an integer
 let snakeYString = "4vh"; //Tracks the y position of snake as a string with units appended so it can be read by
 snake.style.marginTop = snakeYString;
 
+//Animation variables in order of priority (So no visual bugs when going in multiple directions)
+let snakeDown = false;
+let snakeUp = false;
+let snakeLeft = false;
+let snakeRight = false;
+
 /*========== Setting Up Collision Detection on Walls ==========*/
 //The dimensions to be used in collision detection for horizontal wall segments (vh)
 let wallWidthV = 5;
@@ -98,52 +104,89 @@ function keysUp(e)
 //==================== PLAYER CONTROL FUNCTION (RECURSIVE) ================//
 
 
-setInterval(gameMain, 30);
+setInterval(gameMain, 15);
 function gameMain()
 {
-    //Moves snake to the right
-    if ((pressedKeys[68] || pressedKeys[39]))
+    //moves snake down
+    if ((pressedKeys[83] || pressedKeys[40]))
     {
-        if (snakeX < 107 && rightStop == false)
+        if (snakeY < 88 && bottomStop == false)
         {
-            snakeX++;
-            snakeXString = snakeX + "vh";
-            snake.style.marginLeft = snakeXString;
+            snakeY += 0.5;
+            snakeYString = snakeY + "vh";
+            snake.style.marginTop = snakeYString;
+
+            snakeDown = true;
+            snakeAnimation();
         }
-        //for door function
+        doorCheckD();
     }
-    //moves snake to the left
-    if ((pressedKeys[65] || pressedKeys[37]))
+    else 
     {
-        if (snakeX > 0 && leftStop == false)
-        {
-            snakeX--;
-            snakeXString = snakeX + "vh";
-            snake.style.marginLeft = snakeXString;
-        }
-        //for door function
+        snakeDown = false
     }
     //moves snake up
     if ((pressedKeys[87] || pressedKeys[38]))
     {
         if (snakeY > 0 && topStop == false)
         {
-            snakeY--;
+            snakeY -= 0.5;
             snakeYString = snakeY + "vh";
             snake.style.marginTop = snakeYString;
+
+            if (snakeDown == false)
+            {
+                snakeUp = true;
+                snakeAnimation();
+            }
         }
         doorCheckU();
     }
-    //moves snake down
-    if ((pressedKeys[83] || pressedKeys[40]))
+    else
     {
-        if (snakeY < 88 && bottomStop == false)
+        snakeUp = false;
+    }
+    //Moves snake to the right
+    if ((pressedKeys[68] || pressedKeys[39]))
+    {
+        if (snakeX < 107 && rightStop == false)
         {
-            snakeY++;
-            snakeYString = snakeY + "vh";
-            snake.style.marginTop = snakeYString;
+            snakeX += 0.5;
+            snakeXString = snakeX + "vh";
+            snake.style.marginLeft = snakeXString;
+
+            if (snakeDown == false && snakeUp == false)
+            {
+                snakeRight = true;
+                snakeAnimation();
+            }
         }
-        doorCheckD();
+        //for door function
+    }
+    else
+    {
+        snakeRight = false;
+    }
+    //moves snake to the left
+    if ((pressedKeys[65] || pressedKeys[37]))
+    {
+        if (snakeX > 0 && leftStop == false)
+        {
+            snakeX -= 0.5;
+            snakeXString = snakeX + "vh";
+            snake.style.marginLeft = snakeXString;
+
+            if (snakeDown == false && snakeUp == false && snakeRight == false)
+            {
+                snakeLeft = true;
+                snakeAnimation();
+            }
+        }
+        //for door function
+    }
+    else
+    {
+        snakeLeft = false;
     }
 }
 
@@ -151,7 +194,7 @@ function gameMain()
 //==================== COLLISION DETECTION FUNCTION (RECURSIVE)============//
 
 
-setInterval(gameCollision, 30);
+setInterval(gameCollision, 15);
 function gameCollision()
 {
     leftStop = false;
@@ -761,22 +804,72 @@ function collisionRoom4()
 
 
 //==================== Snake Animation Function ============================//
+
+
 let snakeAnimTimer = 0;
-setInterval(snakeAnimation, 30);
+// setInterval(snakeAnimation, 30);
 function snakeAnimation()
 {
     snakeAnimTimer++;
-    if (snakeAnimTimer < 15)
+    if (snakeDown)
     {
-        snake.innerHTML = `<img src = "Assets/snake-forward.png" id = "snakeSprite">`;
+        if (snakeAnimTimer < 20)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-forward.png" id = "snakeSprite">`;
+        }
+        else if (snakeAnimTimer < 40)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-forward-alt.png" id = "snakeSprite">`;
+        }
+        else
+        {
+            snakeAnimTimer = 0;
+        }
     }
-    else if (snakeAnimTimer < 30)
+    else if (snakeUp)
     {
-        snake.innerHTML = `<img src = "Assets/snake-forward-alt.png" id = "snakeSprite">`;
+        if (snakeAnimTimer < 20)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-up.png" id = "snakeSprite">`;
+        }
+        else if (snakeAnimTimer < 40)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-up-alt.png" id = "snakeSprite">`;
+        }
+        else
+        {
+            snakeAnimTimer = 0;
+        }
     }
-    else
+    else if (snakeLeft)
     {
-        snakeAnimTimer = 0;
+        if (snakeAnimTimer < 20)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-left.png" id = "snakeSprite">`;
+        }
+        else if (snakeAnimTimer < 40)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-left-alt.png" id = "snakeSprite">`;
+        }
+        else
+        {
+            snakeAnimTimer = 0;
+        }
+    }
+    else if (snakeRight)
+    {
+        if (snakeAnimTimer < 20)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-right.png" id = "snakeSprite">`;
+        }
+        else if (snakeAnimTimer < 40)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-right-alt.png" id = "snakeSprite">`;
+        }
+        else
+        {
+            snakeAnimTimer = 0;
+        }
     }
 }
 
