@@ -21,6 +21,17 @@ body
     margin-bottom: 1vh;
 }
 
+/*========== Visual Effect Layer ==========*/
+#vEffectLayer
+{
+    position: absolute;
+    height: 98vh;
+    width: 112vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: transparent;
+}
+
 #floor
 {
     position: absolute;
@@ -50,6 +61,15 @@ body
 .guardSprite
 {
     height: 10vh;
+}
+
+/*========== Vision Detection Boxes ==========*/
+.visionBoxFill
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
 }
 
 /*========== Walls ==========*/
@@ -287,6 +307,20 @@ body
 {
     margin-left: 84vh;
     margin-top: 47vh;
+}
+#visionDetection1A
+{
+    margin-left: 89vh;
+    width: 23vh;
+    margin-top: 45vh;
+    height: 15vh;
+}
+#visionDetection1A-Alt
+{
+    margin-left: 42vh;
+    width: 42vh;
+    margin-top: 45vh;
+    height: 15vh;
 }
 
 /*========== Room 2 ==========*/

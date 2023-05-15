@@ -48,6 +48,11 @@ let bottomStop = false;
 let detected = false;
 
 
+//========== Visual Effect Layer Object ==========//
+let vEffectLayer = document.querySelector("#vEffectLayer");
+let visionDetectionSwap = document.querySelector("#visionDetectionSwap"); //The div that contains the vision boxes that move when a guard or camera moves or turns
+
+
 //==================== WALL VARIABLES BY ROOM =============================//
 
 
@@ -427,6 +432,9 @@ let room0 = `
 <!--Player Character's Div Containing Sprite-->
 <div id = "snake">
     <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+<div id = "vEffectLayer">
+    <!-- This will change colour above the viewport for screenload, shooting, etc. -->
 </div>`;
 
 let room1 = `
@@ -435,6 +443,24 @@ let room1 = `
 
 <div class = "guard" id = "guard1A">
     <img src = "Assets/guard-right.png" class = "guardSprite">
+</div>
+
+<!--Doormats-->
+<div class = "doorVertical" id = "doorBottom">
+    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
+</div>
+<div class = "doorVertical" id = "doorTop">
+    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
+</div>
+
+<!--Player Character's Div Containing Sprite-->
+<div id = "snake">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+
+<!-- Vision Detection Box -->
+<div id = "visionDetectionSwap">
+    <img src = "Assets/detection-box.png" id = "visionDetection1A" class = "visionBoxFill">
 </div>
 
 <!--Walls-->
@@ -486,17 +512,9 @@ let room1 = `
     <img src = "Assets/tank-1.png" class = "tankSprite">
 </div>
 
-<!--Doormats-->
-<div class = "doorVertical" id = "doorBottom">
-    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
-</div>
-<div class = "doorVertical" id = "doorTop">
-    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
-</div>
 
-<!--Player Character's Div Containing Sprite-->
-<div id = "snake">
-    <img src = "Assets/snake-forward.png" id = "snakeSprite">
+<div id = "vEffectLayer">
+    <!-- This will change colour above the viewport for screenload, shooting, etc. -->
 </div>`;
 
 let room2 = `
@@ -555,6 +573,9 @@ let room2 = `
 <!--Player Character's Div Containing Sprite-->
 <div id = "snake">
     <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+<div id = "vEffectLayer">
+    <!-- This will change colour above the viewport for screenload, shooting, etc. -->
 </div>`;
 
 let room3 = `
@@ -655,64 +676,70 @@ let room3 = `
 <!--Player Character's Div Containing Sprite-->
 <div id = "snake">
     <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+<div id = "vEffectLayer">
+    <!-- This will change colour above the viewport for screenload, shooting, etc. -->
 </div>`;
 
 let room4 = `
 <!--Floor-->
-        <img src = "Assets/floor.png" id = "floor">
+<img src = "Assets/floor.png" id = "floor">
 
-        <!--Walls-->
-        <div class = "wallHorizontal" id = "wall4A">
-            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
-        </div>
-        <div class = "wallHorizontal" id = "wall4B">
-            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
-        </div>
-        <div class = "wallHorizontal" id = "wall4C">
-            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
-        </div>
-        <div class = "wallHorizontal" id = "wall4D">
-            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
-        </div>
-        <div class = "wallVertical" id = "wall4E">
-            <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
-        </div>
-        <div class = "wallVertical" id = "wall4F">
-            <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
-        </div>
-        <div class = "wallVertical" id = "wall4G">
-            <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
-        </div>
-        <div class = "wallHorizontal" id = "wall4H">
-            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
-        </div>
-        <div class = "wallHorizontal" id = "wall4I">
-            <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
-        </div>
+<!--Walls-->
+<div class = "wallHorizontal" id = "wall4A">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall4B">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall4C">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall4D">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallVertical" id = "wall4E">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall4F">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall4G">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall4H">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall4I">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
 
-        <!--Tanks-->
-        <div class = "tank" id = "tank4A">
-            <img src = "Assets/tank.png" class = "tankSprite">
-        </div>
-        <div class = "tank" id = "tank4B">
-            <img src = "Assets/tank.png" class = "tankSprite">
-        </div>
-        <div class = "tank" id = "tank4C">
-            <img src = "Assets/tank-1.png" class = "tankSprite">
-        </div>
+<!--Tanks-->
+<div class = "tank" id = "tank4A">
+    <img src = "Assets/tank.png" class = "tankSprite">
+</div>
+<div class = "tank" id = "tank4B">
+    <img src = "Assets/tank.png" class = "tankSprite">
+</div>
+<div class = "tank" id = "tank4C">
+    <img src = "Assets/tank-1.png" class = "tankSprite">
+</div>
 
-        <!--Doormats-->
-        <div class = "doorVertical" id = "doorBottom">
-            <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
-        </div>
-        <div class = "doorVertical" id = "doorTop">
-            <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
-        </div>
+<!--Doormats-->
+<div class = "doorVertical" id = "doorBottom">
+    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
+</div>
+<div class = "doorVertical" id = "doorTop">
+    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
+</div>
 
-        <!--Player Character's Div Containing Sprite-->
-        <div id = "snake">
-            <img src = "Assets/snake-forward.png" id = "snakeSprite">
-        </div>`;
+<!--Player Character's Div Containing Sprite-->
+<div id = "snake">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+<div id = "vEffectLayer">
+    <!-- This will change colour above the viewport for screenload, shooting, etc. -->
+</div>`;
 
 
 //==================== COLLISION DETECTION UNIQUE TO EACH ROOM ========//
@@ -891,10 +918,13 @@ function enemyAnimation()
             if (enemyTimer < 120) //Guard looks right for 4 seconds
             {
                 guard1A.innerHTML = `<img src = "Assets/guard-right.png" class = "guardSprite">`;
+                visionDetectionSwap.innerHTML = `<img src = "Assets/detection-box.png" id = "visionDetection1A" class = "visionBoxFill">`;
+                
             }
             else if (enemyTimer < 165) //Guard looks left for 1.5 seconds
             {
                 guard1A.innerHTML = `<img src = "Assets/guard-left.png" class = "guardSprite">`;
+                visionDetectionSwap.innerHTML = `<img src = "Assets/detection-box.png" id = "visionDetection1A-Alt" class = "visionBoxFill">`;
             }
             else
             {
@@ -986,6 +1016,10 @@ function roomLoad()
             dbExists = false;
             break;
     }
+
+    //Recreating the object representing the Visual Effect Layer
+    vEffectLayer = document.querySelector("#vEffectLayer");
+    visionDetectionSwap = document.querySelector("#visionDetectionSwap");
 
     /*========== Room Progression or Return Detection ==========*/
     if (roomIDLast < roomID) //When Snake advances to a room (Setting Position)
