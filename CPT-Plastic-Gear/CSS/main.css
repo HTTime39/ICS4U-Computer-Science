@@ -390,6 +390,25 @@ body
     margin-left: 87vh;
     margin-top: 74vh;
 }
+#guard2A
+{
+    margin-left: 53vh;
+    margin-top: 51vh;
+}
+#visionDetection2A
+{
+    margin-left: 50vh;
+    margin-top: 19vh;
+    width: 12vh;
+    height: 32vh;
+}
+#visionDetection2A-Alt
+{
+    margin-left: 50vh;
+    margin-top: 61vh;
+    width: 12vh;
+    height: 37vh;
+}
 /*========== Room 3 ==========*/
 #wall3A
 {

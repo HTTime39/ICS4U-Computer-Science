@@ -109,7 +109,7 @@ function keysUp(e)
 //==================== PLAYER CONTROL FUNCTION (RECURSIVE) ================//
 
 
-setInterval(gameMain, 15);
+let gameMainVar = setInterval(gameMain, 15);
 function gameMain()
 {
     //moves snake down
@@ -193,13 +193,19 @@ function gameMain()
     {
         snakeLeft = false;
     }
+
+    //This will end the game
+    if (detected)
+    {
+        console.log("Sadge");
+    }
 }
 
 
 //==================== COLLISION DETECTION FUNCTION (RECURSIVE)============//
 
 
-setInterval(gameCollision, 15);
+let gameCollisionVar = setInterval(gameCollision, 15);
 function gameCollision()
 {
     leftStop = false;
@@ -363,6 +369,51 @@ function customCollision(wallX, wallY, wallWidth, wallHeight)
         }
     }
 }
+
+
+//==================== Vision Detection Function ==========================//
+
+
+let detectSoften = 1.5;
+//The minus and plus this variable is the function gives a little bit of grace to the detection in case a pixel of Snake's toe is being detected etc. Small boundries exist around the visible portion of the sprite
+function detectCheck(x, y, width, height)
+//Parameters represent a red box (Field of View): x coordinate, y coordinate, width of the box, height of the box.
+{
+    detected = false;
+    //Checks if Snake's top left corner is in a guard's view
+    if (x <= snakeX - detectSoften && snakeX + detectSoften <= x + width)
+    {
+        if (y <= snakeY - detectSoften && snakeY + detectSoften <= y + height)
+        {
+            detected = true;
+        }
+    }
+    //Checks if Snake's bottom right corner is in a guard's view
+    if (x <= snakeX + snakeWidth - detectSoften && snakeX + snakeWidth + detectSoften <= x + width)
+    {
+        if (y <= snakeY + snakeHeight - detectSoften && snakeY + snakeHeight + detectSoften <= y + height)
+        {
+            detected = true;
+        }
+    }
+    //Checks Snake's bottom left corner
+    if (x <= snakeX - detectSoften && snakeX + detectSoften <= x + width)
+    {
+        if (y <= snakeY + snakeHeight - detectSoften && snakeY + snakeHeight + detectSoften <= y + height)
+        {
+            detected = true;
+        }
+    }
+    //Checks Snake's top right corner
+    if (x <= snakeX + snakeWidth - detectSoften && snakeX + snakeWidth + detectSoften <= x + width)
+    {
+        if (y <= snakeY - detectSoften && snakeY + detectSoften <= y + height)
+        {
+            detected = true;
+        }
+    }
+}
+
 
 //==================== ROOM DATA STRINGS ==================================//
 
@@ -904,8 +955,9 @@ function snakeAnimation()
 //==================== Enemy Animation Function ============================//
 
 
+//This function also repeatedly calls the detection function for when Snake walks into a vision box
 let enemyTimer = 0;
-setInterval(enemyAnimation, 30);
+let enemyAnimationVar = setInterval(enemyAnimation, 15); //Bad form :(
 function enemyAnimation()
 {
     enemyTimer++;
@@ -915,16 +967,32 @@ function enemyAnimation()
             //No guards exist in room 0
             break;
         case 1:
-            if (enemyTimer < 120) //Guard looks right for 4 seconds
+            if (enemyTimer <= 240) //Guard looks right for 4 seconds
             {
                 guard1A.innerHTML = `<img src = "Assets/guard-right.png" class = "guardSprite">`;
                 visionDetectionSwap.innerHTML = `<img src = "Assets/detection-box.png" id = "visionDetection1A" class = "visionBoxFill">`;
-                
+                //x, y, width, height
+                detectCheck(89, 45, 23, 15);
             }
-            else if (enemyTimer < 165) //Guard looks left for 1.5 seconds
+            else if (enemyTimer <= 330) //Guard looks left for 1.5 seconds
             {
                 guard1A.innerHTML = `<img src = "Assets/guard-left.png" class = "guardSprite">`;
                 visionDetectionSwap.innerHTML = `<img src = "Assets/detection-box.png" id = "visionDetection1A-Alt" class = "visionBoxFill">`;
+                detectCheck(42, 45, 42, 15);
+            }
+            else
+            {
+                enemyTimer = 0;
+            }
+            break;
+        case 2:
+            if (enemyTimer <= 90)
+            {
+
+            }
+            else if (enemyTimer <= 180)
+            {
+                
             }
             else
             {
@@ -998,6 +1066,8 @@ function roomLoad()
             document.getElementById("gameViewPort").innerHTML = room2;
             snake = document.querySelector("#snake");
 
+            let guard2A = document.querySelector("#guard2A");
+
             dtExists = true;
             dbExists = true;
             break;
@@ -1041,6 +1111,7 @@ function roomLoad()
         snakeYString = "87vh";
         snake.style.marginTop = snakeYString;
     }
+    enemyTimer = 0;
     console.log("Loaded Room " + roomID);
 }
 
