@@ -1,0 +1,9 @@
+1) Add the guard to the HTML of the room. Also add the vision boxes it will be using and style them for later.
+
+2) Add an object to represent the guard in the room load function for the room he exists in.
+
+3) Animate the guard and the vision detection boxes using the visionDetectionSwap object and referencing the guard directly.
+
+4) Remember to add the guard to the HTML string that exists within the JS.
+
+5) Add the line that adds functionality to the vision boxes.

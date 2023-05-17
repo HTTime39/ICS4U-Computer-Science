@@ -29,6 +29,10 @@ let wallHeightV = 25;
 let wallWidthH = 25;
 let wallHeightH = 5;
 
+//For room 3's camera. Variables that keep track of its position
+let camera3APos = 19;
+let visionDetecion3APos = 15;
+
 
 //==================== INPUT VARIABLE SETUP ===============================//
 
@@ -572,6 +576,29 @@ let room2 = `
 <!--Floor-->
 <img src = "Assets/floor.png" id = "floor">
 
+<!--Doormats-->
+<div class = "doorVertical" id = "doorBottom">
+    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
+</div>
+<div class = "doorVertical" id = "doorTop">
+    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
+</div>
+
+<!-- Guard -->
+<div class = "guard" id = "guard2A">
+    <img src = "Assets/guard-back.png" class = "guardSprite">
+</div>
+
+<!--Player Character's Div Containing Sprite-->
+<div id = "snake">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+
+<!-- Vision Detection Box -->
+<div id = "visionDetectionSwap">
+    <img src = "Assets/detection-box.png" id = "visionDetection2A" class = "visionBoxFill">
+</div>
+
 <!--Walls-->
 <div class = "wallHorizontal" id = "wall2A">
     <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
@@ -613,6 +640,14 @@ let room2 = `
     <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
 </div>
 
+<div id = "vEffectLayer">
+    <!-- This will change colour above the viewport for screenload, shooting, etc. -->
+</div>`;
+
+let room3 = `
+<!--Floor-->
+<img src = "Assets/floor.png" id = "floor">
+
 <!--Doormats-->
 <div class = "doorVertical" id = "doorBottom">
     <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
@@ -621,17 +656,16 @@ let room2 = `
     <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
 </div>
 
+<div id = "visionDetectionSwap">
+    <img src = "Assets/detection-box.png" id = "visionDetection3A" class = "visionBoxFill">
+</div>
+
+<img src = "Assets/camera-left.png" id = "camera3A" class = "camera-side">
+
 <!--Player Character's Div Containing Sprite-->
 <div id = "snake">
     <img src = "Assets/snake-forward.png" id = "snakeSprite">
 </div>
-<div id = "vEffectLayer">
-    <!-- This will change colour above the viewport for screenload, shooting, etc. -->
-</div>`;
-
-let room3 = `
-<!--Floor-->
-<img src = "Assets/floor.png" id = "floor">
 
 <!--Walls-->
 <div class = "wallHorizontal" id = "wall3A">
@@ -716,18 +750,6 @@ let room3 = `
     <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
 </div>
 
-<!--Doormats-->
-<div class = "doorVertical" id = "doorBottom">
-    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
-</div>
-<div class = "doorVertical" id = "doorTop">
-    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
-</div>
-
-<!--Player Character's Div Containing Sprite-->
-<div id = "snake">
-    <img src = "Assets/snake-forward.png" id = "snakeSprite">
-</div>
 <div id = "vEffectLayer">
     <!-- This will change colour above the viewport for screenload, shooting, etc. -->
 </div>`;
@@ -957,7 +979,7 @@ function snakeAnimation()
 
 //This function also repeatedly calls the detection function for when Snake walks into a vision box
 let enemyTimer = 0;
-let enemyAnimationVar = setInterval(enemyAnimation, 15); //Bad form :(
+let enemyAnimationVar = setInterval(enemyAnimation, 15);
 function enemyAnimation()
 {
     enemyTimer++;
@@ -988,11 +1010,36 @@ function enemyAnimation()
         case 2:
             if (enemyTimer <= 90)
             {
-
+                guard2A.innerHTML = `<img src = "Assets/guard-back.png" id = "snakeSprite">`;
+                visionDetectionSwap.innerHTML = `<img src = "Assets/detection-box.png" id = "visionDetection2A" class = "visionBoxFill">`;
+                detectCheck(50, 19, 12, 32);
             }
             else if (enemyTimer <= 180)
             {
-                
+                guard2A.innerHTML = `<img src = "Assets/guard-forward.png" id = "snakeSprite">`
+                visionDetectionSwap.innerHTML = `<img src = "Assets/detection-box.png" id = "visionDetection2A-Alt" class = "visionBoxFill">`;
+                detectCheck(50, 61, 12, 37);
+            }
+            else
+            {
+                enemyTimer = 0;
+            }
+            break;
+        case 3:
+            if (enemyTimer <= 280)
+            {
+                //There is extra here for the camera because it actually has to move, rather than pivot, so there are variables to track and adjust its position, the same way that Snake moves.
+                camera3APos += 0.25;
+                camera3A.style.marginTop = camera3APos + "vh";
+                visionDetection3APos += 0.25;
+                visionDetection3A.style.marginTop = visionDetection3APos + "vh";
+            }
+            else if (enemyTimer <= 560)
+            {
+                camera3APos -= 0.25;
+                camera3A.style.marginTop = camera3APos + "vh";
+                visionDetection3APos -= 0.25;
+                visionDetection3A.style.marginTop = visionDetection3APos + "vh";
             }
             else
             {
@@ -1075,6 +1122,11 @@ function roomLoad()
             document.getElementById("gameViewPort").innerHTML = room3;
             snake = document.querySelector("#snake");
 
+            let camera3A = document.querySelector("#camera3A");
+            camera3APos = 19;
+            let visionDetection3A = document.querySelector("#visionDetection3A");
+            visionDetection3APos = 15;
+
             dtExists = true;
             dbExists = true;
             break;
@@ -1130,7 +1182,7 @@ function gameSecondary()
     if(pressedKeys[55]) console.log(roomID);
     if(pressedKeys[54])
     {
-        roomID = 1; //Room that is currently being worked on
+        roomID = 3; //Room that is currently being worked on
         DevRoomLoad();
     }
 }

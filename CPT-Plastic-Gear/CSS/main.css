@@ -139,6 +139,13 @@ body
     width: 17vh;
 }
 
+/* ========== Camera ========== */
+.camera-side
+{
+    position: absolute;
+    width: 6vh;
+}
+
 #doorBottom
 {
     margin-top: 95vh;
@@ -544,6 +551,18 @@ body
 {
     margin-left: 75vh;
     margin-top: 81vh;
+}
+#camera3A
+{
+    margin-left: 106vh;
+    margin-top: 19vh;
+}
+#visionDetection3A
+{
+    margin-left: 0vh;
+    margin-top: 15vh;
+    width:112vh;
+    height: 13vh;
 }
 /*========== Room 4 ==========*/
 /* Horizontal */
