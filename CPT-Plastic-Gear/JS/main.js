@@ -953,7 +953,7 @@ function collisionRoom2()
     collisionH(62, 74);
     collisionH(87, 74);
     //Guards
-    customCollision(53, 51, 5, 10);
+    customCollision(53, 54, 5, 5);
 }
 function collisionRoom3()
 {
