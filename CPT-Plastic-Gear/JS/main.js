@@ -1308,15 +1308,16 @@ function roomLoad()
 
 
 let deathAnimTimer = 0;
+let restartEnable = false;
 //Timer variable for the death animation.
 function snakeDie()
 {
-    //All of the interval functions are stopped.
+    //All of the interval functions are stopped. All functionality of the main game is terminated.
     clearInterval(gameMainVar);
     clearInterval(gameCollisionVar);
     clearInterval(enemyAnimationVar);
 
-    //The visual effect layers need to flash to indicate gun fire.
+    //The visual effect layers need to flash to indicate gun fire. A part of this also continues to loop once the end screen text. Code to return to the start screen is also here.
     setInterval(function gunFlash(){
         deathAnimTimer++;
         //The visual effect layer over the viewport is flashed white to emulate gunflashes and then falls black with an end screen message. The animation uses a similar method to the snake and enemy animations.
@@ -1406,6 +1407,7 @@ function snakeDie()
         else if (deathAnimTimer <= 25)
         {
             vEffectLayer.innerHTML = `<img src = "Assets/end-screen-message.png" id = "endText" class = "opacityFull">`;
+            restartEnable = true; //The restart button is enables after the first time this part of the animation plays.
         }
         else if (deathAnimTimer <= 27)
         {
@@ -1419,6 +1421,12 @@ function snakeDie()
         //The animation timer is reset back to when the death text first appears to flash it.
         {
             deathAnimTimer = 19;
+        }
+
+        if (restartEnable == true && pressedKeys[13])
+        //Is a restart allowed, and the enter key is pressed?
+        {
+            window.location.replace("main.html");
         }
 
     }, 100);
