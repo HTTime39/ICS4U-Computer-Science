@@ -1,0 +1,45 @@
+p
+{
+    color: white;
+    font-family: 'VT323', monospace;
+    text-align: center;
+    font-size: 5vh;
+    margin-top: 5vh;
+}
+#gameViewPort
+{
+    background-color: black;
+}
+
+#commsInterface
+{
+    position: absolute;
+    width: 112vh;
+    height: 46vh;
+    margin-top: 26vh;
+}
+
+#textBox
+{
+    position: absolute;
+    background-color: #397d59;
+    border: 0.5vh solid #2e3233;
+    margin-top: 72vh;
+    width: 112vh;
+    height: 26vh;
+}
+#hintText
+{
+    position: absolute;
+    font-size: 3vh;
+    width: 28vh;
+    margin-left: 81vh;
+    margin-top: 94vh;
+}
+#skipText
+{
+    position: absolute;
+    font-size: 3vh;
+    margin-left: 3vh;
+    margin-top: 94vh;
+}

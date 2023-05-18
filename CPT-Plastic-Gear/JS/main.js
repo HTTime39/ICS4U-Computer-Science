@@ -1213,10 +1213,13 @@ function doorCheckU()
 }
 
 /*========== Loading Room Data ==========*/
+let referenceTimer;
+let currentTimer;
 function roomLoad()
 {
     console.log("Loading Room " + roomID);
     //Each room's specifics are loaded here
+
     switch (roomID)
     {
         case 0:
@@ -1300,6 +1303,7 @@ function roomLoad()
         snake.style.marginTop = snakeYString;
     }
     enemyTimer = 0; //The enemy animation timer is reset, so that there is no chance that a guard is looking at Snake immediately as he enters a room he was previously in.
+
     console.log("Loaded Room " + roomID);
 }
 
@@ -1426,7 +1430,7 @@ function snakeDie()
         if (restartEnable == true && pressedKeys[13])
         //Is a restart allowed, and the enter key is pressed?
         {
-            window.location.replace("main.html");
+            window.location.replace("game-start.html");
         }
 
     }, 100);
@@ -1450,4 +1454,5 @@ function gameSecondary()
         roomID = 4; //Room that is currently being worked on
         DevRoomLoad();
     }
+    if(pressedKeys[13]) window.location.replace("game-start.html");
 }
