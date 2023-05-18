@@ -628,3 +628,41 @@ body
     margin-left: 90vh;
     margin-top: 77vh;
 }
+#guard4A
+{
+    margin-left: 80vh;
+    margin-top: 15vh;
+}
+#visionDetection4A
+{
+    margin-left: 77vh;
+    margin-top: 0vh;
+    width: 10vh;
+    height: 15vh;
+}
+#visionDetection4A-Alt
+{
+    margin-left: 85vh;
+    margin-top: 13vh;
+    width: 27vh;
+    height: 14vh;
+}
+#guard4B
+{
+    margin-left: 72vh;
+    margin-top: 40vh;
+}
+#visionDetection4B
+{
+    margin-left: 69vh;
+    margin-top: 50vh;
+    width: 11vh;
+    height: 23vh;
+}
+#visionDetection4B-Alt
+{
+    margin-left: 47vh;
+    margin-top: 39vh;
+    width: 25vh;
+    height: 12vh;
+}

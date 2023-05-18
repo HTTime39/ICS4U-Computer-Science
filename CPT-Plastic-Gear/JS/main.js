@@ -76,7 +76,7 @@ let wall0DY = 15;
 let wall0EX = 90;
 let wall0EY = 15;
 
-//Later walls and rooms have coordinates directly placed in collision function parameters
+//Later walls and rooms have coordinates directly placed in collision function parameters (It's easier, and I'm too lazy to remove these ones and put them in directly)
 
 
 //==================== FRAMEWORK FOR LOADING ROOMS ========================//
@@ -87,8 +87,8 @@ let roomID = 0;
 let roomIDLast;
 
 //Variables for whether or not a door exists in a room
-let dbExists = true;
-let dtExists = false;
+let dbExists = true; //The bottom door
+let dtExists = false; //The top door
 
 
 //==================== RECORDING AND UNRECORDING USER INPUTS ==============//
@@ -120,12 +120,15 @@ function gameMain()
     if ((pressedKeys[83] || pressedKeys[40]))
     {
         if (snakeY < 88 && bottomStop == false)
+        //The limit makes sure that Snake doesn't leave the coordinate system of the view port. The boolean changes to true later in the code when Snake is against a wall.
         {
+            //A variable tracks Snake's Y-coordinate (X-coordinate in other parts), the unit "vh" is appended to it, the CSS property of Snake's div is changed to the modified value for his position.
             snakeY += 0.5;
             snakeYString = snakeY + "vh";
             snake.style.marginTop = snakeYString;
 
             snakeDown = true;
+            //This determines Snake's direction that he is travelling, and tells the animation function which sprite to use to represent his direction.
             snakeAnimation();
         }
         doorCheckD();
@@ -212,10 +215,12 @@ function gameMain()
 let gameCollisionVar = setInterval(gameCollision, 15);
 function gameCollision()
 {
+    //These determine whether or not Snake is against a wall.
     leftStop = false;
     rightStop = false;
     topStop = false;
     bottomStop = false;
+    //The code for each wall in a room is changed using a switch case statement. A different function is called depending on the room.
     switch (roomID)
     {
         case 0:
@@ -240,7 +245,9 @@ function gameCollision()
 
 
 /*========== Overall Collision ==========*/
+//The individual collision functions for each direction are combinded here to make it easier to implement walls with just one line.
 function collisionV(wallX, wallY)
+//This one has preset height and width values for a vertical wall
 {
     collisionTopV(wallX, wallY);
     collisionBottomV(wallX, wallY);
@@ -248,6 +255,7 @@ function collisionV(wallX, wallY)
     collisionRightV(wallX, wallY);
 }
 function collisionH(wallX, wallY)
+//This one has preset height and width values for a horizontal wall
 {
     collisionTopH(wallX, wallY);
     collisionBottomH(wallX, wallY);
@@ -256,13 +264,17 @@ function collisionH(wallX, wallY)
 }
 
 /*========== Collision By Parts ==========*/
+//Each function checks if Snake is colliding with a wall in each direction.
 function collisionTopV(wallX, wallY) //Snake hits the top of a vertical wall
 {
     if (snakeY + snakeHeight == wallY && snakeY + snakeHeight <= wallY + wallHeightV)
+    //Checks that Snake is at the top of the wall with his Y-coordinate.
     {
         if (snakeX + snakeWidth > wallX && snakeX < wallX + wallWidthV)
+        //Checks that Snake is aligned with the wall via X-coordate, and not to the left or right of it while at the correct Y-coordinate.
         {
             bottomStop = true;
+            //Blocks Snake from moving down into the wall.
         }
     }
 }
@@ -342,6 +354,7 @@ function collisionRightH(wallX, wallY) //Snake hits the right of a horizontal wa
 
 //Collision for Custom Objects
 //Parameters represent X-Coordinate, Y-Coordinate, Width of Object, Height of Object
+//This is the same logic as the wall collision detection, but has two extra variables to represent a changing width and height of an object.
 function customCollision(wallX, wallY, wallWidth, wallHeight)
 {
     if (snakeY + snakeHeight == wallY && snakeY + snakeHeight <= wallY + wallHeight)
@@ -379,12 +392,12 @@ function customCollision(wallX, wallY, wallWidth, wallHeight)
 
 
 let detectSoften = 1.5;
-//The minus and plus this variable is the function gives a little bit of grace to the detection in case a pixel of Snake's toe is being detected etc. Small boundries exist around the visible portion of the sprite
+//The minus and plus this variable in the function gives a little bit of grace to the detection in case a pixel of Snake's toe is being detected etc. Small boundries exist around the visible portion of the sprite.
 function detectCheck(x, y, width, height)
 //Parameters represent a red box (Field of View): x coordinate, y coordinate, width of the box, height of the box.
 {
     detected = false;
-    //Checks if Snake's top left corner is in a guard's view
+    //Checks if Snake's top left corner is in a guard's view. This is similar to the collision detection functions, but changes a different variable to indicate that Snake has been caught.
     if (x <= snakeX - detectSoften && snakeX + detectSoften <= x + width)
     {
         if (y <= snakeY - detectSoften && snakeY + detectSoften <= y + height)
@@ -416,12 +429,57 @@ function detectCheck(x, y, width, height)
             detected = true;
         }
     }
+    return(detected);
+}
+
+
+//==================== Detection for Room 3 Camera ========================//
+
+
+//This is specific to the camera in room 3. Similar functions can be created using this one as a template.
+//An extra layer is added to determine whether or not Snake is actually detected, when he is behind a wall in this room.
+let wallSoften = 1; //Similar to the softening of the vision detection. Makes the walls extend just a little bit more for some give.
+let wallHeight = 15; //For detection calculations.
+function cameraCheck(x, y, width, height)
+//The same parameters as the normal detectCheck function
+{
+    detectCheck(x, y, width, height);
+    //The default function is called to see if Snake is being detected.
+    hiddenBehindWall(y, height, 15);
+    //A function is called with the specifics of each wall to see if they are blocking the camera's view, and will override the results of the default function
+    hiddenBehindWall(y, height, 43);
+    hiddenBehindWall(y, height, 71);
+
+    return(detected);
+}
+
+//This checks to see if the wall is blocking Snake from the view of the camera and will override the result of the default field of view checker.
+function hiddenBehindWall(y, height, wallY)
+//(Current topMargin of the camera view, height of the camera view, the topMargin of the protective wall)
+{
+    if (wallY <= snakeY + wallSoften && snakeY - wallSoften <= wallY + 5 && wallY + snakeHeight <= snakeY + snakeHeight + wallSoften && snakeY + snakeHeight - wallSoften <= wallY + wallHeight)
+    //Snake is entirely behind the first wall
+    {
+        detected = false;
+    }
+    else if (!(y <= snakeY + snakeHeight - detectSoften && snakeY + snakeHeight + detectSoften <= y + height) && (wallY <= snakeY + wallSoften && snakeY - wallSoften < wallY + wallHeight)) //Snake's feet are not within the detection zone, but his head is behind the wall.
+    //Snake is leaving the bottom of the first wall
+    //Even though his head is still in the detection zone, it is not detected because it is registered here as blocked by the wall.
+    {
+        detected = false;
+    }
+    else if (!(y <= snakeY - detectSoften && snakeY + detectSoften <= y + height) && (wallY <= snakeY + snakeHeight + wallSoften && snakeY + snakeHeight - wallSoften < wallY + wallHeight))
+    //Does the same as the last else if but checks for when Snake is moving up from behind a wall and his toes are still in the technical detection zone behind the wall.
+    {
+        detected = false;
+    }
 }
 
 
 //==================== ROOM DATA STRINGS ==================================//
 
 
+//Each string represents a room, and is injected into the viewport when a room is called.
 let room0 = `
 <!--Floor-->
 <img src = "Assets/floor.png" id = "floor">
@@ -656,16 +714,16 @@ let room3 = `
     <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
 </div>
 
+<!--Player Character's Div Containing Sprite-->
+<div id = "snake">
+<img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+
 <div id = "visionDetectionSwap">
-    <img src = "Assets/detection-box.png" id = "visionDetection3A" class = "visionBoxFill">
+<img src = "Assets/detection-box.png" id = "visionDetection3A" class = "visionBoxFill">
 </div>
 
 <img src = "Assets/camera-left.png" id = "camera3A" class = "camera-side">
-
-<!--Player Character's Div Containing Sprite-->
-<div id = "snake">
-    <img src = "Assets/snake-forward.png" id = "snakeSprite">
-</div>
 
 <!--Walls-->
 <div class = "wallHorizontal" id = "wall3A">
@@ -758,6 +816,32 @@ let room4 = `
 <!--Floor-->
 <img src = "Assets/floor.png" id = "floor">
 
+<div class = "guard" id = "guard4A">
+    <img src = "Assets/guard-back.png" class = "guardSprite">
+</div>
+<div class = "guard" id = "guard4B">
+    <img src = "Assets/guard-forward.png" class = "guardSprite">
+</div>
+
+<!--Doormats-->
+<div class = "doorVertical" id = "doorBottom">
+    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
+</div>
+<div class = "doorVertical" id = "doorTop">
+    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
+</div>
+
+<!--Player Character's Div Containing Sprite-->
+<div id = "snake">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+
+<!-- Vision Detection Box -->
+<div id = "visionDetectionSwap">
+    <img src = "Assets/detection-box.png" id = "visionDetection4A" class = "visionBoxFill">
+    <img src = "Assets/detection-box.png" id = "visionDetection4B" class = "visionBoxFill">
+</div>
+
 <!--Walls-->
 <div class = "wallHorizontal" id = "wall4A">
     <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
@@ -798,18 +882,6 @@ let room4 = `
     <img src = "Assets/tank-1.png" class = "tankSprite">
 </div>
 
-<!--Doormats-->
-<div class = "doorVertical" id = "doorBottom">
-    <img src = "Assets/door-bottom.png" class = "doorVerticalSpriteBottom">
-</div>
-<div class = "doorVertical" id = "doorTop">
-    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
-</div>
-
-<!--Player Character's Div Containing Sprite-->
-<div id = "snake">
-    <img src = "Assets/snake-forward.png" id = "snakeSprite">
-</div>
 <div id = "vEffectLayer">
     <!-- This will change colour above the viewport for screenload, shooting, etc. -->
 </div>`;
@@ -861,6 +933,8 @@ function collisionRoom1()
     customCollision(25, 50, 17, 17);
     customCollision(50, 30, 17, 17);
     customCollision(63, 58, 17, 17);
+    //Guards
+    customCollision(84, 47, 5, 10);
 }
 
 function collisionRoom2()
@@ -878,6 +952,8 @@ function collisionRoom2()
     collisionH(25, 74);
     collisionH(62, 74);
     collisionH(87, 74);
+    //Guards
+    customCollision(53, 51, 5, 10);
 }
 function collisionRoom3()
 {
@@ -900,6 +976,9 @@ function collisionRoom4()
     customCollision(5, 35, 17, 17);
     customCollision(30, 35, 17, 17);
     customCollision(90, 77, 17, 17);
+    //Guards
+    customCollision(80, 15, 5, 10);
+    customCollision(72, 40, 5, 10);
 }
 
 
@@ -907,14 +986,16 @@ function collisionRoom4()
 
 
 let snakeAnimTimer = 0;
-// setInterval(snakeAnimation, 30);
+//This variable is incremented each time the function is called, and will act as a timer for the walking animations of Snake.
 function snakeAnimation()
 {
     snakeAnimTimer++;
     if (snakeDown)
     {
         if (snakeAnimTimer < 20)
+        //For certain ammounts of time, Snake's sprite appears and then changes. The animation timer is reset to zero once the animation has finished so that it can happen again. The same logic is used for each direction that snake is moving. The ordering of the if statements is important here because the game will prioritize the up and down sprites, even if the player is moving both up/down, and left/right.
         {
+            //The innerHTML of the div containing Snake's sprite is changed to a different sprite.
             snake.innerHTML = `<img src = "Assets/snake-forward.png" id = "snakeSprite">`;
         }
         else if (snakeAnimTimer < 40)
@@ -979,11 +1060,13 @@ function snakeAnimation()
 
 //This function also repeatedly calls the detection function for when Snake walks into a vision box
 let enemyTimer = 0;
+//Similar to Snake's animation timer, but for enemies (guards/cameras).
 let enemyAnimationVar = setInterval(enemyAnimation, 15);
 function enemyAnimation()
 {
     enemyTimer++;
     switch (roomID)
+    //The animations are changed per room using the roomID variable in a switch case to know which one to run. Otherwise, the JS will try to update non-existant HTML and break :(
     {
         case 0:
             //No guards exist in room 0
@@ -995,6 +1078,7 @@ function enemyAnimation()
                 visionDetectionSwap.innerHTML = `<img src = "Assets/detection-box.png" id = "visionDetection1A" class = "visionBoxFill">`;
                 //x, y, width, height
                 detectCheck(89, 45, 23, 15);
+                //The detection function is called here. The x-coordinate, y-coordinate, width, and height are used to determine whether Snake is within a vision box. This logic works similar to the wall collision logic.
             }
             else if (enemyTimer <= 330) //Guard looks left for 1.5 seconds
             {
@@ -1010,13 +1094,13 @@ function enemyAnimation()
         case 2:
             if (enemyTimer <= 90)
             {
-                guard2A.innerHTML = `<img src = "Assets/guard-back.png" id = "snakeSprite">`;
+                guard2A.innerHTML = `<img src = "Assets/guard-back.png" class = "guardSprite">`;
                 visionDetectionSwap.innerHTML = `<img src = "Assets/detection-box.png" id = "visionDetection2A" class = "visionBoxFill">`;
                 detectCheck(50, 19, 12, 32);
             }
             else if (enemyTimer <= 180)
             {
-                guard2A.innerHTML = `<img src = "Assets/guard-forward.png" id = "snakeSprite">`
+                guard2A.innerHTML = `<img src = "Assets/guard-forward.png" class = "guardSprite">`
                 visionDetectionSwap.innerHTML = `<img src = "Assets/detection-box.png" id = "visionDetection2A-Alt" class = "visionBoxFill">`;
                 detectCheck(50, 61, 12, 37);
             }
@@ -1028,11 +1112,13 @@ function enemyAnimation()
         case 3:
             if (enemyTimer <= 280)
             {
-                //There is extra here for the camera because it actually has to move, rather than pivot, so there are variables to track and adjust its position, the same way that Snake moves.
+                //There is extra here for the camera because it actually has to move, rather than pivot, so there are variables to track and adjust its position, the same way that Snake moves. The camera sprite, as well as the vision box sprite are tracked and moved here.
                 camera3APos += 0.25;
                 camera3A.style.marginTop = camera3APos + "vh";
                 visionDetection3APos += 0.25;
                 visionDetection3A.style.marginTop = visionDetection3APos + "vh";
+                cameraCheck(0, camera3APos, 112, 13); //The Y-Coordinate is variable here because the box is moving.
+                //A different detection check is called here, because the camera check has an extra layer of logic since it detects in some areas and not others, for example walls block its view as it moves up and down the room. This extra layer checks. 
             }
             else if (enemyTimer <= 560)
             {
@@ -1040,13 +1126,49 @@ function enemyAnimation()
                 camera3A.style.marginTop = camera3APos + "vh";
                 visionDetection3APos -= 0.25;
                 visionDetection3A.style.marginTop = visionDetection3APos + "vh";
+                cameraCheck(0, camera3APos, 112, 13);
             }
             else
             {
                 enemyTimer = 0;
             }
             break;
-    }
+        case 4:
+            if (enemyTimer <= 150)
+            {
+                guard4A.innerHTML = `<img src = "Assets/guard-back.png" class = "guardSprite">`;
+                guard4B.innerHTML = `<img src = "Assets/guard-left.png" class = "guardSprite">`;
+                visionDetectionSwap.innerHTML = `
+                <img src = "Assets/detection-box.png" id = "visionDetection4A" class = "visionBoxFill">
+                <img src = "Assets/detection-box.png" id = "visionDetection4B-Alt" class = "visionBoxFill">`;
+                if (detectCheck(77, 0, 10, 15) == true || detectCheck(47, 39, 25, 12))
+                {
+                    detected = true;
+                }
+                
+                
+            }
+            else if (enemyTimer <= 300)
+            {
+                guard4A.innerHTML = `<img src = "Assets/guard-right.png" class = "guardSprite">`;
+                guard4B.innerHTML = `<img src = "Assets/guard-forward.png" class = "guardSprite">`;
+                visionDetectionSwap.innerHTML = `
+                <img src = "Assets/detection-box.png" id = "visionDetection4A-Alt" class = "visionBoxFill">
+                <img src = "Assets/detection-box.png" id = "visionDetection4B" class = "visionBoxFill">`;
+                //True needs to be put in here for some reason? The console says it's true when it should be but doesn't work here otherwise?
+                if (true == detectCheck(85, 13, 27, 14) || detectCheck(69, 50, 11, 23))
+                //These need to be put in an if statement because they will overwrite each other, because they cannot both be true at the same time, so OR will solve this.
+                {
+                    detected = true;
+                }
+            }
+            else
+            {
+                enemyTimer = 0;
+            }
+            
+            break;
+        }
 }
 
 function DevRoomLoad()
@@ -1066,18 +1188,24 @@ function DevRoomLoad()
 
 /*========== Triggering Room Load at Doors ==========*/
 function doorCheckD()
+//Checks whether or not Snake is at the coordinates of the door, and will call the roomLoad function if he is. This function gets called in the main control function when Snake moves in a certain direction.
+//One function is for the door that might be at the top of a room, and one is for the door that might be at the bottom of the room. 
 {
     if (52 <= snakeX && snakeX <= 55 && snakeY == 88 && dbExists == true)
     {
         roomIDLast = roomID;
+        //The last roomID is tracked to determine whether to place Snake at the top door or bottom door depending on which direction he is coming from. 
         roomID++;
+        //The roomID is incremented so that the next room's code and HTML are loaded.
         roomLoad();
+        //The room load function is called.
     }
 }
 function doorCheckU()
 {
     if (52 <= snakeX && snakeX <= 55 && snakeY == 0 && dtExists == true)
     {
+        //The same as the last function, but the room is incremented down because Snake is moving back a room (The top door).
         roomIDLast = roomID;
         roomID--;
         roomLoad();
@@ -1092,9 +1220,11 @@ function roomLoad()
     switch (roomID)
     {
         case 0:
+            //The HTML string is set to the innerHTMl of the viewport
             document.getElementById("gameViewPort").innerHTML = room0;
             snake = document.querySelector("#snake"); //The JS needs to regrab snake from the HTML since in code, he has been "recreated"
 
+            //Whether or not the door exists is set here. In room zero, the top door does not exist because it is the first room and you cannot go back. (Top doors bring you back, bottom doors bring you back).
             dtExists = false;
             dbExists = true;
             break;
@@ -1124,8 +1254,10 @@ function roomLoad()
 
             let camera3A = document.querySelector("#camera3A");
             camera3APos = 19;
+            //The camera's sprite and Y-coordinate position are grabbed for the JS to reference, and to track its position since it moves.
             let visionDetection3A = document.querySelector("#visionDetection3A");
             visionDetection3APos = 15;
+            //The vision detection box's sprite and Y-coordinate position are grabbed for the JS to reference, and to track its position since it moves.
 
             dtExists = true;
             dbExists = true;
@@ -1134,14 +1266,18 @@ function roomLoad()
             document.getElementById("gameViewPort").innerHTML = room4;
             snake = document.querySelector("#snake");
 
+            let guard4A = document.querySelector("#guard4A");
+            let guard4B = document.querySelector("guard4B");
+
             dtExists = true;
             dbExists = false;
             break;
     }
 
-    //Recreating the object representing the Visual Effect Layer
     vEffectLayer = document.querySelector("#vEffectLayer");
+    //Recreating the object representing the Visual Effect Layer.
     visionDetectionSwap = document.querySelector("#visionDetectionSwap");
+    //Recreating the object representin the div, that swaps out vision boxes for guards when they change direction so it can be referenced.
 
     /*========== Room Progression or Return Detection ==========*/
     if (roomIDLast < roomID) //When Snake advances to a room (Setting Position)
@@ -1163,7 +1299,7 @@ function roomLoad()
         snakeYString = "87vh";
         snake.style.marginTop = snakeYString;
     }
-    enemyTimer = 0;
+    enemyTimer = 0; //The enemy animation timer is reset, so that there is no chance that a guard is looking at Snake immediately as he enters a room he was previously in.
     console.log("Loaded Room " + roomID);
 }
 
@@ -1182,7 +1318,7 @@ function gameSecondary()
     if(pressedKeys[55]) console.log(roomID);
     if(pressedKeys[54])
     {
-        roomID = 3; //Room that is currently being worked on
+        roomID = 4; //Room that is currently being worked on
         DevRoomLoad();
     }
 }
