@@ -146,6 +146,28 @@ body
     width: 6vh;
 }
 
+/*========== Styling for the Death Screen ==========*/
+.opacityHalf
+{
+    opacity: 0.5;
+}
+.opacityFull
+{
+    opacity: 1;
+}
+.opacityQuarter
+{
+    opacity: 0.25;
+}
+.opacity75
+{
+    opacity: 0.75;
+}
+#endText
+{
+    width: 112vh;
+}
+
 #doorBottom
 {
     margin-top: 95vh;

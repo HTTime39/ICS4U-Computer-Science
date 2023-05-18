@@ -204,7 +204,7 @@ function gameMain()
     //This will end the game
     if (detected)
     {
-        console.log("Sadge");
+        snakeDie();
     }
 }
 
@@ -1301,6 +1301,127 @@ function roomLoad()
     }
     enemyTimer = 0; //The enemy animation timer is reset, so that there is no chance that a guard is looking at Snake immediately as he enters a room he was previously in.
     console.log("Loaded Room " + roomID);
+}
+
+
+//==================== Snake Die :( =======================================//
+
+
+let deathAnimTimer = 0;
+//Timer variable for the death animation.
+function snakeDie()
+{
+    //All of the interval functions are stopped.
+    clearInterval(gameMainVar);
+    clearInterval(gameCollisionVar);
+    clearInterval(enemyAnimationVar);
+
+    //The visual effect layers need to flash to indicate gun fire.
+    setInterval(function gunFlash(){
+        deathAnimTimer++;
+        //The visual effect layer over the viewport is flashed white to emulate gunflashes and then falls black with an end screen message. The animation uses a similar method to the snake and enemy animations.
+        if (deathAnimTimer <= 1)
+        {
+            vEffectLayer.style.opacity = 0.5;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 3)
+        {
+            vEffectLayer.style.opacity = 1;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 4)
+        {
+            vEffectLayer.style.opacity = 0.5;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 5)
+        {
+            vEffectLayer.style.opacity = 0;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 6)
+        {
+            vEffectLayer.style.opacity = 0.5;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 8)
+        {
+            vEffectLayer.style.opacity = 1;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 9)
+        {
+            vEffectLayer.style.opacity = 0.5;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 10)
+        {
+            vEffectLayer.style.opacity = 0;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 11)
+        {
+            vEffectLayer.style.opacity = 0.5;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 13)
+        {
+            vEffectLayer.style.opacity = 1;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 14)
+        {
+            vEffectLayer.style.opacity = 0.5;
+            vEffectLayer.style.backgroundColor = "white";
+        }
+        else if (deathAnimTimer <= 15)
+        {
+            vEffectLayer.style.opacity = 0;
+            vEffectLayer.style.backgroundColor = "transparent";
+        }
+        else if (deathAnimTimer <= 16)
+        {
+            vEffectLayer.style.opacity = 0.5;
+            vEffectLayer.style.backgroundColor = "black";
+        }
+        else if (deathAnimTimer <= 17)
+        {
+            vEffectLayer.style.opacity = 1;
+            vEffectLayer.style.backgroundColor = "black";
+        }
+        else if (deathAnimTimer <= 19)
+        //The death message appears here.
+        {
+            vEffectLayer.innerHTML = `<img src = "Assets/end-screen-message.png" id = "endText" class = "opacityQuarter">`;
+        }
+        else if (deathAnimTimer <= 21)
+        {
+            vEffectLayer.innerHTML = `<img src = "Assets/end-screen-message.png" id = "endText" class = "opacityHalf">`;
+        }
+        else if (deathAnimTimer <= 23)
+        {
+            vEffectLayer.innerHTML = `<img src = "Assets/end-screen-message.png" id = "endText" class = "opacity75">`;
+        }
+        else if (deathAnimTimer <= 25)
+        {
+            vEffectLayer.innerHTML = `<img src = "Assets/end-screen-message.png" id = "endText" class = "opacityFull">`;
+        }
+        else if (deathAnimTimer <= 27)
+        {
+            vEffectLayer.innerHTML = `<img src = "Assets/end-screen-message.png" id = "endText" class = "opacity75">`;
+        }
+        else if (deathAnimTimer <= 29)
+        {
+            vEffectLayer.innerHTML = `<img src = "Assets/end-screen-message.png" id = "endText" class = "opacityHalf">`;
+        }
+        else
+        //The animation timer is reset back to when the death text first appears to flash it.
+        {
+            deathAnimTimer = 19;
+        }
+
+    }, 100);
 }
 
 
