@@ -11,22 +11,24 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
     <link rel = "stylesheet" href = "CSS/main.css">
-    <link rel = "stylesheet" href = "CSS/game-start.css">
-    <!-- Extra styling specific to the start screen. -->
+    <link rel = "stylesheet" href = "CSS/start-game.css">
+    <!-- Extra styling for the start screen -->
+
+    <link rel="icon" href="Assets/icon.png">
+    <!-- The tab icon -->
     
 </head>
 <body>
     
     <div id = "gameViewPort">
         
-        <img src = "Assets/comms-interface.png" id = "commsInterface">
+        <img src = "Assets/start-screen-bg-final.png" id = "startScreenBG">
 
-        <div id = "textBox">
-            <p>Snake: This is Solid Snake, respond please.</p>
+        <div id = "startText">
+            <h1>Plastic Gear</h1>
         </div>
-
-        <p id = "hintText">Press Enter to Continue</p>
-        <p id = "skipText">Press Backspace to Skip</p>
+        <p id = "enterText">Press Enter to Start</p>
+        
         
         <div id = "vEffectLayer">
             <!-- This will change colour above the viewport for screenload, shooting, etc. -->
@@ -34,5 +36,5 @@
     </div>
 
 </body>
-<script src = "JS/game-start.js"></script>
+<script src = "JS/start-game.js"></script>
 </html>

@@ -36,6 +36,7 @@ let visionDetecion3APos = 15;
 //Variables Containing Audio Files
 let alertSound = new Audio("Audio/alert.mp3");
 //An object representing an audio file.
+//There are three of these because it cannot play a file that is already playing, so this lets you overlap them.
 let gunshot0 = new Audio("Audio/gunshot0.mp3");
 let gunshot1 = new Audio("Audio/gunshot1.mp3");
 let gunshot2 = new Audio("Audio/gunshot2.mp3");
@@ -44,6 +45,10 @@ let deathSFX = new Audio("Audio/death-sfx.mp3");
 
 let mainBGM = new Audio("Audio/main-bgm.mp3");
 
+let explosion = new Audio("Audio/explosion.mp3");
+let explosion1 = new Audio("Audio/explosion1.mp3");
+let explosion2 = new Audio("Audio/explosion2.mp3");
+
 let bgmTimer = 0;
 let userFirstInteraction = false;
 //The user needs to interact with the page first, otherwise the audio will fail to load. This is tracked here.
@@ -51,15 +56,7 @@ bgmLoopVar = setInterval(function bgmLoop()
 {
     if (userFirstInteraction)
     {
-        bgmTimer++;
-        if (bgmTimer <= 1)
-        {
-            //Wait quarter second.
-        }
-        else if (mainBGM.paused)
-        {
-            mainBGM.play();
-        }
+        if (mainBGM.paused) mainBGM.play();
     }
 }, 250);
 
@@ -1567,7 +1564,7 @@ function snakeDie()
         if (restartEnable == true && pressedKeys[13])
         //Is a restart allowed, and the enter key is pressed?
         {
-            window.location.replace("game-start.html");
+            window.location.replace("start-game.html");
         }
 
     }, 100);
@@ -1581,6 +1578,9 @@ let dialogueGo = false; //For when to start the dialogue before the animation.
 let animationGo = false; //For when to start the main part of the animation.
 let endAnimationTimer = 0; //Timer for the animation.
 let smokeRepeat = 0;
+let explosionPlay = false;
+let explosionPlay1 = false;
+let explosionPlay2 = false;
 setInterval(function gameEndAnimation()
 {
     if (animationGo)
@@ -1652,6 +1652,11 @@ setInterval(function gameEndAnimation()
         {
             vEffectLayer.style.opacity = 0.5;
             vEffectLayer.style.backgroundColor = "#f3f91d";
+            if (!explosionPlay)
+            {
+                explosion.play();
+                explosionPlay = true;
+            }
         }
         else if (endAnimationTimer <= 785)
         {
@@ -1664,6 +1669,11 @@ setInterval(function gameEndAnimation()
         else if (endAnimationTimer <= 805)
         {
             vEffectLayer.style.backgroundColor = "#fea621";
+            if (!explosionPlay1)
+            {
+                explosion1.play();
+                explosionPlay1 = true;
+            }
         }
         else if (endAnimationTimer <= 815)
         {
@@ -1677,6 +1687,11 @@ setInterval(function gameEndAnimation()
         else if (endAnimationTimer <= 835)
         {
             vEffectLayer.style.backgroundColor = "#fea621";
+            if (!explosionPlay2)
+            {
+                explosion2.play;
+                explosionPlay2 = true;
+            }
         }
         else if (endAnimationTimer <= 845)
         {

@@ -4,6 +4,8 @@ document.addEventListener("keyup", keysUp); //Unrecords keys when unpressed
 
 let vEffectLayer = document.querySelector("#vEffectLayer");
 
+let bgm = new Audio("Audio/start-screen.mp3");
+
 //Array to hold all currently held buttons
 let pressedKeys = [];
 
@@ -11,6 +13,7 @@ let pressedKeys = [];
 function keysDown(e)
 {
     pressedKeys[e.keyCode] = true;
+    bgm.play();
 }
 
 //Unrecords keys when unpressed
@@ -62,7 +65,7 @@ let gameRestart = setInterval(function gameRestartFade()
         }
         else
         {
-            window.location.replace("game-start.html");
+            window.location.replace("start-game.html");
             //Sends the user back to the starting screen.
         }
     }

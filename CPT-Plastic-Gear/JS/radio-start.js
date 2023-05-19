@@ -2,6 +2,10 @@
 document.addEventListener("keydown", keysDown); //Records keys when pressed
 document.addEventListener("keyup", keysUp); //Unrecords keys when unpressed
 
+
+let bgm = new Audio("Audio/start-screen.mp3");
+//Object for the BGM of this screen
+
 //Array to hold all currently held buttons
 let pressedKeys = [];
 
@@ -9,6 +13,7 @@ let pressedKeys = [];
 function keysDown(e)
 {
     pressedKeys[e.keyCode] = true;
+    if (bgm.paused) bgm.play();
 }
 
 //Unrecords keys when unpressed

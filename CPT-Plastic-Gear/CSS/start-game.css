@@ -1,0 +1,33 @@
+h1
+{
+    font-family: 'VT323', monospace;
+}
+#gameViewPort
+{
+    background-color: #729483;
+}
+#startScreenBG
+{
+    position: absolute;
+    width: 112vh;
+    margin-top: 28.87vh;
+}
+#startText
+{
+    position: absolute;
+    color: white;
+    font-size: 10vh;
+    font-style: italic;
+    width: 96vh;
+    margin-left: 7vh;
+    margin-top: 10vh;
+}
+#enterText
+{
+    position: absolute;
+    color: white;
+    font-size: 4vh;
+    width: 32vh;
+    margin-left: 40vh;
+    margin-top: 92vh;
+}
