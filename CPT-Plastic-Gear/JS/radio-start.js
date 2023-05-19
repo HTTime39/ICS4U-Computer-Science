@@ -12,8 +12,9 @@ let pressedKeys = [];
 //Records keys when pressed
 function keysDown(e)
 {
-    pressedKeys[e.keyCode] = true;
+    pressedKeys[e.keyCode] = true; //Checks to see if the enter button has been pressed.
     if (bgm.paused) bgm.play();
+    //When the bgm stops playing, it will call it again.
 }
 
 //Unrecords keys when unpressed
@@ -26,7 +27,7 @@ function keysUp(e)
 let textBox = document.querySelector("#textBox");
 //The on screen message is changed by addressing the innerHTML of this div.
 
-//Strings holding dialogue HTML
+//String array holding dialogue HTML. Each index is a screen of dialogue.
 let dialogue = 
 [
     `<p>Snake: This is Solid Snake, respond please.</p>`,
@@ -54,6 +55,7 @@ let gameStartTimer = 0;
 let startFade = false;
 //Tells the recursive function when to start fading.
 let gameStart = setInterval(function gameStartFade()
+//This function is called once every 750ms.
 {
     if (startFade == true)
     //Will only run when the fade is ready to at the end of the dialogue.
@@ -61,6 +63,7 @@ let gameStart = setInterval(function gameStartFade()
         gameStartTimer++;
         if (gameStartTimer <= 1)
         {
+            //The layer fades to black by increasing the opacity.
             vEffectLayer.style.opacity = 0.25;
             vEffectLayer.style.backgroundColor = "black";
         }
@@ -85,6 +88,8 @@ let gameStart = setInterval(function gameStartFade()
 }, 750);
 
 function aPressed()
+//When the enter button is pressed, the dialogue will proceed, and once it reaches the end, it will signal for the screen to fade to black.
+//If delete is pressed, it will skip to the end of the dialogue.
 {
     if (dialogueTracker == 15)
     {

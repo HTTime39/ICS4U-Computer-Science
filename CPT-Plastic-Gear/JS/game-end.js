@@ -5,6 +5,7 @@ document.addEventListener("keyup", keysUp); //Unrecords keys when unpressed
 let vEffectLayer = document.querySelector("#vEffectLayer");
 
 let bgm = new Audio("Audio/start-screen.mp3");
+//Object for the bgm on this screen.
 
 //Array to hold all currently held buttons
 let pressedKeys = [];
@@ -13,20 +14,21 @@ let pressedKeys = [];
 function keysDown(e)
 {
     pressedKeys[e.keyCode] = true;
-    bgm.play();
+    if (bgm.paused) bgm.play();
+    //The bgm plays if it is not already playing when a button is pressed.
 }
 
 //Unrecords keys when unpressed
 function keysUp(e)
 {
-    aPressed();
+    aPressed(); //Checks to see if the enter button has been pressed.
     pressedKeys[e.keyCode] = false;
 }
 
 let textBox = document.querySelector("#textBox");
 //Text box that holds on screen messages.
 
-//Strings holding dialogue HTML
+//String array holding dialogue HTML
 let dialogue = 
 [
     `<p>Snake: This is Solid Snake. The “Plastic Gear” has been destroyed.</p>`,
@@ -43,7 +45,9 @@ let gameEndFade = false;
 //Tells the recursive function when to start fading.
 let gameRestart = setInterval(function gameRestartFade()
 {
+    //This is skipped over and does nothing until the boolean is changed to indicate that the screen should start fading out.
     if (gameEndFade)
+    //The screen fades to black before sending the player to the start screen.
     {
         gameRestartTimer++;
         if (gameRestartTimer <= 1)
@@ -74,6 +78,7 @@ let gameRestart = setInterval(function gameRestartFade()
 function aPressed()
 {
     if (dialogueTracker == 3)
+    //Once the dialogue counter reaches the end (3) the fade animation is triggered by changing the boolean, sending the player back to the starting screen. 
     {
         gameEndFade = true;
     }

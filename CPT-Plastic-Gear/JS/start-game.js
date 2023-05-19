@@ -6,6 +6,7 @@ document.addEventListener("keyup", keysUp); //Unrecords keys when unpressed
 let startText = document.querySelector("#startText");
 let enterText = document.querySelector("#enterText");
 
+//An object for the audio that plays on this screen.
 let gameStartAudio = new Audio("Audio/game-start.mp3");
 
 //Array to hold all currently held buttons
@@ -29,6 +30,7 @@ let gameStartTimer = 0;
 let startFade = false;
 //Tells the recursive function when to start fading.
 let gameStart = setInterval(function gameStartFade()
+//Runs a fading animation based on time when the player pressed enter and the boolean switches to true.
 {
     if (startFade == true)
     //Will only run when the fade is ready to at the end of the dialogue.
@@ -37,6 +39,7 @@ let gameStart = setInterval(function gameStartFade()
         if (gameStartTimer <= 1)
         {
             gameStartAudio.play();
+            //The starting sound plays here.
             vEffectLayer.style.opacity = 0.25;
             vEffectLayer.style.backgroundColor = "black";
         }
@@ -59,7 +62,7 @@ let gameStart = setInterval(function gameStartFade()
         else
         {
             window.location.replace("radio-start.html");
-            //Sends the user back to the starting screen.
+            //Sends the user to the radio screen.
         }
     }
 }, 750);
@@ -100,6 +103,7 @@ setInterval(function startScreenAnimation()
     else
     {
         animationTimer = 0;
+        //The timer is reset.
     }
 
     //Enter prompt flashes.
