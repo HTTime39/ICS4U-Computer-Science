@@ -33,6 +33,17 @@ let wallHeightH = 5;
 let camera3APos = 19;
 let visionDetecion3APos = 15;
 
+//Variables Containing Audio Files
+let alertSound = new Audio("Audio/alert.mp3");
+//An object representing an audio file.
+let gunshot0 = new Audio("Audio/gunshot0.mp3");
+let gunshot1 = new Audio("Audio/gunshot1.mp3");
+let gunshot2 = new Audio("Audio/gunshot2.mp3");
+
+let deathSFX = new Audio("Audio/death-sfx.mp3");
+
+let mainBGM = new Audio("Audio/main-bgm.mp3");
+
 
 //==================== INPUT VARIABLE SETUP ===============================//
 
@@ -122,6 +133,7 @@ let gameMainVar = setInterval(gameMain, 15);
 function gameMain()
 {
     if (roomID == 5)
+    //Checks whether or not Snake is in the final room.
     {
         gameEnd = true;
     }
@@ -213,6 +225,7 @@ function gameMain()
     //This will end the game
     if (detected)
     {
+        alertSound.play();
         snakeDie();
     }
 }
@@ -1430,6 +1443,7 @@ function snakeDie()
         {
             vEffectLayer.style.opacity = 1;
             vEffectLayer.style.backgroundColor = "white";
+            gunshot0.play();
         }
         else if (deathAnimTimer <= 4)
         {
@@ -1450,6 +1464,7 @@ function snakeDie()
         {
             vEffectLayer.style.opacity = 1;
             vEffectLayer.style.backgroundColor = "white";
+            gunshot1.play();
         }
         else if (deathAnimTimer <= 9)
         {
@@ -1470,6 +1485,7 @@ function snakeDie()
         {
             vEffectLayer.style.opacity = 1;
             vEffectLayer.style.backgroundColor = "white";
+            gunshot2.play();
         }
         else if (deathAnimTimer <= 14)
         {
@@ -1483,6 +1499,7 @@ function snakeDie()
         }
         else if (deathAnimTimer <= 16)
         {
+            deathSFX.play();
             vEffectLayer.style.opacity = 0.5;
             vEffectLayer.style.backgroundColor = "black";
         }
