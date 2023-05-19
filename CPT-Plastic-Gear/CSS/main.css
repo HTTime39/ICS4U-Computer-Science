@@ -8,6 +8,10 @@ body
 {
     background-color: #000000;
 }
+p
+{
+    font-family: 'VT323', monospace;
+}
 
 /*========== Game Viewport ==========*/
 #gameViewPort

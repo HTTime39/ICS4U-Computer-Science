@@ -1695,8 +1695,8 @@ setInterval(function gameEndAnimation()
         {
             vEffectLayer.style.opacity = 0.5;
         }
-        else if (smokeRepeat <= 4)
-        //The smoke flickers 5 times. The timer is reset 5 times to do this.
+        else if (smokeRepeat <= 7)
+        //The smoke flickers 7 times. The timer is reset 5 times to do this.
         {
             smokeRepeat++;
             endAnimationTimer = 931;
