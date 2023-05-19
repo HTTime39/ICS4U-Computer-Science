@@ -19,6 +19,7 @@ function keysUp(e)
 }
 
 let textBox = document.querySelector("#textBox");
+//The on screen message is changed by addressing the innerHTML of this div.
 
 //Strings holding dialogue HTML
 let dialogue = 
@@ -32,7 +33,7 @@ let dialogue =
     `<p>Big Boss: As for why they chose plastic, we suspect that it is so they can sneak it past airport security.</p>`,
     `<p>Snake: I see… Does that mean this is a live fire mission?</p>`,
     `<p>Big Boss: We don’t want any evidence left behind to trace our operation.</p>`,
-    `<p>Big Boss: You are not permitted to use weapons for anything other than actually destroying the “Plastic Gear.”</p>`,
+    `<p>Big Boss: You are not permitted to use guns. You are to only plant a bomb once finding the "Plastic Gear"</p>`,
     `<p>Big Boss: You must sneak past all the guards and cameras unnoticed.</p>`,
     `<p>Big Boss: Your visor enables you to see the fields of view of guards and cameras. They will appear as red boxes.</p>`,
     `<p>Big Boss: Do not enter the red boxes, and you should remain undetected.</p>`,
@@ -42,12 +43,47 @@ let dialogue =
 ]
 
 let dialogueTracker = 0;
+//The dialogue to display next is tracked here.
+let gameStartTimer = 0;
+//Timer for the fade animation.
+let startFade = false;
+//Tells the recursive function when to start fading.
+let gameStart = setInterval(function gameStartFade()
+{
+    if (startFade == true)
+    //Will only run when the fade is ready to at the end of the dialogue.
+    {
+        gameStartTimer++;
+        if (gameStartTimer <= 1)
+        {
+            vEffectLayer.style.opacity = 0.25;
+            vEffectLayer.style.backgroundColor = "black";
+        }
+        else if (gameStartTimer <= 2)
+        {
+            vEffectLayer.style.opacity = 0.5;
+        }
+        else if (gameStartTimer <= 3)
+        {
+            vEffectLayer.style.opacity = 0.75;
+        }
+        else if (gameStartTimer <= 4)
+        {
+            vEffectLayer.style.opacity = 1;
+        }
+        else
+        {
+            window.location.replace("main.html");
+            //Sends the user back to the starting screen.
+        }
+    }
+}, 750);
+
 function aPressed()
 {
     if (dialogueTracker == 15)
     {
-        window.location.replace("main.html");
-        //Sends the user to the main game. Replace makes it so that the user is unable to go back with the arrows in the top left of the browser which might break something.
+        startFade = true;
     }
     else if (pressedKeys[8])
     //Let's you skip through the dialogue.

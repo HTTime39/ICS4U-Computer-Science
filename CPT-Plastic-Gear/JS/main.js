@@ -56,6 +56,11 @@ let detected = false;
 let vEffectLayer = document.querySelector("#vEffectLayer");
 let visionDetectionSwap = document.querySelector("#visionDetectionSwap"); //The div that contains the vision boxes that move when a guard or camera moves or turns
 
+let gameEnd = false;
+//Variable tracking if the player has reached the final room of the game.
+let endDialogueBox;
+//Will store the HTML of the alert dialogue box upon loading the last room.
+
 
 //==================== WALL VARIABLES BY ROOM =============================//
 
@@ -116,6 +121,10 @@ function keysUp(e)
 let gameMainVar = setInterval(gameMain, 15);
 function gameMain()
 {
+    if (roomID == 5)
+    {
+        gameEnd = true;
+    }
     //moves snake down
     if ((pressedKeys[83] || pressedKeys[40]))
     {
@@ -886,6 +895,83 @@ let room4 = `
     <!-- This will change colour above the viewport for screenload, shooting, etc. -->
 </div>`;
 
+let room5 = `
+<!--Floor-->
+<img src = "Assets/floor.png" id = "floor">
+
+<!--Doormats-->
+<div class = "doorVertical" id = "doorTop">
+    <img src = "Assets/door-top.png" class = "doorVerticalSpriteTop">
+</div>
+
+<!--Player Character's Div Containing Sprite-->
+<div id = "snake">
+    <img src = "Assets/snake-forward.png" id = "snakeSprite">
+</div>
+
+<div id = "metalGear">
+    <img src = "Assets/metal-gear.png" id = "metalGearIntact">
+</div>
+
+<div class = "wallHorizontal" id = "wall5A">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall5B">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall5C">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall5D">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall5E">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall5F">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall5G">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+<div class = "wallHorizontal" id = "wall5H">
+    <img src = "Assets/wall-horizontal.png" class = "wallHorizontalSprite">
+</div>
+
+
+<div class = "wallVertical" id = "wall5I">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall5J">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall5K">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall5L">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall5M">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall5N">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall5O">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+<div class = "wallVertical" id = "wall5P">
+    <img src = "Assets/wall-vertical.png" class = "wallVerticalSprite">
+</div>
+
+<div id = "endDialogueBox">
+    <!-- Box that will fill and empty of the end game dialogue before animation -->
+</div>
+
+<div id = "vEffectLayer">
+    <!-- This will change colour above the viewport for screenload, shooting, etc. -->
+</div>`;
+
 
 //==================== COLLISION DETECTION UNIQUE TO EACH ROOM ========//
 
@@ -1273,6 +1359,16 @@ function roomLoad()
             let guard4B = document.querySelector("guard4B");
 
             dtExists = true;
+            dbExists = true;
+            break;
+        case 5:
+            document.getElementById("gameViewPort").innerHTML = room5;
+            snake = document.querySelector("#snake");
+
+            endDialogueBox = document.querySelector("#endDialogueBox");
+            metalGear = document.querySelector("#metalGear");
+
+            dtExists = true;
             dbExists = false;
             break;
     }
@@ -1437,6 +1533,222 @@ function snakeDie()
 }
 
 
+//==================== Game End Animation =================================//
+
+
+let dialogueGo = false; //For when to start the dialogue before the animation.
+let animationGo = false; //For when to start the main part of the animation.
+let endAnimationTimer = 0; //Timer for the animation.
+let smokeRepeat = 0;
+setInterval(function gameEndAnimation()
+{
+    if (animationGo)
+    {
+        endAnimationTimer++;
+        snakeDown = false;
+        if (endAnimationTimer <= 69)
+        //Snake walks towards the Metal Gear.
+        {
+            snakeY += 0.5;
+            snakeYString = snakeY + "vh";
+            snake.style.marginTop = snakeYString;
+
+            snakeDown = true;
+            snakeAnimation();
+        }
+        else if (endAnimationTimer <= 142)
+        //Snake pauses infront of the Metal Gear.
+        {
+
+        }
+        else if (endAnimationTimer <= 162)
+        //Snake tampers with the Metal Gear (This is just the walk animation, but his feet are hidden).
+        {
+            snake.innerHTML = `<img src = "Assets/snake-forward.png" id = "snakeSprite">`;
+        }
+        else if (endAnimationTimer <= 202)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-forward-alt.png" id = "snakeSprite">`;
+        }
+        else if (endAnimationTimer <= 222)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-forward.png" id = "snakeSprite">`;
+        }
+        else if (endAnimationTimer <= 242)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-forward-alt.png" id = "snakeSprite">`;
+        }
+        else if (endAnimationTimer <= 262)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-forward.png" id = "snakeSprite">`;
+        }
+        else if (endAnimationTimer <= 282)
+        {
+            snake.innerHTML = `<img src = "Assets/snake-forward-alt.png" id = "snakeSprite">`;
+        }
+        else if (endAnimationTimer <= 364)
+        //Snake pauses to observe his fine handiwork.
+        {
+
+        }
+        else if (endAnimationTimer <= 432)
+        //Snake walks away from the Metal Gear towards the door.
+        {
+            snakeY -= 0.5;
+            snakeYString = snakeY + "vh";
+            snake.style.marginTop = snakeYString;
+
+            snakeUp = true;
+            snakeAnimation();
+        }
+        else if (endAnimationTimer <= 765)
+        //Snake leaves the room (His sprite is deleted). There is also a pause here.
+        {
+            snake.innerHTML = "";
+        }
+        else if (endAnimationTimer <= 775)
+        //EXPLOSION
+        {
+            vEffectLayer.style.opacity = 0.5;
+            vEffectLayer.style.backgroundColor = "#f3f91d";
+        }
+        else if (endAnimationTimer <= 785)
+        {
+            vEffectLayer.style.backgroundColor = "#fea621";
+        }
+        else if (endAnimationTimer <= 795)
+        {
+            vEffectLayer.style.backgroundColor = "#c2000b";
+        }
+        else if (endAnimationTimer <= 805)
+        {
+            vEffectLayer.style.backgroundColor = "#fea621";
+        }
+        else if (endAnimationTimer <= 815)
+        {
+            vEffectLayer.style.backgroundColor = "#f3f91d";
+        }
+        else if (endAnimationTimer <= 825)
+        {
+            vEffectLayer.style.opacity = 0.5;
+            vEffectLayer.style.backgroundColor = "#f3f91d";
+        }
+        else if (endAnimationTimer <= 835)
+        {
+            vEffectLayer.style.backgroundColor = "#fea621";
+        }
+        else if (endAnimationTimer <= 845)
+        {
+            vEffectLayer.style.backgroundColor = "#c2000b";
+        }
+        else if (endAnimationTimer <= 855)
+        {
+            vEffectLayer.style.backgroundColor = "#fea621";
+        }
+        else if (endAnimationTimer <= 865)
+        {
+            vEffectLayer.style.backgroundColor = "#f3f91d";
+        }
+        else if (endAnimationTimer <= 875)
+        {
+            vEffectLayer.style.opacity = 0.5;
+            vEffectLayer.style.backgroundColor = "#f3f91d";
+        }
+        else if (endAnimationTimer <= 885)
+        {
+            vEffectLayer.style.backgroundColor = "#fea621";
+        }
+        else if (endAnimationTimer <= 895)
+        {
+            vEffectLayer.style.backgroundColor = "#c2000b";
+        }
+        else if (endAnimationTimer <= 905)
+        {
+            vEffectLayer.style.backgroundColor = "#fea621";
+        }
+        else if (endAnimationTimer <= 915)
+        {
+            vEffectLayer.style.opacity = 0.75;
+            vEffectLayer.style.backgroundColor = "#f3f91d";
+        }
+        else if (endAnimationTimer <= 930)
+        //Smoke first appears here.
+        {
+            vEffectLayer.style.opacity = 1;
+            vEffectLayer.style.backgroundColor = "gray";
+            metalGear.innerHTML = `<img src = "Assets/metal-gear-destroyed.png" id = "metalGearDestroyed">`;
+        }
+        else if (endAnimationTimer <= 945)
+        //Smoke flickers here.
+        {
+            vEffectLayer.style.opacity = 0.75;
+        }
+        else if (endAnimationTimer <= 960)
+        {
+            vEffectLayer.style.opacity = 0.5;
+        }
+        else if (endAnimationTimer <= 975)
+        {
+            vEffectLayer.style.opacity = 0.25;
+        }
+        else if (endAnimationTimer <= 990)
+        {
+            vEffectLayer.style.opacity = 0.5;
+        }
+        else if (smokeRepeat <= 4)
+        //The smoke flickers 5 times. The timer is reset 5 times to do this.
+        {
+            smokeRepeat++;
+            endAnimationTimer = 931;
+        }
+        else if (endAnimationTimer <= 1005)
+        //The scene fades to black before switching to the radio screen.
+        {
+            vEffectLayer.style.backgroundColor = "black";
+        }
+        else if (endAnimationTimer <= 1020)
+        {
+            vEffectLayer.style.opacity = 0.5;
+        }
+        else if (endAnimationTimer <= 1035)
+        {
+            vEffectLayer.style.opacity = 0.75;
+        }
+        else if (endAnimationTimer <= 1050)
+        {
+            vEffectLayer.style.opacity = 1;
+        }
+        else
+        {
+            window.location.replace("game-end.html");
+        }
+    }
+    else if (dialogueGo)
+    //An alert noting the discovery of the Metal Gear is briefly shown, before starting the final animation.
+    {
+        endAnimationTimer++;
+        if (endAnimationTimer <= 267)
+        {
+            endDialogueBox.innerHTML = `<div id = "innerDialogueBox"><p>There's the "Plastic Gear." It's time to blow it up.</p></div>`;
+        }
+        else
+        {
+            endAnimationTimer = 0;
+            //The timer is reset for the rest of the aniation to reuse the time.
+            endDialogueBox.innerHTML = ``;
+            //The alert is cleared from the screen.
+            animationGo = true;
+            //The animation is enabled.
+        }
+    }
+    else if (gameEnd)
+    {
+        clearInterval(gameMainVar);
+        dialogueGo = true;
+    }
+}, 15);
+
+
 //==================== SUB-RECURSIVE FUNCTION FOR DEV CONTROL =============//
 
 
@@ -1451,7 +1763,7 @@ function gameSecondary()
     if(pressedKeys[55]) console.log(roomID);
     if(pressedKeys[54])
     {
-        roomID = 4; //Room that is currently being worked on
+        roomID = 5; //Room that is currently being worked on
         DevRoomLoad();
     }
     if(pressedKeys[13]) window.location.replace("game-start.html");

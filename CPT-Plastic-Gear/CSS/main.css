@@ -698,3 +698,119 @@ body
     width: 25vh;
     height: 12vh;
 }
+
+/*========== Room 5 ==========*/
+#metalGear
+{
+    position: absolute;
+    margin-left: 46vh;
+    margin-top: 36vh;
+}
+#metalGearIntact
+{
+    height: 30vh;
+    width: 20vh;
+}
+
+#metalGearDestroyed
+{
+    margin-left: -5vh;
+    margin-top: 3vh;
+    height: 18vh;
+    width: 30vh;
+}
+#endDialogueBox
+{
+    position: absolute;
+    margin-left: 71vh;
+    margin-top: 1vh;
+}
+#innerDialogueBox
+{
+    background-color: white;
+    padding: 0.5vh;
+    width: 40vh;
+    border: solid 1vh black;
+}
+#innerDialogueBox p
+{
+    font-family: 'VT323', monospace;
+    font-size: 3vh;
+}
+
+#wall5A
+{
+    margin-top: 30vh;
+}
+#wall5B
+{
+    margin-top: 65vh;
+}
+#wall5C
+{
+    margin-top: 30vh;
+    margin-left: 87vh;
+}
+#wall5D
+{
+    margin-top: 65vh;
+    margin-left: 87vh;
+}
+#wall5E
+{
+    margin-left: 15vh;
+    margin-top: 30vh;
+}
+#wall5F
+{
+    margin-left: 15vh;
+    margin-top: 65vh;
+}
+#wall5G
+{
+    margin-top: 30vh;
+    margin-left: 72vh;
+}
+#wall5H
+{
+    margin-top: 65vh;
+    margin-left: 72vh;
+}
+#wall5I
+{
+    margin-left: 35vh;
+}
+#wall5J
+{
+    margin-left: 35vh;
+    margin-top: 5vh;
+}
+#wall5K
+{
+    margin-left: 35vh;
+    margin-top: 65vh;
+}
+#wall5L
+{
+    margin-left: 35vh;
+    margin-top: 73vh;
+}
+#wall5M
+{
+    margin-left: 72vh;
+}
+#wall5N
+{
+    margin-left: 72vh;
+    margin-top: 10vh;
+}
+#wall5O
+{
+    margin-left: 72vh;
+    margin-top: 65vh;
+}
+#wall5P
+{
+    margin-left: 72vh;
+    margin-top: 73vh;
+}
