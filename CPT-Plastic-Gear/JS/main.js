@@ -45,27 +45,23 @@ let deathSFX = new Audio("Audio/death-sfx.mp3");
 let mainBGM = new Audio("Audio/main-bgm.mp3");
 
 let bgmTimer = 0;
-setInterval(function bgmLoop()
+let userFirstInteraction = false;
+//The user needs to interact with the page first, otherwise the audio will fail to load. This is tracked here.
+bgmLoopVar = setInterval(function bgmLoop()
 {
-    bgmTimer++;
-    if (bgmTimer <= 1)
+    if (userFirstInteraction)
     {
-        //Wait one second.
+        bgmTimer++;
+        if (bgmTimer <= 1)
+        {
+            //Wait quarter second.
+        }
+        else if (mainBGM.paused)
+        {
+            mainBGM.play();
+        }
     }
-    else if (bgmTimer <= 2)
-    {
-        mainBGM.play();
-    }
-    else if (bgmTimer <= 183)
-    {
-        //Do nothing while it plays.
-    }
-    else 
-    {
-        bgmTimer = 0;
-        //The timer is reset to restart the audio.
-    }
-}, 1000);
+}, 250);
 
 
 //==================== INPUT VARIABLE SETUP ===============================//
@@ -175,6 +171,7 @@ function gameMain()
             //This determines Snake's direction that he is travelling, and tells the animation function which sprite to use to represent his direction.
             snakeAnimation();
         }
+        userFirstInteraction = true;
         doorCheckD();
     }
     else 
@@ -196,6 +193,7 @@ function gameMain()
                 snakeAnimation();
             }
         }
+        userFirstInteraction = true;
         doorCheckU();
     }
     else
@@ -217,7 +215,7 @@ function gameMain()
                 snakeAnimation();
             }
         }
-        //for door function
+        userFirstInteraction = true;
     }
     else
     {
@@ -238,7 +236,7 @@ function gameMain()
                 snakeAnimation();
             }
         }
-        //for door function
+        userFirstInteraction = true;
     }
     else
     {
@@ -1452,6 +1450,9 @@ function snakeDie()
     clearInterval(gameMainVar);
     clearInterval(gameCollisionVar);
     clearInterval(enemyAnimationVar);
+    clearInterval(bgmLoopVar);
+    mainBGM.pause();
+    //The main bgm is ended.
 
     //The visual effect layers need to flash to indicate gun fire. A part of this also continues to loop once the end screen text. Code to return to the start screen is also here.
     setInterval(function gunFlash(){
