@@ -44,6 +44,29 @@ let deathSFX = new Audio("Audio/death-sfx.mp3");
 
 let mainBGM = new Audio("Audio/main-bgm.mp3");
 
+let bgmTimer = 0;
+setInterval(function bgmLoop()
+{
+    bgmTimer++;
+    if (bgmTimer <= 1)
+    {
+        //Wait one second.
+    }
+    else if (bgmTimer <= 2)
+    {
+        mainBGM.play();
+    }
+    else if (bgmTimer <= 183)
+    {
+        //Do nothing while it plays.
+    }
+    else 
+    {
+        bgmTimer = 0;
+        //The timer is reset to restart the audio.
+    }
+}, 1000);
+
 
 //==================== INPUT VARIABLE SETUP ===============================//
 
