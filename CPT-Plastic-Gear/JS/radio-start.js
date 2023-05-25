@@ -44,6 +44,7 @@ let dialogue =
     `<p>Big Boss: Your visor enables you to see the fields of view of guards and cameras. They will appear as red boxes.</p>`,
     `<p>Big Boss: Do not enter the red boxes, and you should remain undetected.</p>`,
     `<p>Snake: Anything else I should know?</p>`,
+    `<p>Big Boss: If you need my help, you can press the H key to contact me on your radio.</p>`,
     `<p>Big Boss: That is all Snake. Keep your foot on the gas pedal.</p>`,
     `<p>Snake: Roger that. Snake out.</p>`
 ]
@@ -91,14 +92,14 @@ function aPressed()
 //When the enter button is pressed, the dialogue will proceed, and once it reaches the end, it will signal for the screen to fade to black.
 //If delete is pressed, it will skip to the end of the dialogue.
 {
-    if (dialogueTracker == 15)
+    if (dialogueTracker == 16)
     {
         startFade = true;
     }
     else if (pressedKeys[8])
     //Let's you skip through the dialogue.
     {
-        dialogueTracker = 15;
+        dialogueTracker = 16;
         textBox.innerHTML = dialogue[dialogueTracker];
     }
     else if (pressedKeys[13])

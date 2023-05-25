@@ -50,6 +50,8 @@ let explosion = new Audio("Audio/explosion.mp3");
 let explosion1 = new Audio("Audio/explosion1.mp3");
 let explosion2 = new Audio("Audio/explosion2.mp3");
 
+let radioAudio = new Audio("Audio/radio-bgm.mp3");
+
 //A recursive function that checks to see if the bgm is playing, and if the user has interacted with the page, then it will play the bgm. Google won't let you play an audio file until the user has interacted with the page.
 let bgmTimer = 0;
 let userFirstInteraction = false;
@@ -124,6 +126,9 @@ let roomIDLast;
 let dbExists = true; //The bottom door
 let dtExists = false; //The top door
 
+let helpShown = false;
+//Tracls whether or not the help screen is currently showing.
+
 
 //==================== RECORDING AND UNRECORDING USER INPUTS ==============//
 
@@ -141,6 +146,24 @@ function keysDown(e)
 function keysUp(e)
 {
     pressedKeys[e.keyCode] = false;
+    if (e.keyCode == 72)
+    //Checks to see if the key that was released/pressed is the H key.
+    {
+        if (helpShown == false)
+        {
+            vEffectLayer.innerHTML = `<img src = "Assets/help-screen.png" id = "helpScreen">`
+            //The image is set to fill the visual effect layer.
+            helpShown = true;
+            //Setting the variable that tracks the state of the help screen to true.
+            console.log("Revealing the help screen");
+        }
+        else if (helpShown == true)
+        {
+            vEffectLayer.innerHTML = "";
+            helpShown = false;
+            console.log("Hiding the help screen");
+        }
+    }
 }
 
 
@@ -1475,6 +1498,8 @@ function snakeDie()
         if (deathAnimTimer <= 1)
         //Snake is shot three times in this animation.
         {
+            vEffectLayer.innerHTML = "";
+            //Removes the help screen if it is showing when Snake is getting shot.
             vEffectLayer.style.opacity = 0.5;
             vEffectLayer.style.backgroundColor = "white";
         }

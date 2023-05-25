@@ -36,6 +36,12 @@ p
     background-color: transparent;
 }
 
+#helpScreen
+{
+    width: 112vh;
+    height: 98vh;
+}
+
 #screenLoadEffect
 {
     position: absolute;
