@@ -4,16 +4,21 @@ import java.util.ArrayList;
 
 public class tikTakToe {
 	
-	static Scanner in = new Scanner(System.in);
+	public static Scanner in = new Scanner(System.in);
+
+	public static String userSymbol;
+	//Tracks the player's symbol
+	public static String cpuSymbol = "X";
+	//Tracks the CPU's symbol. Set to X by default
+	public static boolean gameEnd = false;
+	//Boolean changes to signal the end of the game. 
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to Tik Tak Toe.");
 		System.out.println("Please enter the symbol you want to play as (X/O)");
 		
-		String userSymbol = in.nextLine();
-		//Tracks the player's symbol
-		String cpuSymbol = "X";
-		//Tracks the CPU's symbol. Set to X by default
+		userSymbol = in.nextLine();
+		
 		if (userSymbol.equalsIgnoreCase("X"))
 		{
 			userSymbol = "X";
@@ -55,13 +60,13 @@ public class tikTakToe {
 		
 		displayBoard(board);
 		
-//		while (!gameOver)
-//		{
-//			playerTurn(board);
-//			cpuTurn(board);
-//			gameWinCheck(board);
-//		}
-
+		while (!gameOver)
+		{
+			playerTurn(board);
+			gameEndCheck(board);
+			cpuTurn(board);
+			gameEndCheck(board);
+		}
 		
 		
 	}
@@ -81,42 +86,150 @@ public class tikTakToe {
 		
 	}
 	
-	static int playerRow;
+	public static int playerRow;
 	//Global variable for the player's row choice.
-	static int playerColumn;
+	public static int playerColumn;
 	//Global variable for the player's column choice.
-	static boolean canPlace = false;
+	public static boolean canPlace = false;
 	//Global variable that indicates to while loops that the spot trying to be placed on is empty.
 	
 	public static void playerTurn(ArrayList<ArrayList<String>> board)
 	//The ArrayList is passed through to the function for the player's turn.
 	{
-		System.out.println("Which row would you like to place your symbol? (1, 2, 3)");
-		playerRow = in.nextInt();
-		System.out.println("Which column would you like to place your symvol (1, 2, 3)");
-		playerColumn = in.nextInt();
-		
-		if (board.get(playerRow - 1).get(playerColumn - 1).equalsIgnoreCase(" "))
+		while (!canPlace)
+		//Repeats until the cpu chooses a valid spot.
+		{
+			System.out.println("Which row would you like to place your symbol? (1, 2, 3)");
+			playerRow = in.nextInt();
+			System.out.println("Which column would you like to place your symbol (1, 2, 3)");
+			playerColumn = in.nextInt();
+
+			if (board.get(playerRow - 1).get(playerColumn - 1).equalsIgnoreCase(" "))
 			//Checks to see if the space is unoccupied.
-		{
-			canPlace = false;
+			{
+				canPlace = true;
+			}
+			else
+			{
+				System.out.println("The spot is occupied, choose another spot to place your symbol.");
+			}			
 		}
-		else
-		{
-			System.out.println("The spot is occupied, choose another spot to place your symbol.");
-		}
+		
+		board.get(playerRow - 1).set(playerColumn - 1, userSymbol);
+		//Sets the chosen spot equal to the players symbol.
+		
+		displayBoard(board);
+		
+		canPlace = false;
+		//Resets the boolean that indicated whether or not a spot if open.
 	}
+	
+	public static int cpuRow;
+	//Variable for cpu picking a row.
+	public static int cpuColumn;
+	//Variable for cpu picking a column.
+	
 	
 	public static void cpuTurn(ArrayList<ArrayList<String>> board)
 	//The ArrayList is passed through to the function for the cpu's turn.
 	{
+		while (!canPlace)
+			//Repeats until the player chooses a valid spot.
+			{
+				double rowPicker = Math.random() * 3;
+				//A number between 0 and 8 is chosen. 0 - 2 will be row 1, 3 - 5 will be row 2, 6 - 8 will be row 3.
+				if (rowPicker < 1) cpuRow = 1;
+				else if (rowPicker < 2) cpuRow = 2;
+				else if (rowPicker <= 3) cpuRow = 3;
+				//This makes it easier since a decimal value is generated, to pick between the three numbers.
+				
+				double columnPicker = Math.random() * 9;
+				//A number between 0 and 8 is chosen. 0 - 2 will be column 1, 3 - 5 will be column 2, 6 - 8 will be column 3.
+				if (0 <= columnPicker && columnPicker <= 2) cpuColumn = 1;
+				else if (3 <= columnPicker && columnPicker <= 5) cpuColumn = 2;
+				else if (6 <= columnPicker && columnPicker <= 8) cpuColumn = 3;
+				//This makes it easier since a decimal value is generated, to pick between the three numbers.
+			
+				if (board.get(cpuRow - 1).get(cpuColumn - 1).equalsIgnoreCase(" "))
+					//Checks to see if the space is unoccupied.
+				{
+					canPlace = true;
+				}	
+			}
 		
+		board.get(cpuRow - 1).set(cpuColumn - 1, cpuSymbol);
+		//Sets the chosen spot equal to the players symbol.
+		displayBoard(board);
+		
+		canPlace = false;
+		//Resetting the valid placement boolean.
 	}
 	
-	public static void gameWinCheck(ArrayList<ArrayList<String>> board)
+	public static int boardFull = 0;
+	//It is set to true, because the check will assume that the board is full until proven otherwise.
+	
+	public static void gameEndCheck(ArrayList<ArrayList<String>> board)
 	//The board ArrayList is passed through to the function that checks the board for a win condition.
 	{
+		boardFull++;
 		
+//		if (winCheck(board, userSymbol))
+//		//Checks to see if the user has won.
+//		{
+//			gameEnd = true;
+//			//The game is signaled to end.
+//			System.out.println("Congradulations. The players has won.");
+//		}
+//		if (winCheck(board, cpuSymbol))
+//		//Checks to see if the cpu has won.
+//		{
+//			gameEnd = true;
+//			//The game is signaled to end.
+//			System.out.println("The player has won.");
+//		}
+		
+		if (boardFull == 9 && !gameEnd)
+		//If the max amount of turns has been reached, and a win condition was not triggered on the last turn (This iteration would be for the last turn).
+		{
+			gameEnd = true;
+			System.out.println("The board is full and there is no winner. The game is a tie");
+		}
 	}
+	
+	public static boolean currentCheck;
+	//Will hold whether or not the current win check will return as true or false.
+	
+//	public static boolean winCheck(ArrayList<ArrayList<String>> board, String symbol)
+//	{		
+//		for (int i = 0; i < 3; i++)
+//		//Detects win conditions for rows and columns.
+//		{
+//			if (board.get(i).get(0).equalsIgnoreCase(symbol) && board.get(i).get(1).equalsIgnoreCase(symbol) && board.get(i).get(2).equalsIgnoreCase(symbol))
+//			//Checking to see if the win condition has been met for each row.
+//			{
+//				currentCheck = true;
+//				//Changes to true if a win condition is met in a horizontal row.
+//			}
+//			if (board.get(0).get(i).equalsIgnoreCase(symbol) && board.get(1).get(i).equalsIgnoreCase(symbol) && board.get(0).get(i).equalsIgnoreCase(symbol))
+//			//Checking to see if the win condition has been met for each column.
+//			{
+//				currentCheck = true;
+//				//Changes to true if a win condition is met in a column.
+//			}
+//		}
+//		
+//		if (board.get(0).get(0).equalsIgnoreCase(symbol) && board.get(1).get(1).equalsIgnoreCase(symbol) && board.get(2).get(2).equalsIgnoreCase(symbol))
+//		//Checks for a win condition in the diagonal from top left to bottom right.
+//		{
+//			currentCheck = true;
+//		}
+//		if (board.get(0).get(2).equalsIgnoreCase(symbol) && board.get(1).get(1).equalsIgnoreCase(symbol) && board.get(2).get(0).equalsIgnoreCase(symbol))
+//		//Checks for a win condition in the diagonal from the top right to the bottom left.
+//		{
+//			currentCheck = true;
+//		}
+//			
+//		return(currentCheck);
+//	}
 
 }
