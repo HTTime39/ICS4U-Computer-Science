@@ -6,6 +6,7 @@ public class tikTakToe {
 	
 	public static Scanner in = new Scanner(System.in);
 
+	//It's easier just to have all of these variables outside the main function so that you don't have to pass them through functions every time. :)
 	public static String userSymbol;
 	//Tracks the player's symbol
 	public static String cpuSymbol = "X";
@@ -35,14 +36,12 @@ public class tikTakToe {
 		}
 		
 		ArrayList <ArrayList<String>> board = new ArrayList<ArrayList<String>>();
-		//ArrayList that holds ArrayLists that holds integers.
+		//ArrayList that holds ArrayLists that holds Strings.
 		
 		board.add(new ArrayList<String>());
 		board.add(new ArrayList<String>());
 		board.add(new ArrayList<String>());
 		//Creates an ArrayList in the first 3 indices of the outer ArrayList. They don't need names since they exist within an already named ArrayList.
-		
-		//0 will represent O, 1 will represent X, 2 will represent unoccupied.
 		
 		for (int i = 0; i < 3; i++)
 			//Cycles through the rows of the board.
