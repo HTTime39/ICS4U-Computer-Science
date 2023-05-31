@@ -15,6 +15,14 @@ public class SearchingAlgorithms {
 		
 		System.out.println(binarySearch(values, 5));
 
+		//Searching Algorithms with Strings.
+
+		String name1 = "Justin";
+		String name2 = "Jack";
+
+		System.out.println(name1.compareTo(name2));
+		//The difference between the first letter's place in the alphabet. It will compare the next available letter if the first letters of the strings being compared are the same.
+		//You can use these to have the algorithms work with a list that is organized alphabetically.
 	}
 
 	public static boolean linearSearch(int [] values, int desiredValue)
