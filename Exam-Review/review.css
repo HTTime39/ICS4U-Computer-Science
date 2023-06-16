@@ -1,0 +1,14 @@
+body
+{
+    background-color: lightblue;
+}
+p
+{
+    font-size: 25px;
+    color: aliceblue;
+}
+#container
+{
+    border-style: dotted;
+    border-color: black;
+}

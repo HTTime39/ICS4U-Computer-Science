@@ -1,0 +1,5 @@
+Circular rectangle represents the starting point. 
+Rectangle is a process independant of the user. 
+Rhombus is an input/output from the user. 
+A diamond is a decision that needs to be made. 
+Rounded with corner displays something.
